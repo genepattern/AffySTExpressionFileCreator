@@ -1,0 +1,339 @@
+## The Broad Institute
+## SOFTWARE COPYRIGHT NOTICE AGREEMENT
+## This software and its documentation are copyright (2014) by the
+## Broad Institute/Massachusetts Institute of Technology. All rights are
+## reserved.
+##
+## This software is supplied without any warranty or guaranteed support
+## whatsoever. Neither the Broad Institute nor MIT can be responsible for its
+## use, misuse, or functionality.
+
+GP.affyst.efc <- function(cel.files, normalize, background.correct, compute.present.absent.calls, 
+                         qc.plot.format, clm.file, annotate.probes, output.file.base) {
+   files.to.process <- list.celfiles(cel.files, recursive=TRUE, full.names=TRUE)
+   
+   # Check that we actually have files
+   if (NROW(files.to.process) < 1) {
+      stop(paste0("No CEL files were found in ", cel.files))
+   }
+
+   # Load the CLM file and rearrange files.to.process to match
+   if (!is.null(clm.file)) {
+      clm <- read.clm(clm.file)
+      write.cls.from.clm(clm, output.file.base)
+      files.to.process <- rearrange.files(files.to.process, clm)
+   }
+   else {
+      clm <- NULL
+   }
+   
+   # Need some appropriate wrapping here to avoid fail-on-warning issues when an annotation package is
+   # downloaded for the first time.  Note that this annotation package is needed even if the user is
+   # not annotating the probes.
+   cel.batch <- read.celfiles(files.to.process)
+   # Probably need to recheck at this point to be sure things loaded correctly.
+
+   # Rename samples according to CLM file, if present, or remove the '.CEL' extensions from the file names if not.
+   column.names <- rename.samples(sampleNames(cel.batch), clm)
+   
+   probeset.summary <- rma(cel.batch, target="probeset", background=background.correct, normalize=normalize)
+   expr.data <- exprs(probeset.summary)
+
+   if (annotate.probes) {
+      # Figure out the array type being processed based on the first CEL file
+      arrayTypeName <- read.celfile.header(files.to.process[1])$cdfName
+      probesetDbName <- find.probesetDbName(arrayTypeName)
+      loadAnnotationPackage(probesetDbName)
+      annotations <- build.annotations(probeset.summary, probesetDbName, arrayTypeName, output.file.base)
+   }
+   else {
+      annotations <- NULL
+   }
+
+   if (compute.present.absent.calls) {
+      print("Calculating P/A calls")
+      calls.pvalues <- paCalls(cel.batch, method="PSDABG")
+      calls <- apply(calls.pvalues, c(1,2), function(pvalue) (if (pvalue < 0.05) { return("P") } else { return("A") } ))
+      dataset <- list(row.descriptions=annotations, data=expr.data, calls=calls)
+      colnames(dataset$data) <- column.names
+      print("Writing dataset as RES")
+      write.res(dataset, paste0(output.file.base, ".res"))
+   }
+   else {
+      dataset <- list(row.descriptions=annotations, data=expr.data)
+      colnames(dataset$data) <- column.names
+      print("Writing dataset as GCT")
+      write.gct(dataset, paste0(output.file.base, ".gct"))
+   }
+
+   plot.qc.images(cel.batch, column.names, output.file.base, qc.plot.format)
+}
+
+find.probesetDbName <- function(arrayTypeName) {
+   arrayTypeName <- tolower(gsub("[-_]", "", arrayTypeName))
+   probesetDbName <- paste0(arrayTypeName, "probeset")
+   return (probesetDbName)
+}
+
+loadAnnotationPackage <- function(probesetDbName) {
+   # Install the full annotation package if necessary...
+   # This is actually going to require some legwork.  See the RDep library for full details; gist of it is:
+   # - Need to check if it's already installed
+   # - Need to handle Bioconductor mirror; must be passed from manifest commandLine.
+   # - Need to handle errors
+   # - Need to install to correct location
+   # - Need to suppress messages
+   # Break this off into separate function, destined for common Lib.
+   annPackageName <- paste0(probesetDbName, ".db")
+   # biocLite(annPackageName)
+   library(annPackageName, character.only=TRUE)
+}
+
+build.annotations <- function(probeset.summary, probesetDbName, arrayTypeName, output.file.base) {
+   # TODO: more wrapping here to avoid fail-on-warning issues.
+   featureData(probeset.summary) <- getNetAffx(probeset.summary, "probeset")
+
+   # Find references to the various annotation environments needed for lookup.  These are dependent on
+   # the probesetDbName (based on the Affy array type).
+   # That is, we will be looking in e.g. mogene20stprobesetENTREZID for the Entrez Gene identifiers.
+   print("Finding annotation environment references")
+   entrezMapName <- paste0(probesetDbName,"ENTREZID")
+   entrezEnv <- get(entrezMapName)
+   symbolMapName <- paste0(probesetDbName,"SYMBOL")
+   symbolEnv <- get(symbolMapName)
+   geneNameMapName <- paste0(probesetDbName,"GENENAME")
+   geneNameEnv <- get(geneNameMapName)
+
+   # Now we look up the various annotation info.  The annotatedData structure will have rownames matching
+   # the Affy probesetIds, so we apply a lookup function across these to get the Entrez Gene ID, the gene
+   # description and the gene symbol.  These look into the environments found in the probesetDbName package
+   # loaded above.  There's a little bit of 'meta-programming' here; see the mogene20stprobeset package
+   # documentation in Bioconductor for a more 'straight code' version of how to do this.  The key point
+   # here is that we find the relevant annotation records through the (matrix-oriented) 'mget' call, then
+   # apply a function to pull out the desired piece of info from the record.
+   print("Looking up annotations")
+   annotatedData <- featureData(probeset.summary)
+   entrezGenes <- sapply(mget(rownames(annotatedData), entrezEnv), FUN=function(entrezEntry) (entrezEntry[[1]]), simplify="array")
+   descriptions <- sapply(mget(rownames(annotatedData), geneNameEnv), FUN=function(geneNameEntry) (geneNameEntry[[1]]), simplify="array")
+   gene.symbols <- sapply(mget(rownames(annotatedData), symbolEnv), FUN=function(symbolEntry) (symbolEntry[[1]]), simplify="array")
+      
+   # The RefSeq Ids are available in the base annotation package loaded by oligo for this array type.  We
+   # could get it from an environment like the items above, but it's a little more straightforward this way. 
+   refSeqIds <- sapply(pData(annotatedData)[,"geneassignment"], FUN=function(geneEntry) (unlist(strsplit(geneEntry," //"))[1]), simplify="array")
+      
+   # Write a chip file based on these annotations
+   print("Writing chip file from annotation info")
+   chip <- data.frame(names(gene.symbols), gene.symbols, descriptions, entrezGenes)
+   colnames(chip)<-c("Probe Set ID", "Gene Symbol", "Gene Title", "Entrez Gene")
+   write.table(chip, file=paste0(output.file.base, ".", arrayTypeName, ".chip"), sep="\t", quote=FALSE, row.names=FALSE)
+
+   # Build a suitable annotation for the dataset.  We'll use "<entrezGene> // <refSeqId> // <gene.symbol>"
+   print("Building annotations for dataset")
+   annotations <- paste0(unname(entrezGenes), " // ", unname(refSeqIds), " // ", unname(gene.symbols))
+   return (annotations)
+}
+
+rearrange.files <- function(file.list, clm) {
+   # Rearrange the order of the files to match the CLM file.  Note that we may discard
+   # some files based on this (if they are not present in the CLM).
+   new.files.list <- c()
+   file.basenames <- basename(file.list)
+   file.dirnames <- dirname(file.list)
+   i <- 1
+   scanIdx <- 1
+   for (scan in clm$scan.names) {
+      # Search for the scan name in the file.list.  We search against the file.basenames only so that there
+      # are only matches against file names rather than some other path component.
+      index <- grep(scan, file.basenames, ignore.case=TRUE)
+
+      if (length(index) == 0) {
+         cat(paste("Scan", scan, "in clm file was not found. \n"))
+      } 
+      else if(length(index) > 1) {
+         cat(paste("Scan", scan, "in clm file matches more than one CEL file. \n"))
+      } 
+      else {
+         new.files.list[i] <- file.path(file.dirnames[index[1]], file.basenames[index[1]])
+         i <- i + 1
+      }   
+      scanIdx <- scanIdx + 1
+   }
+   return (new.files.list)
+}
+
+# Based on code from ExpressionFileCreator.  Migrate this to a common lib?  Only common between these two for now.
+rename.samples <- function(cel.file.names, clm) {
+   # If there is no CLM, just strip the extensions and use the file names
+   if(is.null(clm)) {
+      new.cel.file.names <- gsub(".CEL$|.CEL.gz$|.CEL.zip$|.CEL.bz2$", "", cel.file.names, ignore.case=TRUE)
+      return (new.cel.file.names)
+   }
+   
+   print("Renaming samples based on CLM file")
+   
+   # Strip extensions from both the CLM scan.names and the cel.file.names to simplify matching
+   scan.names <- gsub(".CEL$|.CEL.gz$|.CEL.zip$|.CEL.bz2$", "", clm$scan.names, ignore.case=TRUE)
+   cel.file.names <- gsub(".CEL$|.CEL.gz$|.CEL.zip$|.CEL.bz2$", "", cel.file.names, ignore.case=TRUE)
+   
+   new.cel.file.names <- vector("character")
+   i <- 1
+   scanIdx <- 1
+   remove.scan.index <- c()
+   for (scan in scan.names) {
+      s <- paste0('^', scan, "$")
+      index <- grep(s, cel.file.names, ignore.case=TRUE)
+
+      if (length(index) == 0) {
+         cat(paste("Scan", scan, "in clm file was not found. \n"))
+         remove.scan.index <- c(remove.scan.index, scanIdx)
+      } 
+      else if(length(index) > 1) {
+         cat(paste("Scan", scan, "in clm file matches more than one CEL file. \n"))
+         remove.scan.index <- c(remove.scan.index, scanIdx)
+      } 
+      else {
+         new.cel.file.names[i] <- cel.file.names[index[1]]
+         i <- i + 1
+      }   
+      scanIdx <- scanIdx + 1
+   }
+   cel.file.names <- new.cel.file.names
+
+   # Remove duplicate or missing scan names from the CLM
+   if (length(remove.scan.index) != 0) {
+      clm$scan.names <- clm$scan.names[-remove.scan.index]
+      clm$sample.names <- clm$sample.names[-remove.scan.index]
+             
+      if (!is.null(clm$factor)) {
+         clm$factor <- clm$factor[-remove.scan.index, drop=TRUE]
+      }
+   }
+
+   if (length(cel.file.names) == 0) {
+      exit("No CEL files listed in clm file found.")
+   }
+
+   return (cel.file.names)
+}
+
+write.cls.from.clm <- function(clm, output.file.base) {
+   if (!is.null(clm)) {
+      factor <- clm$factor
+      if (!is.null(factor)) {
+         output.cls.file.name <- paste0(output.file.base, ".cls")        
+         write.factor.to.cls (factor, output.cls.file.name)
+      }
+   }
+}
+
+plot.qc.images <- function(cel.batch, column.names, output.file.base, qc.plot.format) {
+   # Print out some QC images
+   # TODO: surround each with try/catch to allow them to continue on error.  Look at code from CBD
+
+   # Plot nothing if the user choose "skip"
+   device.open <- get.device.open(qc.plot.format)
+   if (!is.null(device.open)) {
+      print("Generating QC plots")
+      device.open(paste0(output.file.base, ".QC.Density_histogram"))
+      hist(cel.batch, names=1:NROW(column.names))
+      dev.off()
+      device.open(paste0(output.file.base, ".QC.Boxplot"))
+      boxplot(cel.batch, names=1:NROW(column.names))
+      dev.off()
+      
+      for (i in 1:NROW(column.names)) {
+         device.open(paste0(output.file.base, ".QC.",column.names[i], "_MAplot"))
+         MAplot(cel.batch, which=i)
+         dev.off()
+         device.open(paste0(output.file.base, ".QC.",column.names[i], "_celImage"))
+         image(cel.batch, which=i)
+         dev.off()
+      }
+   }
+}
+
+check.output.format <- function(output.format) {
+   if (!(output.format %in% c("pdf", "svg", "png", "skip"))) {
+      stop(paste0("Unrecognized output format '", output.format, "'"))
+   }
+}
+
+get.device.open <- function(extension) {
+   if (extension == "skip") { return(NULL) }
+   if (extension == "pdf") {
+      return(function(filename_base) {
+         pdf(paste0(filename_base, ".pdf"))
+      })
+   }
+   if (extension == "svg") {
+      return(function(filename_base) {
+         svg(paste0(filename_base, ".svg"))
+      })
+   }
+   if (extension == "png") {
+      return(function(filename_base) {
+         png(paste0(filename_base, ".png"))
+      })
+   }
+   stop(paste0("Unhandled plot file format '", extension, "'"))
+}
+
+print.plotObject <- function(plotObj, filename_base, device.open) {
+   device.open(filename_base)
+   print(plotObj)
+   dev.off()
+}
+
+build.allCelPlotter <- function(plotTypeName, plotterFunction) {
+   function(cel.batch, device.open, output.file.base, count) {
+      plotname <- paste0(output.file.base, ".QC.",plotTypeName)
+      tryCatch({
+         device.open(plotname)
+         plotterFunction(cel.batch, count)
+         dev.off()
+      },
+      error = function(err) {
+         print(paste0("Error printing the ", plotname, " plot - skipping"))
+         print(conditionMessage(err))
+      })
+   }
+}
+
+build.oneCelPlotter <- function(plotTypeName, plotterFunction) {
+   function(cel.batch, device.open, which, output.file.base, plotInstanceName) {
+      plotname <- paste0(output.file.base, ".QC.", plotInstanceName, "_", plotTypeName)
+      tryCatch({
+         device.open(plotname)
+         plotterFunction(cel.batch, which)
+         dev.off()
+      },
+      error = function(err) {
+         print(paste0("Error printing the ", plotname, " plot - skipping"))
+         print(conditionMessage(err))
+      })
+   }
+}
+
+print.densityHistogram <- build.allCelPlotter("Density_histogram", 
+   function(cel.batch, count) {
+      return(hist(cel.batch, names=1:count))
+   }
+)
+
+print.boxplot <- build.allCelPlotter("Boxplot", 
+   function(cel.batch, count) {
+      return(boxplot(cel.batch, names=1:count))
+   }
+)
+
+print.celImage <- build.oneCelPlotter("Cel_image", 
+   function(cel.batch, which) {
+      return(image(cel.batch, which=which))
+   }
+)
+
+print.MAplot <- build.oneCelPlotter("MAplot", 
+   function(cel.batch, which) {
+      return(MAplot(cel.batch, which=which))
+   }
+)

@@ -1,0 +1,98 @@
+#Wed Aug 13 09:06:10 EDT 2014
+name=AffySTExpressionFileCreator
+# Note that the site-library named below does not exist and will not actually have that datestamp when in final form.  This is just a placeholder for the eventual 3.1 site-library.
+commandLine=<R3.1_RScript> --no-save --quiet --slave --no-restore <libdir>run_gp_affyst_efc.R <libdir> <patches>/rlib/3.1_20140813/site-library \
+    --input.file\=<input.file> --normalize=<normalize> --background.correct=<background.correct> --compute.present.absent.calls=<compute.present.absent.calls> \
+    --qc.plot.format=<qc.plot.format> <clm.file> --annotate.probes=<annotate.probes> --output.file.base=<output.file.base>
+license=
+taskDoc=doc.html
+fileFormat=gct;res;pdf;svg;png
+taskType=Preprocess & Utilities
+os=any
+quality=preproduction
+privacy=public
+description=
+version=
+minGenePatternVersion=
+language=R
+author=David Eby, Broad Institute
+
+p1_default_value=
+p1_description=One or more Affy ST CEL files 
+p1_fileFormat=cel;zip;gz;bz2
+p1_numValues=1+
+p1_MODE=IN
+p1_name=input.file
+p1_optional=
+p1_prefix_when_specified=
+p1_TYPE=FILE
+p1_type=java.io.File
+p1_value=
+
+p2_default_value=yes
+p2_description=Whether to normalize data using quantile normalization
+p2_name=normalize
+p2_optional=
+p2_prefix_when_specified=
+p2_type=java.lang.String
+p2_value=yes;no
+
+p3_default_value=yes
+p3_description=Whether to perform background correction
+p3_fileFormat=
+p3_name=background.correct
+p3_optional=
+p3_prefix_when_specified=
+p3_type=java.lang.String
+p3_value=yes;no
+
+p4_default_value=no
+p4_description=Whether to compute Present/Absent calls.
+p4_name=compute.present.absent.calls
+p4_optional=
+p4_prefix_when_specified=
+p4_type=java.lang.String
+p4_value=yes\=yes (create res file);no\=no (create gct file)
+
+p5_default_value=pdf
+p5_description=Choose a file format for the QC plots (or skip them completely)
+p5_fileFormat=
+p5_name=qc.plot.format
+p5_optional=
+p5_prefix_when_specified=
+p5_type=java.lang.String
+p5_value=pdf;svg;png;skip
+
+p6_MODE=IN
+p6_TYPE=FILE
+p6_default_value=
+p6_description=A tab-delimited text file containing one scan, sample, and class per line
+p6_fileFormat=txt;clm
+p6_name=clm.file
+p6_optional=on
+p6_prefix_when_specified=--clm.file=
+p6_type=java.io.File
+p6_value=
+
+p7_default_value=yes
+p7_description=Whether to annotate probes with the gene symbol and description
+p7_name=annotate.probes
+p7_optional=
+p7_prefix_when_specified=
+p7_type=java.lang.String
+p7_value=yes;no
+
+p8_default_value=<job_id>.expression
+p8_description=The base name of the output file(s).  The .gct or .res extension will be automatically added. 
+p8_name=output.file.base
+p8_optional=
+p8_prefix_when_specified=
+p8_type=java.lang.String
+p8_value=
+
+# Update these later when we have dependency installer plug-in
+requiredPatchLSIDs=
+requiredPatchURLs=
+
+LSID=urn\:lsid\:broad.mit.edu\:cancer.software.genepattern.module.analysis\:00335\:999999999
+publicationDate=11/13/2013 15\:59 
