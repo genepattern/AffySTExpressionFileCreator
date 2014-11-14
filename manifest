@@ -1,7 +1,7 @@
 #Wed Aug 13 09:06:10 EDT 2014
 name=AffySTExpressionFileCreator
 # Note that the site-library named below does not exist and will not actually have that datestamp when in final form.  This is just a placeholder for the eventual 3.1 site-library.
-commandLine=<R3.1_RScript> --no-save --quiet --slave --no-restore <libdir>run_gp_affyst_efc.R <libdir> <patches>/rlib/3.1_20140813/site-library \
+commandLine=<R3.1_Rscript> --no-save --quiet --slave --no-restore <libdir>run_gp_affyst_efc.R <libdir> <patches>/rlib/3.1_20141113/site-library \
     --input.file\=<input.file> --normalize=<normalize> --background.correct=<background.correct> --compute.present.absent.calls=<compute.present.absent.calls> \
     --qc.plot.format=<qc.plot.format> <clm.file> --annotate.probes=<annotate.probes> --output.file.base=<output.file.base>
 license=
@@ -19,7 +19,7 @@ author=David Eby, Broad Institute
 
 p1_default_value=
 p1_description=One or more Affy ST CEL files 
-p1_fileFormat=cel;zip;gz;bz2
+p1_fileFormat=cel;zip;gz;bz2;xz
 p1_numValues=1+
 p1_MODE=IN
 p1_name=input.file
@@ -61,7 +61,7 @@ p5_name=qc.plot.format
 p5_optional=
 p5_prefix_when_specified=
 p5_type=java.lang.String
-p5_value=pdf;svg;png;skip
+p5_value=pdf;svg;png;skip\=skip (do not produce QC plots)
 
 p6_MODE=IN
 p6_TYPE=FILE

@@ -9,8 +9,8 @@
 ## use, misuse, or functionality.
 
 GP.affyst.efc <- function(cel.files, normalize, background.correct, compute.present.absent.calls, 
-                         qc.plot.format, clm.file, annotate.probes, output.file.base) {
-   files.to.process <- list.celfiles(cel.files, recursive=TRUE, full.names=TRUE)
+                         qc.plot.format, clm.file, annotate.probes, output.file.base, site.library) {
+   files.to.process <- list.celfiles(cel.files, recursive=TRUE, full.names=TRUE, listGzipped=TRUE)
    
    # Check that we actually have files
    if (NROW(files.to.process) < 1) {
@@ -27,23 +27,27 @@ GP.affyst.efc <- function(cel.files, normalize, background.correct, compute.pres
       clm <- NULL
    }
    
-   # Need some appropriate wrapping here to avoid fail-on-warning issues when an annotation package is
-   # downloaded for the first time.  Note that this annotation package is needed even if the user is
-   # not annotating the probes.
-   cel.batch <- read.celfiles(files.to.process)
-   # Probably need to recheck at this point to be sure things loaded correctly.
+   # Figure out the array type being processed based on the first CEL file
+   arrayTypeName <- read.celfile.header(files.to.process[1])$cdfName
+
+   # The read.celfiles call will auto-load the following annotation pkg, but we preemptively & explicitly do it
+   # here in order to control output of messages to stderr.
+   basic.annPkgName <- paste0("pd.", tolower(gsub("[-_]", ".", arrayTypeName)))
+   loadAnnotationPackage(basic.annPkgName, site.library)
+
+   # Now, read the CEL files to be processed.
+   cel.batch <- read.celfiles(files.to.process, verbose=FALSE)
 
    # Rename samples according to CLM file, if present, or remove the '.CEL' extensions from the file names if not.
    column.names <- rename.samples(sampleNames(cel.batch), clm)
-   
+
    probeset.summary <- rma(cel.batch, target="probeset", background=background.correct, normalize=normalize)
    expr.data <- exprs(probeset.summary)
 
    if (annotate.probes) {
-      # Figure out the array type being processed based on the first CEL file
-      arrayTypeName <- read.celfile.header(files.to.process[1])$cdfName
-      probesetDbName <- find.probesetDbName(arrayTypeName)
-      loadAnnotationPackage(probesetDbName)
+      probesetDbName <- paste0(tolower(gsub("[-_]", "", arrayTypeName)), "probeset")
+      probesetDb.annPkgName <- paste0(probesetDbName, ".db")
+      loadAnnotationPackage(probesetDb.annPkgName, site.library)
       annotations <- build.annotations(probeset.summary, probesetDbName, arrayTypeName, output.file.base)
    }
    else {
@@ -69,24 +73,12 @@ GP.affyst.efc <- function(cel.files, normalize, background.correct, compute.pres
    plot.qc.images(cel.batch, column.names, output.file.base, qc.plot.format)
 }
 
-find.probesetDbName <- function(arrayTypeName) {
-   arrayTypeName <- tolower(gsub("[-_]", "", arrayTypeName))
-   probesetDbName <- paste0(arrayTypeName, "probeset")
-   return (probesetDbName)
-}
-
-loadAnnotationPackage <- function(probesetDbName) {
-   # Install the full annotation package if necessary...
-   # This is actually going to require some legwork.  See the RDep library for full details; gist of it is:
-   # - Need to check if it's already installed
-   # - Need to handle Bioconductor mirror; must be passed from manifest commandLine.
-   # - Need to handle errors
-   # - Need to install to correct location
-   # - Need to suppress messages
-   # Break this off into separate function, destined for common Lib.
-   annPackageName <- paste0(probesetDbName, ".db")
-   # biocLite(annPackageName)
-   library(annPackageName, character.only=TRUE)
+loadAnnotationPackage <- function(annPackageName, site.library) {
+   # Dynamically install (if necessary) and load the extra required annotation package
+   dyn.loadBioconductorPackage(annPackageName, site.library)
+   suppressMessages(suppressWarnings(
+      library(annPackageName, character.only=TRUE, warn.conflicts=FALSE)
+   ))
 }
 
 build.annotations <- function(probeset.summary, probesetDbName, arrayTypeName, output.file.base) {
@@ -227,27 +219,16 @@ write.cls.from.clm <- function(clm, output.file.base) {
 }
 
 plot.qc.images <- function(cel.batch, column.names, output.file.base, qc.plot.format) {
-   # Print out some QC images
-   # TODO: surround each with try/catch to allow them to continue on error.  Look at code from CBD
-
-   # Plot nothing if the user choose "skip"
+   # Print out some QC images. Plot nothing if the user choose "skip"
    device.open <- get.device.open(qc.plot.format)
    if (!is.null(device.open)) {
       print("Generating QC plots")
-      device.open(paste0(output.file.base, ".QC.Density_histogram"))
-      hist(cel.batch, names=1:NROW(column.names))
-      dev.off()
-      device.open(paste0(output.file.base, ".QC.Boxplot"))
-      boxplot(cel.batch, names=1:NROW(column.names))
-      dev.off()
+      print.densityHistogram(cel.batch, device.open, output.file.base, NROW(column.names))
+      print.boxplot(cel.batch, device.open, output.file.base, NROW(column.names))
       
       for (i in 1:NROW(column.names)) {
-         device.open(paste0(output.file.base, ".QC.",column.names[i], "_MAplot"))
-         MAplot(cel.batch, which=i)
-         dev.off()
-         device.open(paste0(output.file.base, ".QC.",column.names[i], "_celImage"))
-         image(cel.batch, which=i)
-         dev.off()
+         print.MAplot(cel.batch, device.open, output.file.base, i, column.names[i])
+         print.celImage(cel.batch, device.open, output.file.base, i, column.names[i])
       }
    }
 }
@@ -300,7 +281,7 @@ build.allCelPlotter <- function(plotTypeName, plotterFunction) {
 }
 
 build.oneCelPlotter <- function(plotTypeName, plotterFunction) {
-   function(cel.batch, device.open, which, output.file.base, plotInstanceName) {
+   function(cel.batch, device.open, output.file.base, which, plotInstanceName) {
       plotname <- paste0(output.file.base, ".QC.", plotInstanceName, "_", plotTypeName)
       tryCatch({
          device.open(plotname)
@@ -316,24 +297,67 @@ build.oneCelPlotter <- function(plotTypeName, plotterFunction) {
 
 print.densityHistogram <- build.allCelPlotter("Density_histogram", 
    function(cel.batch, count) {
-      return(hist(cel.batch, names=1:count))
+      hist(cel.batch, names=1:count)
    }
 )
 
 print.boxplot <- build.allCelPlotter("Boxplot", 
    function(cel.batch, count) {
-      return(boxplot(cel.batch, names=1:count))
+      boxplot(cel.batch, names=1:count)
    }
 )
 
 print.celImage <- build.oneCelPlotter("Cel_image", 
    function(cel.batch, which) {
-      return(image(cel.batch, which=which))
+      image(cel.batch, which=which)
    }
 )
 
 print.MAplot <- build.oneCelPlotter("MAplot", 
    function(cel.batch, which) {
-      return(MAplot(cel.batch, which=which))
+      MAplot(cel.batch, which=which)
    }
 )
+
+# Set up all of the input files in a common directory for processing.
+setup.input.files <- function(input.file, destdir) {
+   # Create a subdir to hold all of the input files.
+   dir.create(destdir)
+   file.list <- read.table(input.file, header=FALSE)[,1]
+   cels<-grep("*.CEL$|*.CEL.gz$", ignore.case=TRUE, file.list, value=TRUE)
+   cels.bz2<-grep("*.CEL.bz2$", ignore.case=TRUE, file.list, value=TRUE)
+   tars<-grep("*.tar$|*.tar.xz$|*.tar.gz$|*.tar.bz2$", ignore.case=TRUE, file.list, value=TRUE)
+   zips<-grep("*.zip$", ignore.case=TRUE, file.list, value=TRUE)
+   
+   # Copy the cels into place.  GZ files are handled natively by read.celfiles.  Setting overwrite=FALSE prevents items with
+   # the same name from sneaking in from different paths; this should be detected rather than silently ignored. 
+   retVal <- file.copy(cels, file.path(destdir), overwrite=FALSE)
+   check.retVal<-matrix(nrow=length(cels), ncol=2)
+   check.retVal[,1]<-cels
+   check.retVal[,2]<-retVal
+   #apply(check.retVal, MARGIN=1, FUN=function(item) { 
+   #   if (!(item[2])) { stop(paste0("Unable to make a local copy of '", item[1], "'")) }
+   #})
+
+   # Decompress BZ2 files into the common directory.
+   lapply(cels.bz2, function(cel.bz2) {
+      cel <- file.path(destdir, gsub("[.]bz2$", "", cel.bz2))
+      bunzip2(cel.bz2, cel, overwrite=FALSE, remove=FALSE)
+   })
+
+   # We handle TAR and ZIP files by unpacking them into dedicated subdirectories within the cel_files location.  This is to
+   # avoid silently overwriting files provided by other means (brought in individually or contained in other archives).  The
+   # eventual processing by read.celfiles will detect and disallow any duplicates, but handling archives this way ensure that
+   # collisions will be detected and seen by the user rather than silently skipped.
+   tmpDirCount<-0
+   lapply(tars, function(tarfile) {
+      tmpDirCount<-tmpDirCount+1
+      to <- file.path(destdir, paste0("in",tmpDirCount))
+      untar(tarfile, exdir=to)
+   })
+   lapply(zips, function(zipfile) {
+      tmpDirCount<-tmpDirCount+1
+      to <- file.path(destdir, paste0("in",tmpDirCount))
+      unzip(zipfile, exdir=to)
+   })
+}
