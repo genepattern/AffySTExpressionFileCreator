@@ -17,6 +17,9 @@ GP.affyst.efc <- function(cel.files, normalize, background.correct, compute.pres
       stop(paste0("No CEL files were found in ", cel.files))
    }
 
+   # Make sure that there are no name collisions (CEL files with duplicated names)
+   check.for.dup.file(files.to.process)
+
    # Load the CLM file and rearrange files.to.process to match
    if (!is.null(clm.file)) {
       clm <- read.clm(clm.file)
@@ -36,7 +39,22 @@ GP.affyst.efc <- function(cel.files, normalize, background.correct, compute.pres
    loadAnnotationPackage(basic.annPkgName, site.library)
 
    # Now, read the CEL files to be processed.
-   cel.batch <- read.celfiles(files.to.process, verbose=FALSE)
+   tryCatch(
+      {
+         cel.batch <- read.celfiles(files.to.process, verbose=FALSE)
+      },
+      warning=function(w) {
+         # Check whether read.celfiles detected any duplicated names.  This should not happen after our above check
+         # for duplicates, but we'll do it just in case.
+         if (grepl("non-unique values when setting 'row.names'", conditionMessage(w))) {
+            stop(paste0("Duplicated CEL file names were detected.  The module cannot handle duplicated names.  ",
+                        "Each file must have a unique name (ignoring any compression extension)."))
+         }
+         else {
+            print(conditionMessage(w))
+         }
+      }
+   )
 
    # Rename samples according to CLM file, if present, or remove the '.CEL' extensions from the file names if not.
    column.names <- rename.samples(sampleNames(cel.batch), clm)
@@ -176,11 +194,11 @@ rename.samples <- function(cel.file.names, clm) {
       index <- grep(s, cel.file.names, ignore.case=TRUE)
 
       if (length(index) == 0) {
-         cat(paste("Scan", scan, "in clm file was not found. \n"))
+         cat(paste("Scan", scan, "in clm file was not found.  Excluding from dataset. \n"))
          remove.scan.index <- c(remove.scan.index, scanIdx)
       } 
       else if(length(index) > 1) {
-         cat(paste("Scan", scan, "in clm file matches more than one CEL file. \n"))
+         cat(paste("Scan", scan, "in clm file matches more than one CEL file.  Excluding from dataset. \n"))
          remove.scan.index <- c(remove.scan.index, scanIdx)
       } 
       else {
@@ -205,7 +223,7 @@ rename.samples <- function(cel.file.names, clm) {
       exit("No CEL files listed in clm file found.")
    }
 
-   return (cel.file.names)
+   return (clm$sample.names)
 }
 
 write.cls.from.clm <- function(clm, output.file.base) {
@@ -329,27 +347,29 @@ setup.input.files <- function(input.file, destdir) {
    tars<-grep("*.tar$|*.tar.xz$|*.tar.gz$|*.tar.bz2$", ignore.case=TRUE, file.list, value=TRUE)
    zips<-grep("*.zip$", ignore.case=TRUE, file.list, value=TRUE)
    
-   # Copy the cels into place.  GZ files are handled natively by read.celfiles.  Setting overwrite=FALSE prevents items with
-   # the same name from sneaking in from different paths; this should be detected rather than silently ignored. 
-   retVal <- file.copy(cels, file.path(destdir), overwrite=FALSE)
-   check.retVal<-matrix(nrow=length(cels), ncol=2)
-   check.retVal[,1]<-cels
-   check.retVal[,2]<-retVal
-   #apply(check.retVal, MARGIN=1, FUN=function(item) { 
-   #   if (!(item[2])) { stop(paste0("Unable to make a local copy of '", item[1], "'")) }
-   #})
+   # We copy/unpack all files into dedicated subdirectories within the cel_files location.  This is to avoid silently
+   # overwriting files provided by other means (brought in individually or contained in multiple archives).  The
+   # read.celfiles call will detect and disallow any duplicates, but handling archives this way ensures that collisions
+   # will be detected and seen by the user rather than silently skipped.
+   tmpDirCount<-0
 
-   # Decompress BZ2 files into the common directory.
+   # Copy the cels into place.  GZ files are handled natively by read.celfiles.
+   for (i in 1:NROW(cels)) {
+      tmpDirCount<-tmpDirCount+1
+      to <- file.path(destdir, paste0("in",tmpDirCount))
+      dir.create(to)
+      retVal <- file.copy(cels[i], to)
+      if (!retVal) { stop(paste0("Unable to make a local copy of '", cels[i], "'")) }
+   }
+
+   # Decompress BZ2 files.
    lapply(cels.bz2, function(cel.bz2) {
-      cel <- file.path(destdir, gsub("[.]bz2$", "", cel.bz2))
+      tmpDirCount<-tmpDirCount+1
+      cel <- file.path(destdir, paste0("in",tmpDirCount), gsub("[.]bz2$", "", cel.bz2))
       bunzip2(cel.bz2, cel, overwrite=FALSE, remove=FALSE)
    })
 
-   # We handle TAR and ZIP files by unpacking them into dedicated subdirectories within the cel_files location.  This is to
-   # avoid silently overwriting files provided by other means (brought in individually or contained in other archives).  The
-   # eventual processing by read.celfiles will detect and disallow any duplicates, but handling archives this way ensure that
-   # collisions will be detected and seen by the user rather than silently skipped.
-   tmpDirCount<-0
+   # Unpack TARs and ZIPs
    lapply(tars, function(tarfile) {
       tmpDirCount<-tmpDirCount+1
       to <- file.path(destdir, paste0("in",tmpDirCount))
@@ -360,4 +380,17 @@ setup.input.files <- function(input.file, destdir) {
       to <- file.path(destdir, paste0("in",tmpDirCount))
       unzip(zipfile, exdir=to)
    })
+}
+
+check.for.dup.file <- function(files.to.process) {
+   # Make sure that there are no name collisions (CEL files with duplicated names)
+   dups <- duplicated(gsub("[.]gz", "", ignore.case=TRUE, basename(files.to.process)))
+   if (any(dups)) {
+      cat("The following CEL file names were duplicated  (ignoring any compression extension):\n", file=stderr())
+      for (i in 1:NROW(dups)) {
+         if (dups[i]) { cat(paste0("     ", basename(files.to.process[i]), "\n"), file=stderr()) }
+      }
+      
+      stop("The module cannot handle duplicated names.  Each file must have a unique name.")
+   }
 }
