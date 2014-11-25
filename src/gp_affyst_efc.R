@@ -8,10 +8,8 @@
 ## whatsoever. Neither the Broad Institute nor MIT can be responsible for its
 ## use, misuse, or functionality.
 
-GP.affyst.efc <- function(cel.files, normalize, background.correct, compute.present.absent.calls, 
+GP.affyst.efc <- function(files.to.process, normalize, background.correct, compute.present.absent.calls, 
                          qc.plot.format, clm.file, annotate.probes, output.file.base, site.library) {
-   files.to.process <- list.celfiles(cel.files, recursive=TRUE, full.names=TRUE, listGzipped=TRUE)
-   
    # Check that we actually have files
    if (NROW(files.to.process) < 1) {
       stop(paste0("No CEL files were found in ", cel.files))
@@ -338,20 +336,21 @@ print.MAplot <- build.oneCelPlotter("MAplot",
 )
 
 # Set up all of the input files in a common directory for processing.
-setup.input.files <- function(input.file, destdir) {
+GP.setup.input.files <- function(input.file, destdir) {
    # Create a subdir to hold all of the input files.
    dir.create(destdir)
    file.list <- read.table(input.file, header=FALSE)[,1]
-   cels<-grep("*.CEL$|*.CEL.gz$", ignore.case=TRUE, file.list, value=TRUE)
-   cels.bz2<-grep("*.CEL.bz2$", ignore.case=TRUE, file.list, value=TRUE)
-   tars<-grep("*.tar$|*.tar.xz$|*.tar.gz$|*.tar.bz2$", ignore.case=TRUE, file.list, value=TRUE)
-   zips<-grep("*.zip$", ignore.case=TRUE, file.list, value=TRUE)
-   
+
+   # Find files with various extensions so they can be handled according to type.
    # We copy/unpack all files into dedicated subdirectories within the cel_files location.  This is to avoid silently
    # overwriting files provided by other means (brought in individually or contained in multiple archives).  The
    # read.celfiles call will detect and disallow any duplicates, but handling archives this way ensures that collisions
    # will be detected and seen by the user rather than silently skipped.
    tmpDirCount<-0
+   cels<-grep("*.CEL$|*.CEL.gz$", ignore.case=TRUE, file.list, value=TRUE)
+   cels.bz2<-grep("*.CEL.bz2$", ignore.case=TRUE, file.list, value=TRUE)
+   tars<-grep("*.tar$|*.tar.xz$|*.tar.gz$|*.tar.bz2$", ignore.case=TRUE, file.list, value=TRUE)
+   zips<-grep("*.zip$", ignore.case=TRUE, file.list, value=TRUE)
 
    # Copy the cels into place.  GZ files are handled natively by read.celfiles.
    for (i in 1:NROW(cels)) {
@@ -380,6 +379,19 @@ setup.input.files <- function(input.file, destdir) {
       to <- file.path(destdir, paste0("in",tmpDirCount))
       unzip(zipfile, exdir=to)
    })
+
+   # Find all directory inputs.  These are handled differently: they will be passed in directly rather than being copied over.
+   # We'll have the list.celfiles() call operate across these so the results will all be appended together for processing.
+   input.file.info <- file.info(file.list)
+   file.dirs.list <- rownames(subset(input.file.info, isdir==TRUE))
+   
+   # Add the destdir to our list of directories to process. 
+   file.dirs.list <- c(destdir, input.dirs.list)
+
+   # Gather up a list of all CEL files found in these dirs and return it for processing. 
+   files.to.process <- list.celfiles(file.dirs.list, recursive=TRUE, full.names=TRUE, listGzipped=TRUE)   
+   
+   return(files.to.process)   
 }
 
 check.for.dup.file <- function(files.to.process) {

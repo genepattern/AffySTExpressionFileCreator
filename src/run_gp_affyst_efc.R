@@ -59,8 +59,8 @@ check.output.format(opts$qc.plot.format)
 destdir <- "cel_files"
 tryCatch(
    {
-      setup.input.files(opts$input.file, destdir)
-      GP.affyst.efc(destdir, normalize, background.correct, compute.present.absent.calls,
+      files.to.process <- GP.setup.input.files(opts$input.file, destdir)
+      GP.affyst.efc(files.to.process, normalize, background.correct, compute.present.absent.calls,
                     opts$qc.plot.format, opts$clm.file, annotate.probes, opts$output.file.base,
                     site.library)
    },

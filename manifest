@@ -1,7 +1,6 @@
 #Wed Aug 13 09:06:10 EDT 2014
 name=AffySTExpressionFileCreator
-# Note that the site-library named below does not exist and will not actually have that datestamp when in final form.  This is just a placeholder for the eventual 3.1 site-library.
-commandLine=<R3.1_Rscript> --no-save --quiet --slave --no-restore <libdir>run_gp_affyst_efc.R <libdir> <patches>/rlib/3.1_20141113/site-library \
+commandLine=<R3.1_Rscript> --no-save --quiet --slave --no-restore <libdir>run_gp_affyst_efc.R <libdir> <patches>/rlib/3.1_20141120/site-library \
     --input.file\=<input.file> --normalize=<normalize> --background.correct=<background.correct> --compute.present.absent.calls=<compute.present.absent.calls> \
     --qc.plot.format=<qc.plot.format> <clm.file> --annotate.probes=<annotate.probes> --output.file.base=<output.file.base>
 license=
@@ -19,7 +18,7 @@ author=David Eby, Broad Institute
 
 p1_default_value=
 p1_description=One or more Affy ST CEL files 
-p1_fileFormat=cel;zip;gz;bz2;xz
+p1_fileFormat=directory;cel;zip;gz;bz2;xz
 p1_numValues=1+
 p1_MODE=IN
 p1_name=input.file
@@ -91,8 +90,8 @@ p8_type=java.lang.String
 p8_value=
 
 # Update these later when we have dependency installer plug-in
-requiredPatchLSIDs=
-requiredPatchURLs=
+requiredPatchLSIDs=urn\:lsid\:broadinstitute.org\:plugin\:rdep_3.1_affyST\:0.1
+requiredPatchURLs=http\://iwww.broadinstitute.org/~eby/rdep_3.1_affyST.zip
 
 LSID=urn\:lsid\:broad.mit.edu\:cancer.software.genepattern.module.analysis\:00335\:999999999
 publicationDate=11/13/2013 15\:59 
