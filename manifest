@@ -11,7 +11,7 @@ os=any
 quality=preproduction
 privacy=public
 description=Creates a RES or GCT file from a set of CEL files from Affymetrix ST arrays.
-version=
+version=Minor bug-fixes for input file set-up.  Changed to skip QC plots by default (time intensive).  Fixed dependency plug-in URL.
 minGenePatternVersion=
 language=R
 author=David Eby, Broad Institute
@@ -53,7 +53,7 @@ p4_prefix_when_specified=
 p4_type=java.lang.String
 p4_value=yes\=yes (create res file);no\=no (create gct file)
 
-p5_default_value=pdf
+p5_default_value=skip
 p5_description=Choose a file format for the QC plots (or skip them completely)
 p5_fileFormat=
 p5_name=qc.plot.format
@@ -89,9 +89,12 @@ p8_prefix_when_specified=
 p8_type=java.lang.String
 p8_value=
 
-# Update these later when we have dependency installer plug-in
 requiredPatchLSIDs=urn\:lsid\:broadinstitute.org\:plugin\:rdep_3.1_affyST\:0.1
-requiredPatchURLs=http\://iwww.broadinstitute.org/~eby/rdep_3.1_affyST.zip
+requiredPatchURLs=http\://www.broadinstitute.org/webservices/gpModuleRepository/download/dev/patch/?file\=/rdep_3.1_affyST/broadinstitute.org\:plugin/rdep_3.1_affyST/0.1/rdep_3.1_affyST.zip
+
+# The following should be the final LSID & URL for affyST rdep when it's done.  Remove this comment and place the values above.
+#  urn\:lsid:broadinstitute.org:\plugin\:rdep_3.1_affyST\:1
+#  http\://www.broadinstitute.org/webservices/gpModuleRepository/download/prod/patch/?file\=/rdep_3.1_affyST/broadinstitute.org\:plugin/rdep_3.1_affyST/1/rdep_3.1_affyST.zip
 
 LSID=urn\:lsid\:broad.mit.edu\:cancer.software.genepattern.module.analysis\:00335\:999999999
 publicationDate=11/13/2013 15\:59 

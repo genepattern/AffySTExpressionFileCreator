@@ -339,7 +339,7 @@ print.MAplot <- build.oneCelPlotter("MAplot",
 GP.setup.input.files <- function(input.file, destdir) {
    # Create a subdir to hold all of the input files.
    dir.create(destdir)
-   file.list <- read.table(input.file, header=FALSE)[,1]
+   file.list <- read.table(input.file, header=FALSE, stringsAsFactors=FALSE)[,1]
 
    # Find files with various extensions so they can be handled according to type.
    # We copy/unpack all files into dedicated subdirectories within the cel_files location.  This is to avoid silently
@@ -353,12 +353,14 @@ GP.setup.input.files <- function(input.file, destdir) {
    zips<-grep("*.zip$", ignore.case=TRUE, file.list, value=TRUE)
 
    # Copy the cels into place.  GZ files are handled natively by read.celfiles.
-   for (i in 1:NROW(cels)) {
-      tmpDirCount<-tmpDirCount+1
-      to <- file.path(destdir, paste0("in",tmpDirCount))
-      dir.create(to)
-      retVal <- file.copy(cels[i], to)
-      if (!retVal) { stop(paste0("Unable to make a local copy of '", cels[i], "'")) }
+   if (NROW(cels) > 1) {
+      for (i in 1:NROW(cels)) {
+         tmpDirCount<-tmpDirCount+1
+         to <- file.path(destdir, paste0("in",tmpDirCount))
+         dir.create(to)
+         retVal <- file.copy(cels[i], to)
+         if (!retVal) { stop(paste0("Unable to make a local copy of '", cels[i], "'")) }
+      }
    }
 
    # Decompress BZ2 files.
@@ -386,7 +388,7 @@ GP.setup.input.files <- function(input.file, destdir) {
    file.dirs.list <- rownames(subset(input.file.info, isdir==TRUE))
    
    # Add the destdir to our list of directories to process. 
-   file.dirs.list <- c(destdir, input.dirs.list)
+   file.dirs.list <- c(destdir, file.dirs.list)
 
    # Gather up a list of all CEL files found in these dirs and return it for processing. 
    files.to.process <- list.celfiles(file.dirs.list, recursive=TRUE, full.names=TRUE, listGzipped=TRUE)   
