@@ -17,7 +17,7 @@ language=R
 author=David Eby, Broad Institute
 
 p1_default_value=
-p1_description=One or more Affymetrix ST CEL files.  These can be submitted directly through this parameter, packaged as ZIP or TAR bundles, or through a directory input.  The CEL files can be in GZ format and the TAR can be in GZ, XZ, or BZ2 format. One or more Affymetrix ST CEL files either uploaded directly, packaged into a ZIP or TAR bundle, or supplied through a directory input.  The CEL files can be in GZ format and the TAR can be in GZ, XZ, or BZ2 format.  The parameter will accept multiple inputs in any of these forms. 
+p1_description=One or more Affymetrix ST CEL files either uploaded directly, packaged into a ZIP or TAR bundle, or supplied through a directory input.  The CEL files can be in GZ format and the TAR can be in GZ, XZ, or BZ2 format.  The parameter will accept multiple inputs in any of these forms. 
 p1_fileFormat=directory;cel;zip;gz;bz2;xz
 p1_numValues=1+
 p1_MODE=IN
