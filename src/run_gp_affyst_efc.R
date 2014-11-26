@@ -66,6 +66,6 @@ tryCatch(
    },
    finally = {
       # Clean up the CEL file subtree.
-      #unlink(destdir, recursive=TRUE)
+      unlink(destdir, recursive=TRUE)
    }
 )
