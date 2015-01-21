@@ -33,7 +33,7 @@ GP.affyst.efc <- function(files.to.process, normalize, background.correct, compu
 
    # The read.celfiles call will auto-load the following annotation pkg, but we preemptively & explicitly do it
    # here in order to control output of messages to stderr.
-   basic.annPkgName <- paste0("pd.", tolower(gsub("[-_]", ".", arrayTypeName)))
+   basic.annPkgName <- cleanPlatformName(arrayTypeName)
    loadAnnotationPackage(basic.annPkgName, site.library)
 
    # Now, read the CEL files to be processed.
@@ -61,10 +61,27 @@ GP.affyst.efc <- function(files.to.process, normalize, background.correct, compu
    expr.data <- exprs(probeset.summary)
 
    if (annotate.probes) {
-      probesetDbName <- paste0(tolower(gsub("[-_]", "", arrayTypeName)), "probeset")
-      probesetDb.annPkgName <- paste0(probesetDbName, ".db")
-      loadAnnotationPackage(probesetDb.annPkgName, site.library)
-      annotations <- build.annotations(probeset.summary, probesetDbName, arrayTypeName, output.file.base)
+      # Check arrayTypeName to see if we have Human, Mouse, Rat (using hard-coded huex, hugene, ...)
+      # These arrays have *much* better/cleaner annotation info available in secondary "probeset" packages;
+      # it's much better to work with those than the corresponding pdInfoFile where they are available.
+      if (haveDetailedAnnotations(arrayTypeName)) {
+         # Remove any trailing "-v1", "-v2" piece (if present) as these are not found in the "probeset" package names.
+         # This cleans up e.g. "HuEx-1_0-st-v2" to "HuEx-1_0-st".
+         probesetArrayTypeName <- gsub("-v[12]$", "", arrayTypeName)
+         # ...then remove dash and underscore chars and force to lowercase as expected in these names.
+         probesetArrayTypeName <- tolower(gsub("[-_]", "", probesetArrayTypeName))
+ 
+         probesetDbName <- paste0(probesetArrayTypeName, "probeset")
+         probesetDb.annPkgName <- paste0(probesetDbName, ".db")
+         loadAnnotationPackage(probesetDb.annPkgName, site.library)
+         annotations <- build.annotations(probeset.summary, probesetDbName)
+      }
+      else {
+         # For other organisms, skip annotations entirely
+         print(paste0("Sorry, annotation information is not available for arrays of type ", arrayTypeName, " at this time."))
+         annotate.probes <- FALSE
+         annotations <- NULL
+      }
    }
    else {
       annotations <- NULL
@@ -97,8 +114,8 @@ loadAnnotationPackage <- function(annPackageName, site.library) {
    ))
 }
 
-build.annotations <- function(probeset.summary, probesetDbName, arrayTypeName, output.file.base) {
-   # TODO: more wrapping here to avoid fail-on-warning issues.
+# Works for Human, Mouse, Rat but not for other organisms.
+build.annotations <- function(probeset.summary, probesetDbName) {
    featureData(probeset.summary) <- getNetAffx(probeset.summary, "probeset")
 
    # Find references to the various annotation environments needed for lookup.  These are dependent on
@@ -109,8 +126,6 @@ build.annotations <- function(probeset.summary, probesetDbName, arrayTypeName, o
    entrezEnv <- get(entrezMapName)
    symbolMapName <- paste0(probesetDbName,"SYMBOL")
    symbolEnv <- get(symbolMapName)
-   geneNameMapName <- paste0(probesetDbName,"GENENAME")
-   geneNameEnv <- get(geneNameMapName)
 
    # Now we look up the various annotation info.  The annotatedData structure will have rownames matching
    # the Affy probesetIds, so we apply a lookup function across these to get the Entrez Gene ID, the gene
@@ -122,23 +137,21 @@ build.annotations <- function(probeset.summary, probesetDbName, arrayTypeName, o
    print("Looking up annotations")
    annotatedData <- featureData(probeset.summary)
    entrezGenes <- sapply(mget(rownames(annotatedData), entrezEnv), FUN=function(entrezEntry) (entrezEntry[[1]]), simplify="array")
-   descriptions <- sapply(mget(rownames(annotatedData), geneNameEnv), FUN=function(geneNameEntry) (geneNameEntry[[1]]), simplify="array")
    gene.symbols <- sapply(mget(rownames(annotatedData), symbolEnv), FUN=function(symbolEntry) (symbolEntry[[1]]), simplify="array")
       
    # The RefSeq Ids are available in the base annotation package loaded by oligo for this array type.  We
    # could get it from an environment like the items above, but it's a little more straightforward this way. 
    refSeqIds <- sapply(pData(annotatedData)[,"geneassignment"], FUN=function(geneEntry) (unlist(strsplit(geneEntry," //"))[1]), simplify="array")
-      
-   # Write a chip file based on these annotations
-   print("Writing chip file from annotation info")
-   chip <- data.frame(names(gene.symbols), gene.symbols, descriptions, entrezGenes)
-   colnames(chip)<-c("Probe Set ID", "Gene Symbol", "Gene Title", "Entrez Gene")
-   write.table(chip, file=paste0(output.file.base, ".", arrayTypeName, ".chip"), sep="\t", quote=FALSE, row.names=FALSE)
 
    # Build a suitable annotation for the dataset.  We'll use "<entrezGene> // <refSeqId> // <gene.symbol>"
    print("Building annotations for dataset")
    annotations <- paste0(unname(entrezGenes), " // ", unname(refSeqIds), " // ", unname(gene.symbols))
    return (annotations)
+}
+
+haveDetailedAnnotations <- function(arrayTypeName) {
+   # Bioconductor only has detailed annotation information for Human, Mouse, and Rat.
+   return(grepl("huex|hugene|moex|mogene|raex|ragene", arrayTypeName, ignore.case=TRUE))
 }
 
 rearrange.files <- function(file.list, clm) {
@@ -391,7 +404,7 @@ GP.setup.input.files <- function(input.file, destdir) {
    file.dirs.list <- c(destdir, file.dirs.list)
 
    # Gather up a list of all CEL files found in these dirs and return it for processing. 
-   files.to.process <- list.celfiles(file.dirs.list, recursive=TRUE, full.names=TRUE, listGzipped=TRUE)   
+   files.to.process <- list.celfiles(file.dirs.list, recursive=TRUE, full.names=TRUE, listGzipped=TRUE)
    
    return(files.to.process)   
 }
