@@ -31,6 +31,12 @@ GP.affyst.efc <- function(files.to.process, normalize, background.correct, compu
    # Figure out the array type being processed based on the first CEL file
    arrayTypeName <- read.celfile.header(files.to.process[1])$cdfName
 
+   # Check that this is an ST array
+   if (!haveSTArrayType(arrayTypeName)) {
+      stop(paste0("Array type ", arrayTypeName, 
+          " does not seem to be an ST array.  You may want to check whether it is supported by ExpressionFileCreator instead."))
+   }
+
    # The read.celfiles call will auto-load the following annotation pkg, but we preemptively & explicitly do it
    # here in order to control output of messages to stderr.
    basic.annPkgName <- cleanPlatformName(arrayTypeName)
@@ -147,6 +153,10 @@ build.annotations <- function(probeset.summary, probesetDbName) {
    print("Building annotations for dataset")
    annotations <- paste0(unname(entrezGenes), " // ", unname(refSeqIds), " // ", unname(gene.symbols))
    return (annotations)
+}
+
+haveSTArrayType <- function(arrayTypeName) {
+   return(grepl("[.]st$|[.]st[.]v1$|[.]st[.]v2$", arrayTypeName, ignore.case=TRUE))
 }
 
 haveDetailedAnnotations <- function(arrayTypeName) {
