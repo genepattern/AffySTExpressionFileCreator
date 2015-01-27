@@ -27,16 +27,22 @@ GP.affyst.efc <- function(files.to.process, normalize, background.correct, compu
    else {
       clm <- NULL
    }
-   
-   # Figure out the array type being processed based on the first CEL file
-   arrayTypeName <- read.celfile.header(files.to.process[1])$cdfName
 
-   # Check that this is an ST array
+   # Get the arrayTypeNames of all files and use the first as the reference.
+   arrayTypeNames <- sapply(files.to.process, getCelChipType)
+   arrayTypeName <- arrayTypeNames[1]
+
+   # Make sure that this is an ST array
    if (!haveSTArrayType(arrayTypeName)) {
       stop(paste0("Array type ", arrayTypeName, 
           " does not seem to be an ST array.  You may want to check whether it is supported by ExpressionFileCreator instead."))
    }
-
+   
+   # Make sure all files match the first.  The read.celfiles() call will also do this, but the error message
+   # it uses is not very clear as we need to set verbose=FALSE on that call.  The following replicates that
+   # verbose=TRUE error message (based on 'checkChipTypes' in oligo's utils-general.R).
+   if (length(unique(arrayTypeNames)) != 1) stop("All the CEL files must be of the same type.")
+    
    # The read.celfiles call will auto-load the following annotation pkg, but we preemptively & explicitly do it
    # here in order to control output of messages to stderr.
    basic.annPkgName <- cleanPlatformName(arrayTypeName)
@@ -155,8 +161,12 @@ build.annotations <- function(probeset.summary, probesetDbName) {
    return (annotations)
 }
 
+getCelChipType <- function(x) {
+   read.celfile.header(x)[["cdfName"]]
+}
+
 haveSTArrayType <- function(arrayTypeName) {
-   return(grepl("[.]st$|[.]st[.]v1$|[.]st[.]v2$", arrayTypeName, ignore.case=TRUE))
+   return(grepl(".st$|.st.v1$|.st.v2$", arrayTypeName, ignore.case=TRUE))
 }
 
 haveDetailedAnnotations <- function(arrayTypeName) {
