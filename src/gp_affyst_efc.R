@@ -177,15 +177,16 @@ haveDetailedAnnotations <- function(arrayTypeName) {
 rearrange.files <- function(file.list, clm) {
    # Rearrange the order of the files to match the CLM file.  Note that we may discard
    # some files based on this (if they are not present in the CLM).
+   print("Rearranging samples based on CLM file")
    new.files.list <- c()
    file.basenames <- basename(file.list)
    file.dirnames <- dirname(file.list)
    i <- 1
-   scanIdx <- 1
    for (scan in clm$scan.names) {
       # Search for the scan name in the file.list.  We search against the file.basenames only so that there
       # are only matches against file names rather than some other path component.
-      index <- grep(scan, file.basenames, ignore.case=TRUE)
+      scanPat <- paste0("^", scan, "$")  # We want an exact match
+      index <- grep(scanPat, file.basenames, ignore.case=TRUE)
 
       if (length(index) == 0) {
          cat(paste("Scan", scan, "in clm file was not found. \n"))
@@ -196,8 +197,7 @@ rearrange.files <- function(file.list, clm) {
       else {
          new.files.list[i] <- file.path(file.dirnames[index[1]], file.basenames[index[1]])
          i <- i + 1
-      }   
-      scanIdx <- scanIdx + 1
+      }
    }
    return (new.files.list)
 }
