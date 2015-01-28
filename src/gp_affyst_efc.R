@@ -379,7 +379,8 @@ GP.setup.input.files <- function(input.file, destdir) {
    # overwriting files provided by other means (brought in individually or contained in multiple archives).  The
    # read.celfiles call will detect and disallow any duplicates, but handling archives this way ensures that collisions
    # will be detected and seen by the user rather than silently skipped.
-   tmpDirCount<-0
+   tmpDirCount <- 0
+   
    cels<-grep("*.CEL$|*.CEL.gz$", ignore.case=TRUE, file.list, value=TRUE)
    cels.bz2<-grep("*.CEL.bz2$", ignore.case=TRUE, file.list, value=TRUE)
    tars<-grep("*.tar$|*.tar.xz$|*.tar.gz$|*.tar.bz2$", ignore.case=TRUE, file.list, value=TRUE)
@@ -388,7 +389,7 @@ GP.setup.input.files <- function(input.file, destdir) {
    # Copy the cels into place.  GZ files are handled natively by read.celfiles.
    if (NROW(cels) > 1) {
       for (i in 1:NROW(cels)) {
-         tmpDirCount<-tmpDirCount+1
+         tmpDirCount <<- tmpDirCount+1
          to <- file.path(destdir, paste0("in",tmpDirCount))
          dir.create(to)
          retVal <- file.copy(cels[i], to)
@@ -398,19 +399,19 @@ GP.setup.input.files <- function(input.file, destdir) {
 
    # Decompress BZ2 files.
    lapply(cels.bz2, function(cel.bz2) {
-      tmpDirCount<-tmpDirCount+1
+      tmpDirCount <<- tmpDirCount+1
       cel <- file.path(destdir, paste0("in",tmpDirCount), gsub("[.]bz2$", "", cel.bz2))
       bunzip2(cel.bz2, cel, overwrite=FALSE, remove=FALSE)
    })
 
    # Unpack TARs and ZIPs
    lapply(tars, function(tarfile) {
-      tmpDirCount<-tmpDirCount+1
+      tmpDirCount <<- tmpDirCount+1
       to <- file.path(destdir, paste0("in",tmpDirCount))
       untar(tarfile, exdir=to)
    })
    lapply(zips, function(zipfile) {
-      tmpDirCount<-tmpDirCount+1
+      tmpDirCount <<- tmpDirCount+1
       to <- file.path(destdir, paste0("in",tmpDirCount))
       unzip(zipfile, exdir=to)
    })
