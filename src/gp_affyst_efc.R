@@ -12,7 +12,7 @@ GP.affyst.efc <- function(files.to.process, normalize, background.correct, compu
                          qc.plot.format, clm.file, annotate.probes, output.file.base, site.library) {
    # Check that we actually have files
    if (NROW(files.to.process) < 1) {
-      stop(paste0("No CEL files were found in ", cel.files))
+      stop("No CEL files were found in the input file(s)")
    }
 
    # Make sure that there are no name collisions (CEL files with duplicated names)
@@ -101,7 +101,7 @@ GP.affyst.efc <- function(files.to.process, normalize, background.correct, compu
 
    if (compute.present.absent.calls) {
       print("Calculating P/A calls")
-      calls.pvalues <- paCalls(cel.batch, method="PSDABG")
+      calls.pvalues <- paCalls(cel.batch, method="PSDABG", verbose=FALSE)
       calls <- apply(calls.pvalues, c(1,2), function(pvalue) (if (pvalue < 0.05) { return("P") } else { return("A") } ))
       dataset <- list(row.descriptions=annotations, data=expr.data, calls=calls)
       colnames(dataset$data) <- column.names
@@ -383,7 +383,10 @@ GP.setup.input.files <- function(input.file, destdir) {
    
    cels<-grep("*.CEL$|*.CEL.gz$", ignore.case=TRUE, file.list, value=TRUE)
    cels.bz2<-grep("*.CEL.bz2$", ignore.case=TRUE, file.list, value=TRUE)
-   tars<-grep("*.tar$|*.tar.xz$|*.tar.gz$|*.tar.bz2$", ignore.case=TRUE, file.list, value=TRUE)
+   tars<-grep("*.tar$", ignore.case=TRUE, file.list, value=TRUE)
+   tar_gzs<-grep("*.tar.gz$", ignore.case=TRUE, file.list, value=TRUE)
+   tar_bz2s<-grep("*.tar.bz2$", ignore.case=TRUE, file.list, value=TRUE)
+   tar_xzs<-grep("*.tar.xz$", ignore.case=TRUE, file.list, value=TRUE)
    zips<-grep("*.zip$", ignore.case=TRUE, file.list, value=TRUE)
 
    # Copy the cels into place.  GZ files are handled natively by read.celfiles.
@@ -409,6 +412,21 @@ GP.setup.input.files <- function(input.file, destdir) {
       tmpDirCount <<- tmpDirCount+1
       to <- file.path(destdir, paste0("in",tmpDirCount))
       untar(tarfile, exdir=to)
+   })
+   lapply(tar_gzs, function(tarfile) {
+      tmpDirCount <<- tmpDirCount+1
+      to <- file.path(destdir, paste0("in",tmpDirCount))
+      untar(tarfile, exdir=to, compressed="gzip")
+   })
+   lapply(tar_bz2s, function(tarfile) {
+      tmpDirCount <<- tmpDirCount+1
+      to <- file.path(destdir, paste0("in",tmpDirCount))
+      untar(tarfile, exdir=to, compressed="bzip2")
+   })
+   lapply(tar_xzs, function(tarfile) {
+      tmpDirCount <<- tmpDirCount+1
+      to <- file.path(destdir, paste0("in",tmpDirCount))
+      untar(tarfile, exdir=to, compressed="xz")
    })
    lapply(zips, function(zipfile) {
       tmpDirCount <<- tmpDirCount+1
