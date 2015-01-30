@@ -21,8 +21,10 @@ GP.affyst.efc <- function(files.to.process, normalize, background.correct, compu
    # Load the CLM file and rearrange files.to.process to match
    if (!is.null(clm.file)) {
       clm <- read.clm(clm.file)
+      rearranged <- rearrange.files(files.to.process, clm)
+      files.to.process <- rearranged$file.list
+      clm <- rearranged$clm
       write.cls.from.clm(clm, output.file.base)
-      files.to.process <- rearrange.files(files.to.process, clm)
    }
    else {
       clm <- NULL
@@ -181,7 +183,10 @@ rearrange.files <- function(file.list, clm) {
    new.files.list <- c()
    file.basenames <- basename(file.list)
    file.dirnames <- dirname(file.list)
-   i <- 1
+   scanIdxs.to.remove <- c()
+   scan.index <- 1
+   new.index <- 1
+   del.index <- 1
    for (scan in clm$scan.names) {
       # Search for the scan name in the file.list.  We search against the file.basenames only so that there
       # are only matches against file names rather than some other path component.
@@ -190,16 +195,27 @@ rearrange.files <- function(file.list, clm) {
 
       if (length(index) == 0) {
          cat(paste("Scan", scan, "in clm file was not found. \n"))
+         scanIdxs.to.remove[del.index] <- scan.index
+         del.index <- del.index + 1
       } 
       else if(length(index) > 1) {
          cat(paste("Scan", scan, "in clm file matches more than one CEL file. \n"))
       } 
       else {
-         new.files.list[i] <- file.path(file.dirnames[index[1]], file.basenames[index[1]])
-         i <- i + 1
+         new.files.list[new.index] <- file.path(file.dirnames[index[1]], file.basenames[index[1]])
+         new.index <- new.index + 1
       }
+      scan.index <- scan.index + 1
    }
-   return (new.files.list)
+   
+   # Remove any unused scans from the CLM.
+   if (length(scanIdxs.to.remove) > 0) {
+      clm$scan.names <- clm$scan.names[-scanIdxs.to.remove]
+      clm$factor <- clm$factor[-scanIdxs.to.remove]
+      clm$sample.names <- clm$sample.names[-scanIdxs.to.remove]
+   }
+   
+   return (list("file.list"=new.files.list, "clm"=clm))
 }
 
 # Based on code from ExpressionFileCreator.  Migrate this to a common lib?  Only common between these two for now.
