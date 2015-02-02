@@ -1,0 +1,24 @@
+#
+# Test loading (invalid): multiple sources with file overlap (naming collision)
+#
+module: AffySTExpressionFileCreator
+params: 
+    input.file: [ "http://127.0.0.1:8080/gp/data//xchip/gpdev/shared_data/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st_err/overlap_gz_2/",
+                  "http://127.0.0.1:8080/gp/data//xchip/gpdev/shared_data/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st_err/overlap_uncompressed_2/"
+                  ]
+    normalize: 'yes'
+    background.correct: 'yes'
+    compute.present.absent.calls: 'no'
+    qc.plot.format: 'skip'
+    clm.file: 
+    annotate.probes: 'no'
+    output.file.base: 'result'
+assertions:
+    jobStatus: fail
+    files:
+        "stdout.txt":
+            diffCmd: ../diffIgnoreGpTraces.sh
+            diff: "/Volumes/xchip_sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/input_options/invalid_mixed_inputs_overlap5_test/stdout.txt"
+        "stderr.txt":
+            diffCmd: ../diffIgnoreGpTraces.sh
+            diff: "/Volumes/xchip_sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/input_options/invalid_mixed_inputs_overlap5_test/stderr.txt"
