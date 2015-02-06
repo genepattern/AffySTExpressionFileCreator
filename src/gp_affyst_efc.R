@@ -427,22 +427,22 @@ GP.setup.input.files <- function(input.file, destdir) {
    lapply(tars, function(tarfile) {
       tmpDirCount <<- tmpDirCount+1
       to <- file.path(destdir, paste0("in",tmpDirCount))
-      untar(tarfile, exdir=to)
+      untar(tarfile, exdir=to, tar="internal")
    })
    lapply(tar_gzs, function(tarfile) {
       tmpDirCount <<- tmpDirCount+1
       to <- file.path(destdir, paste0("in",tmpDirCount))
-      untar(tarfile, exdir=to, compressed="gzip")
+      untar(tarfile, exdir=to, compressed="gzip", tar="internal")
    })
    lapply(tar_bz2s, function(tarfile) {
       tmpDirCount <<- tmpDirCount+1
       to <- file.path(destdir, paste0("in",tmpDirCount))
-      untar(tarfile, exdir=to, compressed="bzip2")
+      untar(tarfile, exdir=to, compressed="bzip2", tar="internal")
    })
    lapply(tar_xzs, function(tarfile) {
       tmpDirCount <<- tmpDirCount+1
       to <- file.path(destdir, paste0("in",tmpDirCount))
-      untar(tarfile, exdir=to, compressed="xz")
+      untar(tarfile, exdir=to, compressed="xz", tar="internal")
    })
    lapply(zips, function(zipfile) {
       tmpDirCount <<- tmpDirCount+1

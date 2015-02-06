@@ -14,9 +14,6 @@ libdir <- args[1]
 
 site.library <- args[2]
 
-# Temporarily use my local lib so we can avoid the need to create dependency installer.
-#site.library <- "/Users/eby/Library/R/3.1/library"
-
 cat("\nLibrary dir: ",site.library)
 .libPaths(site.library)
 
