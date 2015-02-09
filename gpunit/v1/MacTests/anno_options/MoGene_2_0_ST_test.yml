@@ -1,0 +1,18 @@
+#
+# Test annotation: archive containing MoGene 2.0 ST CEL files.
+#
+module: AffySTExpressionFileCreator
+params: 
+    input.file: [ "http://127.0.0.1:8080/gp/data//xchip/gpdev/shared_data/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/input/MoGene-2_0-st/E-MTAB-2337.raw.1.zip"
+                  ]
+    normalize: 'yes'
+    background.correct: 'yes'
+    compute.present.absent.calls: 'no'
+    qc.plot.format: 'skip'
+    clm.file: 
+    annotate.probes: 'yes'
+    output.file.base: 'result'
+assertions:
+    files:
+        "result.gct":
+            diff: "/Volumes/xchip_sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/anno_options/MoGene_2_0_ST_test/result.gct"
