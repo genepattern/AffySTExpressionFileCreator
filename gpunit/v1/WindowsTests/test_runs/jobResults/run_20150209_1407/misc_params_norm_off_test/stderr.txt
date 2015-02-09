@@ -1,4 +1,0 @@
-Error in read.celfile.header(x) : 
-  End of file reached unexpectedly. Perhaps this file is truncated.
-Calls: tryCatch ... sapply -> lapply -> FUN -> read.celfile.header -> .Call
-Execution halted
