@@ -1,0 +1,18 @@
+#
+# Test annotation: archive containing ZebGene 1.1 ST CEL files.  Note that this is a "model" organism so annotation will be skipped.
+#
+module: AffySTExpressionFileCreator
+params: 
+    input.file: [ "Z:Modules/TestSuiteData/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/deep_nested_archive1.tar.bz2" ]
+    normalize: 'yes'
+    background.correct: 'yes'
+    compute.present.absent.calls: 'no'
+    qc.plot.format: 'skip'
+    clm.file: 
+    annotate.probes: 'yes'
+    output.file.base: 'result'
+assertions:
+    files:
+        "result.gct":
+            diffCmd: ../diffWithTolerance.sh
+            diff: "/Volumes/xchip_sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/anno_options/ZebGene_1_1_ST_test/result.gct"

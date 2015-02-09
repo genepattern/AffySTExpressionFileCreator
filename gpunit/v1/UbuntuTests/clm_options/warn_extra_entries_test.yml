@@ -1,0 +1,23 @@
+#
+# Test CLM options: warns about extra entries in the CLM not present in the archive.
+#
+module: AffySTExpressionFileCreator
+params: 
+    input.file: [ "http://genepatternbeta.broadinstitute.org/gp/data//xchip/gpdev/shared_data/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/deep_nested_archive1.tar.bz2" ]
+    normalize: 'yes'
+    background.correct: 'yes'
+    compute.present.absent.calls: 'no'
+    qc.plot.format: 'skip'
+    clm.file: "http://genepatternbeta.broadinstitute.org/gp/data//xchip/gpdev/shared_data/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/clm/extra_entries.clm"
+    annotate.probes: 'no'
+    output.file.base: 'result'
+assertions:
+    files:
+        "stdout.txt":
+            diffCmd: ../diffIgnoreGpTraces.sh
+            diff: "/Volumes/xchip_sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/clm_options/warn_extra_entries_test/stdout.txt"
+        "result.gct":
+            diffCmd: ../diffWithTolerance.sh
+            diff: "/Volumes/xchip_sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/clm_options/warn_extra_entries_test/result.gct"
+        "result.cls":
+            diff: "/Volumes/xchip_sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/clm_options/warn_extra_entries_test/result.cls"

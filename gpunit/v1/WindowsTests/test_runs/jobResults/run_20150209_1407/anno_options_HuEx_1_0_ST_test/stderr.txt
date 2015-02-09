@@ -1,0 +1,5 @@
+Error in "BiocInstaller" %in% installed.packages(lib.loc = site.library)[,  : 
+  error in evaluating the argument 'table' in selecting a method for function '%in%': Error in readRDS(dest) : error reading from connection
+Calls: installed.packages -> readRDS
+Calls: tryCatch ... dyn.loadBioconductorPackage -> init.bioc.loader -> %in%
+Execution halted

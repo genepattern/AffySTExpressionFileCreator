@@ -1,0 +1,236 @@
+<html xmlns:string="xalan://java.lang.String" xmlns:lxslt="http://xml.apache.org/xslt">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Unit Test Results: All Failures</title>
+<link rel="stylesheet" type="text/css" title="Style" href="stylesheet.css">
+</head>
+<body onload="open('allclasses-frame.html','classListFrame')">
+<h1>Unit Test Results.</h1>
+<table width="100%">
+<tr>
+<td align="left"></td><td align="right">Designed for use with <a href="http://www.junit.org/">JUnit</a> and <a href="http://ant.apache.org/">Ant</a>.</td>
+</tr>
+</table>
+<hr size="1">
+<h2>All Failures</h2>
+<table class="details" border="0" cellpadding="5" cellspacing="2" width="95%">
+<tr valign="top">
+<th>Class</th><th>Name</th><th>Status</th><th width="80%">Type</th><th nowrap>Time(s)</th>
+</tr>
+<tr valign="top" class="Failure">
+<td><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html">BatchModuleTest</a></td><td><a name="gpunit[input_options_invalid_empty_zip_test]"></a><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html#gpunit[input_options_invalid_empty_zip_test]">gpunit[input_options_invalid_empty_zip_test]</a></td><td>Failure</td><td>job #42, Files differ, '/Volumes/xchip_sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/input_options/invalid_empty_zip_test/stdout.txt', './test_runs/jobResults/run_20150209_1407/input_options_invalid_empty_zip_test/stdout.txt'<br>
+<br>
+<code>junit.framework.AssertionFailedError: job #42, Files differ, '/Volumes/xchip_sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/input_options/invalid_empty_zip_test/stdout.txt', './test_runs/jobResults/run_20150209_1407/input_options_invalid_empty_zip_test/stdout.txt'<br>	at org.genepattern.gpunit.test.BatchModuleTest.gpunit(BatchModuleTest.java:173)<br>
+</code></td><td>121.755</td>
+</tr>
+<tr valign="top" class="Failure">
+<td><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html">BatchModuleTest</a></td><td><a name="gpunit[anno_options_HuEx_1_0_ST_test]"></a><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html#gpunit[anno_options_HuEx_1_0_ST_test]">gpunit[anno_options_HuEx_1_0_ST_test]</a></td><td>Failure</td><td>job #46 has stderr.txt output: 
+Error in "BiocInstaller" %in% installed.packages(lib.loc = site.library)[,  : 
+  error in evaluating the argument 'table' in selecting a method for function '%in%': Error in readRDS(dest) : error reading from connection
+Calls: installed.packages -&gt; readRDS
+Calls: tryCatch ... dyn.loadBioconductorPackage -&gt; init.bioc.loader -&gt; %in%
+Execution halted<br>
+<br>
+<code>junit.framework.AssertionFailedError: job #46 has stderr.txt output: <br>Error in "BiocInstaller" %in% installed.packages(lib.loc = site.library)[,  : <br>  error in evaluating the argument 'table' in selecting a method for function '%in%': Error in readRDS(dest) : error reading from connection<br>Calls: installed.packages -&gt; readRDS<br>Calls: tryCatch ... dyn.loadBioconductorPackage -&gt; init.bioc.loader -&gt; %in%<br>Execution halted<br>	at org.genepattern.gpunit.test.BatchModuleTest.gpunit(BatchModuleTest.java:173)<br>
+</code></td><td>128.722</td>
+</tr>
+<tr valign="top" class="Failure">
+<td><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html">BatchModuleTest</a></td><td><a name="gpunit[clm_options_warn_extra_entries_test]"></a><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html#gpunit[clm_options_warn_extra_entries_test]">gpunit[clm_options_warn_extra_entries_test]</a></td><td>Failure</td><td>job #45 has stderr.txt output: 
+Error in file(file, "rt") : cannot open the connection
+Calls: tryCatch ... tryCatchList -&gt; GP.affyst.efc -&gt; read.clm -&gt; read.table -&gt; file
+Execution halted<br>
+<br>
+<code>junit.framework.AssertionFailedError: job #45 has stderr.txt output: <br>Error in file(file, "rt") : cannot open the connection<br>Calls: tryCatch ... tryCatchList -&gt; GP.affyst.efc -&gt; read.clm -&gt; read.table -&gt; file<br>Execution halted<br>	at org.genepattern.gpunit.test.BatchModuleTest.gpunit(BatchModuleTest.java:173)<br>
+</code></td><td>236.017</td>
+</tr>
+<tr valign="top" class="Failure">
+<td><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html">BatchModuleTest</a></td><td><a name="gpunit[clm_options_exclude_test]"></a><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html#gpunit[clm_options_exclude_test]">gpunit[clm_options_exclude_test]</a></td><td>Failure</td><td>job #48 has stderr.txt output: 
+Error in file(file, "rt") : cannot open the connection
+Calls: tryCatch ... tryCatchList -&gt; GP.affyst.efc -&gt; read.clm -&gt; read.table -&gt; file
+Execution halted<br>
+<br>
+<code>junit.framework.AssertionFailedError: job #48 has stderr.txt output: <br>Error in file(file, "rt") : cannot open the connection<br>Calls: tryCatch ... tryCatchList -&gt; GP.affyst.efc -&gt; read.clm -&gt; read.table -&gt; file<br>Execution halted<br>	at org.genepattern.gpunit.test.BatchModuleTest.gpunit(BatchModuleTest.java:173)<br>
+</code></td><td>241.956</td>
+</tr>
+<tr valign="top" class="Failure">
+<td><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html">BatchModuleTest</a></td><td><a name="gpunit[anno_options_ZebGene_1_1_ST_test]"></a><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html#gpunit[anno_options_ZebGene_1_1_ST_test]">gpunit[anno_options_ZebGene_1_1_ST_test]</a></td><td>Failure</td><td>job #43 has stderr.txt output: 
+Error in read.celfile.header(x) : 
+  End of file reached unexpectedly. Perhaps this file is truncated.
+Calls: tryCatch ... sapply -&gt; lapply -&gt; FUN -&gt; read.celfile.header -&gt; .Call
+Execution halted<br>
+<br>
+<code>junit.framework.AssertionFailedError: job #43 has stderr.txt output: <br>Error in read.celfile.header(x) : <br>  End of file reached unexpectedly. Perhaps this file is truncated.<br>Calls: tryCatch ... sapply -&gt; lapply -&gt; FUN -&gt; read.celfile.header -&gt; .Call<br>Execution halted<br>	at org.genepattern.gpunit.test.BatchModuleTest.gpunit(BatchModuleTest.java:173)<br>
+</code></td><td>241.981</td>
+</tr>
+<tr valign="top" class="Failure">
+<td><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html">BatchModuleTest</a></td><td><a name="gpunit[clm_options_rename_and_rearrange_test]"></a><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html#gpunit[clm_options_rename_and_rearrange_test]">gpunit[clm_options_rename_and_rearrange_test]</a></td><td>Failure</td><td>job #44 has stderr.txt output: 
+Error in file(file, "rt") : cannot open the connection
+Calls: tryCatch ... tryCatchList -&gt; GP.affyst.efc -&gt; read.clm -&gt; read.table -&gt; file
+Execution halted<br>
+<br>
+<code>junit.framework.AssertionFailedError: job #44 has stderr.txt output: <br>Error in file(file, "rt") : cannot open the connection<br>Calls: tryCatch ... tryCatchList -&gt; GP.affyst.efc -&gt; read.clm -&gt; read.table -&gt; file<br>Execution halted<br>	at org.genepattern.gpunit.test.BatchModuleTest.gpunit(BatchModuleTest.java:173)<br>
+</code></td><td>241.983</td>
+</tr>
+<tr valign="top" class="Failure">
+<td><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html">BatchModuleTest</a></td><td><a name="gpunit[clm_options_invalid_dup_entires_test]"></a><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html#gpunit[clm_options_invalid_dup_entires_test]">gpunit[clm_options_invalid_dup_entires_test]</a></td><td>Failure</td><td>job #47, Files differ, '/Volumes/xchip_sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/clm_options/invalid_dup_entires_test/stdout.txt', './test_runs/jobResults/run_20150209_1407/clm_options_invalid_dup_entires_test/stdout.txt'<br>
+<br>
+<code>junit.framework.AssertionFailedError: job #47, Files differ, '/Volumes/xchip_sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/clm_options/invalid_dup_entires_test/stdout.txt', './test_runs/jobResults/run_20150209_1407/clm_options_invalid_dup_entires_test/stdout.txt'<br>	at org.genepattern.gpunit.test.BatchModuleTest.gpunit(BatchModuleTest.java:173)<br>
+</code></td><td>242.468</td>
+</tr>
+<tr valign="top" class="Failure">
+<td><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html">BatchModuleTest</a></td><td><a name="gpunit[input_options_invalid_mixed_ST_array_types_zip_test]"></a><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html#gpunit[input_options_invalid_mixed_ST_array_types_zip_test]">gpunit[input_options_invalid_mixed_ST_array_types_zip_test]</a></td><td>Failure</td><td>Error submitting job: POST http://192.168.195.73:8080/gp/rest/v1/jobs failed! 500: Internal Server Error<br>
+<br>
+<code>junit.framework.AssertionFailedError: Error submitting job: POST http://192.168.195.73:8080/gp/rest/v1/jobs failed! 500: Internal Server Error<br>	at org.genepattern.gpunit.test.BatchModuleTest.gpunit(BatchModuleTest.java:173)<br>
+</code></td><td>1.046</td>
+</tr>
+<tr valign="top" class="Failure">
+<td><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html">BatchModuleTest</a></td><td><a name="gpunit[input_options_invalid_nonST_zip_test]"></a><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html#gpunit[input_options_invalid_nonST_zip_test]">gpunit[input_options_invalid_nonST_zip_test]</a></td><td>Failure</td><td>Error submitting job: POST http://192.168.195.73:8080/gp/rest/v1/jobs failed! 500: Internal Server Error<br>
+<br>
+<code>junit.framework.AssertionFailedError: Error submitting job: POST http://192.168.195.73:8080/gp/rest/v1/jobs failed! 500: Internal Server Error<br>	at org.genepattern.gpunit.test.BatchModuleTest.gpunit(BatchModuleTest.java:173)<br>
+</code></td><td>1.072</td>
+</tr>
+<tr valign="top" class="Failure">
+<td><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html">BatchModuleTest</a></td><td><a name="gpunit[input_options_invalid_ST_with_nonST_zip_test]"></a><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html#gpunit[input_options_invalid_ST_with_nonST_zip_test]">gpunit[input_options_invalid_ST_with_nonST_zip_test]</a></td><td>Failure</td><td>Error submitting job: POST http://192.168.195.73:8080/gp/rest/v1/jobs failed! 500: Internal Server Error<br>
+<br>
+<code>junit.framework.AssertionFailedError: Error submitting job: POST http://192.168.195.73:8080/gp/rest/v1/jobs failed! 500: Internal Server Error<br>	at org.genepattern.gpunit.test.BatchModuleTest.gpunit(BatchModuleTest.java:173)<br>
+</code></td><td>0.532</td>
+</tr>
+<tr valign="top" class="Failure">
+<td><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html">BatchModuleTest</a></td><td><a name="gpunit[input_options_load_deep_nested_tar_bz2_test]"></a><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html#gpunit[input_options_load_deep_nested_tar_bz2_test]">gpunit[input_options_load_deep_nested_tar_bz2_test]</a></td><td>Failure</td><td>Error submitting job: POST http://192.168.195.73:8080/gp/rest/v1/jobs failed! 500: Internal Server Error<br>
+<br>
+<code>junit.framework.AssertionFailedError: Error submitting job: POST http://192.168.195.73:8080/gp/rest/v1/jobs failed! 500: Internal Server Error<br>	at org.genepattern.gpunit.test.BatchModuleTest.gpunit(BatchModuleTest.java:173)<br>
+</code></td><td>5.469</td>
+</tr>
+<tr valign="top" class="Failure">
+<td><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html">BatchModuleTest</a></td><td><a name="gpunit[input_options_load_deep_nested_zip_test]"></a><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html#gpunit[input_options_load_deep_nested_zip_test]">gpunit[input_options_load_deep_nested_zip_test]</a></td><td>Failure</td><td>Error submitting job: POST http://192.168.195.73:8080/gp/rest/v1/jobs failed! 500: Internal Server Error<br>
+<br>
+<code>junit.framework.AssertionFailedError: Error submitting job: POST http://192.168.195.73:8080/gp/rest/v1/jobs failed! 500: Internal Server Error<br>	at org.genepattern.gpunit.test.BatchModuleTest.gpunit(BatchModuleTest.java:173)<br>
+</code></td><td>3.413</td>
+</tr>
+<tr valign="top" class="Failure">
+<td><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html">BatchModuleTest</a></td><td><a name="gpunit[input_options_load_flat_gz_test]"></a><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html#gpunit[input_options_load_flat_gz_test]">gpunit[input_options_load_flat_gz_test]</a></td><td>Failure</td><td>Error submitting job: POST http://192.168.195.73:8080/gp/rest/v1/jobs failed! 500: Internal Server Error<br>
+<br>
+<code>junit.framework.AssertionFailedError: Error submitting job: POST http://192.168.195.73:8080/gp/rest/v1/jobs failed! 500: Internal Server Error<br>	at org.genepattern.gpunit.test.BatchModuleTest.gpunit(BatchModuleTest.java:173)<br>
+</code></td><td>0.651</td>
+</tr>
+<tr valign="top" class="Failure">
+<td><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html">BatchModuleTest</a></td><td><a name="gpunit[input_options_load_flat_raw_test]"></a><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html#gpunit[input_options_load_flat_raw_test]">gpunit[input_options_load_flat_raw_test]</a></td><td>Failure</td><td>Error submitting job: POST http://192.168.195.73:8080/gp/rest/v1/jobs failed! 500: Internal Server Error<br>
+<br>
+<code>junit.framework.AssertionFailedError: Error submitting job: POST http://192.168.195.73:8080/gp/rest/v1/jobs failed! 500: Internal Server Error<br>	at org.genepattern.gpunit.test.BatchModuleTest.gpunit(BatchModuleTest.java:173)<br>
+</code></td><td>0.572</td>
+</tr>
+<tr valign="top" class="Failure">
+<td><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html">BatchModuleTest</a></td><td><a name="gpunit[input_options_load_flat_tar_gz_test]"></a><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html#gpunit[input_options_load_flat_tar_gz_test]">gpunit[input_options_load_flat_tar_gz_test]</a></td><td>Failure</td><td>Error submitting job: POST http://192.168.195.73:8080/gp/rest/v1/jobs failed! 500: Internal Server Error<br>
+<br>
+<code>junit.framework.AssertionFailedError: Error submitting job: POST http://192.168.195.73:8080/gp/rest/v1/jobs failed! 500: Internal Server Error<br>	at org.genepattern.gpunit.test.BatchModuleTest.gpunit(BatchModuleTest.java:173)<br>
+</code></td><td>0.675</td>
+</tr>
+<tr valign="top" class="Failure">
+<td><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html">BatchModuleTest</a></td><td><a name="gpunit[input_options_load_flat_tar_test]"></a><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html#gpunit[input_options_load_flat_tar_test]">gpunit[input_options_load_flat_tar_test]</a></td><td>Failure</td><td>Error submitting job: POST http://192.168.195.73:8080/gp/rest/v1/jobs failed! 500: Internal Server Error<br>
+<br>
+<code>junit.framework.AssertionFailedError: Error submitting job: POST http://192.168.195.73:8080/gp/rest/v1/jobs failed! 500: Internal Server Error<br>	at org.genepattern.gpunit.test.BatchModuleTest.gpunit(BatchModuleTest.java:173)<br>
+</code></td><td>1.097</td>
+</tr>
+<tr valign="top" class="Failure">
+<td><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html">BatchModuleTest</a></td><td><a name="gpunit[input_options_load_flat_tar_xz_test]"></a><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html#gpunit[input_options_load_flat_tar_xz_test]">gpunit[input_options_load_flat_tar_xz_test]</a></td><td>Failure</td><td>Error submitting job: POST http://192.168.195.73:8080/gp/rest/v1/jobs failed! 500: Internal Server Error<br>
+<br>
+<code>junit.framework.AssertionFailedError: Error submitting job: POST http://192.168.195.73:8080/gp/rest/v1/jobs failed! 500: Internal Server Error<br>	at org.genepattern.gpunit.test.BatchModuleTest.gpunit(BatchModuleTest.java:173)<br>
+</code></td><td>0.804</td>
+</tr>
+<tr valign="top" class="Failure">
+<td><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html">BatchModuleTest</a></td><td><a name="gpunit[input_options_load_flat_zip_test]"></a><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html#gpunit[input_options_load_flat_zip_test]">gpunit[input_options_load_flat_zip_test]</a></td><td>Failure</td><td>Error submitting job: POST http://192.168.195.73:8080/gp/rest/v1/jobs failed! 500: Internal Server Error<br>
+<br>
+<code>junit.framework.AssertionFailedError: Error submitting job: POST http://192.168.195.73:8080/gp/rest/v1/jobs failed! 500: Internal Server Error<br>	at org.genepattern.gpunit.test.BatchModuleTest.gpunit(BatchModuleTest.java:173)<br>
+</code></td><td>0.948</td>
+</tr>
+<tr valign="top" class="Failure">
+<td><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html">BatchModuleTest</a></td><td><a name="gpunit[input_options_load_mixed_inputs_test]"></a><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html#gpunit[input_options_load_mixed_inputs_test]">gpunit[input_options_load_mixed_inputs_test]</a></td><td>Failure</td><td>Error submitting job: POST http://192.168.195.73:8080/gp/rest/v1/jobs failed! 500: Internal Server Error<br>
+<br>
+<code>junit.framework.AssertionFailedError: Error submitting job: POST http://192.168.195.73:8080/gp/rest/v1/jobs failed! 500: Internal Server Error<br>	at org.genepattern.gpunit.test.BatchModuleTest.gpunit(BatchModuleTest.java:173)<br>
+</code></td><td>1.675</td>
+</tr>
+<tr valign="top" class="Failure">
+<td><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html">BatchModuleTest</a></td><td><a name="gpunit[misc_params_bg_correct_off_test]"></a><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html#gpunit[misc_params_bg_correct_off_test]">gpunit[misc_params_bg_correct_off_test]</a></td><td>Failure</td><td>Error submitting job: POST http://192.168.195.73:8080/gp/rest/v1/jobs failed! 500: Internal Server Error<br>
+<br>
+<code>junit.framework.AssertionFailedError: Error submitting job: POST http://192.168.195.73:8080/gp/rest/v1/jobs failed! 500: Internal Server Error<br>	at org.genepattern.gpunit.test.BatchModuleTest.gpunit(BatchModuleTest.java:173)<br>
+</code></td><td>0.371</td>
+</tr>
+<tr valign="top" class="Failure">
+<td><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html">BatchModuleTest</a></td><td><a name="gpunit[anno_options_MoGene_2_0_ST_test]"></a><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html#gpunit[anno_options_MoGene_2_0_ST_test]">gpunit[anno_options_MoGene_2_0_ST_test]</a></td><td>Failure</td><td>job #41 has stderr.txt output: 
+Error in sqliteSendQuery(con, statement, bind.data) : 
+  error in statement: database disk image is malformed
+Error in sqliteSendQuery(con, statement, bind.data) : 
+  error in statement: database disk image is malformed
+Calls: tryCatch ... .local -&gt; sqliteGetQuery -&gt; sqliteSendQuery -&gt; .Call
+Execution halted<br>
+<br>
+<code>junit.framework.AssertionFailedError: job #41 has stderr.txt output: <br>Error in sqliteSendQuery(con, statement, bind.data) : <br>  error in statement: database disk image is malformed<br>Error in sqliteSendQuery(con, statement, bind.data) : <br>  error in statement: database disk image is malformed<br>Calls: tryCatch ... .local -&gt; sqliteGetQuery -&gt; sqliteSendQuery -&gt; .Call<br>Execution halted<br>	at org.genepattern.gpunit.test.BatchModuleTest.gpunit(BatchModuleTest.java:173)<br>
+</code></td><td>266.365</td>
+</tr>
+<tr valign="top" class="Failure">
+<td><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html">BatchModuleTest</a></td><td><a name="gpunit[input_options_invalid_mixed_inputs_overlap1_test]"></a><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html#gpunit[input_options_invalid_mixed_inputs_overlap1_test]">gpunit[input_options_invalid_mixed_inputs_overlap1_test]</a></td><td>Failure</td><td>job #49, Files differ, '/Volumes/xchip_sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/input_options/invalid_mixed_inputs_overlap1_test/stdout.txt', './test_runs/jobResults/run_20150209_1407/input_options_invalid_mixed_inputs_overlap1_test/stdout.txt'<br>
+<br>
+<code>junit.framework.AssertionFailedError: job #49, Files differ, '/Volumes/xchip_sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/input_options/invalid_mixed_inputs_overlap1_test/stdout.txt', './test_runs/jobResults/run_20150209_1407/input_options_invalid_mixed_inputs_overlap1_test/stdout.txt'<br>	at org.genepattern.gpunit.test.BatchModuleTest.gpunit(BatchModuleTest.java:173)<br>
+</code></td><td>165.355</td>
+</tr>
+<tr valign="top" class="Failure">
+<td><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html">BatchModuleTest</a></td><td><a name="gpunit[input_options_invalid_mixed_inputs_overlap2_test]"></a><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html#gpunit[input_options_invalid_mixed_inputs_overlap2_test]">gpunit[input_options_invalid_mixed_inputs_overlap2_test]</a></td><td>Failure</td><td>job #50, Files differ, '/Volumes/xchip_sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/input_options/invalid_mixed_inputs_overlap2_test/stdout.txt', './test_runs/jobResults/run_20150209_1407/input_options_invalid_mixed_inputs_overlap2_test/stdout.txt'<br>
+<br>
+<code>junit.framework.AssertionFailedError: job #50, Files differ, '/Volumes/xchip_sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/input_options/invalid_mixed_inputs_overlap2_test/stdout.txt', './test_runs/jobResults/run_20150209_1407/input_options_invalid_mixed_inputs_overlap2_test/stdout.txt'<br>	at org.genepattern.gpunit.test.BatchModuleTest.gpunit(BatchModuleTest.java:173)<br>
+</code></td><td>253.603</td>
+</tr>
+<tr valign="top" class="Failure">
+<td><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html">BatchModuleTest</a></td><td><a name="gpunit[input_options_invalid_mixed_inputs_overlap3_test]"></a><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html#gpunit[input_options_invalid_mixed_inputs_overlap3_test]">gpunit[input_options_invalid_mixed_inputs_overlap3_test]</a></td><td>Failure</td><td>job #51, Files differ, '/Volumes/xchip_sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/input_options/invalid_mixed_inputs_overlap3_test/stdout.txt', './test_runs/jobResults/run_20150209_1407/input_options_invalid_mixed_inputs_overlap3_test/stdout.txt'<br>
+<br>
+<code>junit.framework.AssertionFailedError: job #51, Files differ, '/Volumes/xchip_sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/input_options/invalid_mixed_inputs_overlap3_test/stdout.txt', './test_runs/jobResults/run_20150209_1407/input_options_invalid_mixed_inputs_overlap3_test/stdout.txt'<br>	at org.genepattern.gpunit.test.BatchModuleTest.gpunit(BatchModuleTest.java:173)<br>
+</code></td><td>149.127</td>
+</tr>
+<tr valign="top" class="Failure">
+<td><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html">BatchModuleTest</a></td><td><a name="gpunit[qc_plot_options_generate_svg_test]"></a><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html#gpunit[qc_plot_options_generate_svg_test]">gpunit[qc_plot_options_generate_svg_test]</a></td><td>Failure</td><td>Error submitting job: POST http://192.168.195.73:8080/gp/rest/v1/jobs failed! 500: Internal Server Error<br>
+<br>
+<code>junit.framework.AssertionFailedError: Error submitting job: POST http://192.168.195.73:8080/gp/rest/v1/jobs failed! 500: Internal Server Error<br>	at org.genepattern.gpunit.test.BatchModuleTest.gpunit(BatchModuleTest.java:173)<br>
+</code></td><td>0.453</td>
+</tr>
+<tr valign="top" class="Failure">
+<td><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html">BatchModuleTest</a></td><td><a name="gpunit[misc_params_norm_off_test]"></a><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html#gpunit[misc_params_norm_off_test]">gpunit[misc_params_norm_off_test]</a></td><td>Failure</td><td>job #56 has stderr.txt output: 
+Error in read.celfile.header(x) : 
+  End of file reached unexpectedly. Perhaps this file is truncated.
+Calls: tryCatch ... sapply -&gt; lapply -&gt; FUN -&gt; read.celfile.header -&gt; .Call
+Execution halted<br>
+<br>
+<code>junit.framework.AssertionFailedError: job #56 has stderr.txt output: <br>Error in read.celfile.header(x) : <br>  End of file reached unexpectedly. Perhaps this file is truncated.<br>Calls: tryCatch ... sapply -&gt; lapply -&gt; FUN -&gt; read.celfile.header -&gt; .Call<br>Execution halted<br>	at org.genepattern.gpunit.test.BatchModuleTest.gpunit(BatchModuleTest.java:173)<br>
+</code></td><td>159.380</td>
+</tr>
+<tr valign="top" class="Failure">
+<td><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html">BatchModuleTest</a></td><td><a name="gpunit[misc_params_compute_PA_test]"></a><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html#gpunit[misc_params_compute_PA_test]">gpunit[misc_params_compute_PA_test]</a></td><td>Failure</td><td>job #55 has stderr.txt output: 
+Error in read.celfile.header(x) : 
+  End of file reached unexpectedly. Perhaps this file is truncated.
+Calls: tryCatch ... sapply -&gt; lapply -&gt; FUN -&gt; read.celfile.header -&gt; .Call
+Execution halted<br>
+<br>
+<code>junit.framework.AssertionFailedError: job #55 has stderr.txt output: <br>Error in read.celfile.header(x) : <br>  End of file reached unexpectedly. Perhaps this file is truncated.<br>Calls: tryCatch ... sapply -&gt; lapply -&gt; FUN -&gt; read.celfile.header -&gt; .Call<br>Execution halted<br>	at org.genepattern.gpunit.test.BatchModuleTest.gpunit(BatchModuleTest.java:173)<br>
+</code></td><td>165.022</td>
+</tr>
+<tr valign="top" class="Failure">
+<td><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html">BatchModuleTest</a></td><td><a name="gpunit[qc_plot_options_generate_pdf_test]"></a><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html#gpunit[qc_plot_options_generate_pdf_test]">gpunit[qc_plot_options_generate_pdf_test]</a></td><td>Failure</td><td>job #57 has stderr.txt output: 
+Error in read.celfile.header(x) : 
+  End of file reached unexpectedly. Perhaps this file is truncated.
+Calls: tryCatch ... sapply -&gt; lapply -&gt; FUN -&gt; read.celfile.header -&gt; .Call
+Execution halted<br>
+<br>
+<code>junit.framework.AssertionFailedError: job #57 has stderr.txt output: <br>Error in read.celfile.header(x) : <br>  End of file reached unexpectedly. Perhaps this file is truncated.<br>Calls: tryCatch ... sapply -&gt; lapply -&gt; FUN -&gt; read.celfile.header -&gt; .Call<br>Execution halted<br>	at org.genepattern.gpunit.test.BatchModuleTest.gpunit(BatchModuleTest.java:173)<br>
+</code></td><td>142.529</td>
+</tr>
+<tr valign="top" class="Failure">
+<td><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html">BatchModuleTest</a></td><td><a name="gpunit[qc_plot_options_generate_png_test]"></a><a href="org/genepattern/gpunit/test/0_BatchModuleTest.html#gpunit[qc_plot_options_generate_png_test]">gpunit[qc_plot_options_generate_png_test]</a></td><td>Failure</td><td>job #58 has stderr.txt output: 
+Error in read.celfile.header(x) : 
+  End of file reached unexpectedly. Perhaps this file is truncated.
+Calls: tryCatch ... sapply -&gt; lapply -&gt; FUN -&gt; read.celfile.header -&gt; .Call
+Execution halted<br>
+<br>
+<code>junit.framework.AssertionFailedError: job #58 has stderr.txt output: <br>Error in read.celfile.header(x) : <br>  End of file reached unexpectedly. Perhaps this file is truncated.<br>Calls: tryCatch ... sapply -&gt; lapply -&gt; FUN -&gt; read.celfile.header -&gt; .Call<br>Execution halted<br>	at org.genepattern.gpunit.test.BatchModuleTest.gpunit(BatchModuleTest.java:173)<br>
+</code></td><td>54.027</td>
+</tr>
+</table>
+</body>
+</html>

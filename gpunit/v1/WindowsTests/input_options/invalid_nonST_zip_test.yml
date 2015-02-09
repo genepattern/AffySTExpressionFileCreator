@@ -1,0 +1,23 @@
+#
+# Test loading (invalid): archives containing CEL files of non-ST array type.
+#
+module: AffySTExpressionFileCreator
+params: 
+    input.file: [ "Z:Modules/TestSuiteData/AffySTExpressionFileCreator/v1/input/HG-U133A/DBA_cel_files_small.zip"
+                  ]
+    normalize: 'yes'
+    background.correct: 'yes'
+    compute.present.absent.calls: 'no'
+    qc.plot.format: 'skip'
+    clm.file: 
+    annotate.probes: 'no'
+    output.file.base: 'result'
+assertions:
+    jobStatus: fail
+    files:
+        "stdout.txt":
+            diffCmd: ../diffIgnoreGpTraces.sh
+            diff: "/Volumes/xchip_sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/input_options/invalid_nonST_zip_test/stdout.txt"
+        "stderr.txt":
+            diffCmd: ../diffIgnoreGpTraces.sh
+            diff: "/Volumes/xchip_sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/input_options/invalid_nonST_zip_test/stderr.txt"

@@ -1,0 +1,33 @@
+
+Library dir:  C:/GenePatternServer/patches/rlib/3.1_20141120/site-library$options
+$options$input.file
+[1] "C:\\GenePatternServer\\users\\eby@broadinstitute.org\\uploads\\tmp\\run9037334049048771628.tmp\\input.file.list.txt"
+
+$options$normalize
+[1] "yes"
+
+$options$background.correct
+[1] "yes"
+
+$options$compute.present.absent.calls
+[1] "no"
+
+$options$qc.plot.format
+[1] "skip"
+
+$options$annotate.probes
+[1] "no"
+
+$options$output.file.base
+[1] "result"
+
+$options$help
+[1] FALSE
+
+
+$args
+[1] "C:\\GenePatternServer\\taskLib\\AffySTExpressionFileCreator.0.11.3\\"
+[2] "C:/GenePatternServer/patches/rlib/3.1_20141120/site-library"         
+
+R version 3.1.0 (2014-04-10)
+Platform: 

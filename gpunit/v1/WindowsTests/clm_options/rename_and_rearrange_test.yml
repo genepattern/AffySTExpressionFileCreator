@@ -1,0 +1,23 @@
+#
+# Test CLM options: rename samples and rearrange the columns.
+#
+module: AffySTExpressionFileCreator
+params: 
+    input.file: [ "Z:Modules/TestSuiteData/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/deep_nested_archive1.tar.bz2" ]
+    normalize: 'yes'
+    background.correct: 'yes'
+    compute.present.absent.calls: 'no'
+    qc.plot.format: 'skip'
+    clm.file: "Z:Modules/TestSuiteData/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/clm/valid.clm"
+    annotate.probes: 'no'
+    output.file.base: 'result'
+assertions:
+    files:
+        "stdout.txt":
+            diffCmd: ../diffIgnoreGpTraces.sh
+            diff: "/Volumes/xchip_sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/clm_options/rename_and_rearrange_test/stdout.txt"
+        "result.gct":
+            diffCmd: ../diffWithTolerance.sh
+            diff: "/Volumes/xchip_sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/clm_options/rename_and_rearrange_test/result.gct"
+        "result.cls":
+            diff: "/Volumes/xchip_sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/clm_options/rename_and_rearrange_test/result.cls"

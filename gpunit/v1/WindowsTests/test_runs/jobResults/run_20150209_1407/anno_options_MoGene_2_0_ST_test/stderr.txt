@@ -1,0 +1,6 @@
+Error in sqliteSendQuery(con, statement, bind.data) : 
+  error in statement: database disk image is malformed
+Error in sqliteSendQuery(con, statement, bind.data) : 
+  error in statement: database disk image is malformed
+Calls: tryCatch ... .local -> sqliteGetQuery -> sqliteSendQuery -> .Call
+Execution halted

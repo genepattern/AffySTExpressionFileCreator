@@ -1,0 +1,27 @@
+#
+# Test QC plots: generate PNGs
+#
+module: AffySTExpressionFileCreator
+params: 
+    input.file: [ "Z:Modules/TestSuiteData/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/deep_nested_archive1.tar.bz2" ]
+    normalize: 'yes'
+    background.correct: 'yes'
+    compute.present.absent.calls: 'no'
+    qc.plot.format: 'png'
+    clm.file: 
+    annotate.probes: 'no'
+    output.file.base: 'result'
+assertions:
+    files:
+        "result.gct": !!null
+        "stdout.txt": !!null
+        "result.QC.Density_histogram.png": !!null
+        "result.QC.Boxplot.png": !!null
+        "result.QC.101642-50_MAplot.png": !!null
+        "result.QC.101642-50_Cel_image.png": !!null
+        "result.QC.101642-51_MAplot.png": !!null
+        "result.QC.101642-51_Cel_image.png": !!null
+        "result.QC.101642-54_MAplot.png": !!null
+        "result.QC.101642-54_Cel_image.png": !!null
+        "result.QC.101642-57_MAplot.png": !!null
+        "result.QC.101642-57_Cel_image.png": !!null

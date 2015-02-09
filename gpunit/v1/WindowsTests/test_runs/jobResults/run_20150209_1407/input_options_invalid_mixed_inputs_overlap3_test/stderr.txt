@@ -1,0 +1,6 @@
+The following CEL file names were duplicated  (ignoring any compression extension):
+     101642-05.CEL.gz
+Error in check.for.dup.file(files.to.process) : 
+  The module cannot handle duplicated names.  Each file must have a unique name.
+Calls: tryCatch ... tryCatchList -> GP.affyst.efc -> check.for.dup.file
+Execution halted
