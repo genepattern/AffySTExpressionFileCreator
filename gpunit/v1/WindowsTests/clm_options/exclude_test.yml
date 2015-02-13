@@ -8,16 +8,21 @@ params:
     background.correct: 'yes'
     compute.present.absent.calls: 'no'
     qc.plot.format: 'skip'
-    clm.file: "Z:Modules/TestSuiteData/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/clm/exclude.clm"
+    clm.file: "C:GenePatternServer/local_cache/clm/exclude.clm"
     annotate.probes: 'no'
     output.file.base: 'result'
 assertions:
     files:
         "stdout.txt":
-            diffCmd: ../diffIgnoreGpTraces.sh
-            diff: "/Volumes/xchip_sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/clm_options/exclude_test/stdout.txt"
+            diffCmd: ../diffTailOnlyIgnoreGpTraces.sh -9
+            diff: "/xchip/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/clm_options/exclude_test/stdout.txt"
         "result.gct":
-            diff: "/Volumes/xchip_sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/clm_options/exclude_test/result.gct"
+            diffCmd: ../diffWithTolerance.sh
+            diff: "/xchip/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/clm_options/exclude_test/result.gct"
         "result.cls":
-            diff: "/Volumes/xchip_sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/clm_options/exclude_test/result.cls"
+            diffCmd: diff -q --strip-trailing-cr
+            diff: "/xchip/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/clm_options/exclude_test/result.cls"
+            
+# The following won't work due to GP bugs in referencing mounted drives: GP-5548, GP-5547.  Thus we use a local copy, as defined above
+#    clm.file: "Z:Modules/TestSuiteData/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/clm/exclude.clm"
             

@@ -16,9 +16,6 @@ params:
 assertions:
     jobStatus: fail
     files:
-        "stdout.txt":
-            diffCmd: ../diffIgnoreGpTraces.sh
-            diff: "/Volumes/xchip_sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/input_options/invalid_mixed_inputs_overlap4_test/stdout.txt"
         "stderr.txt":
             diffCmd: ../diffIgnoreGpTraces.sh
-            diff: "/Volumes/xchip_sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/input_options/invalid_mixed_inputs_overlap4_test/stderr.txt"
+            diff: "/xchip/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/input_options/invalid_mixed_inputs_overlap4_test/stderr.txt"
