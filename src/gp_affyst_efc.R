@@ -466,11 +466,15 @@ GP.setup.input.files <- function(input.file, destdir) {
 
 check.for.dup.file <- function(files.to.process) {
    # Make sure that there are no name collisions (CEL files with duplicated names)
-   dups <- duplicated(gsub("[.]gz", "", ignore.case=TRUE, basename(files.to.process)))
+   # 1) Strip any compression extensions
+   cel_names <- gsub("[.]gz", "", ignore.case=TRUE, basename(files.to.process))
+   # 2) Force all CEL file extensions to same case
+   cel_names <- gsub("[.]cel", ".CEL", ignore.case=TRUE, cel_names)
+   dups <- duplicated(cel_names)
    if (any(dups)) {
       cat("The following CEL file names were duplicated  (ignoring any compression extension):\n", file=stderr())
       for (i in 1:NROW(dups)) {
-         if (dups[i]) { cat(paste0("     ", basename(files.to.process[i]), "\n"), file=stderr()) }
+         if (dups[i]) { cat(paste0("     ", basename(cel_names[i]), "\n"), file=stderr()) }
       }
       
       stop("The module cannot handle duplicated names.  Each file must have a unique name.")
