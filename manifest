@@ -89,12 +89,8 @@ p8_prefix_when_specified=
 p8_type=java.lang.String
 p8_value=
 
-requiredPatchLSIDs=urn\:lsid\:broadinstitute.org\:plugin\:rdep_3.1_affyST\:0.1
-requiredPatchURLs=http\://www.broadinstitute.org/webservices/gpModuleRepository/download/dev/patch/?file\=/rdep_3.1_affyST/broadinstitute.org\:plugin/rdep_3.1_affyST/0.1/rdep_3.1_affyST.zip
-
-# The following should be the final LSID & URL for affyST rdep when it's done.  Remove this comment and place the values above.
-#  urn\:lsid:broadinstitute.org:\plugin\:rdep_3.1_affyST\:1
-#  http\://www.broadinstitute.org/webservices/gpModuleRepository/download/prod/patch/?file\=/rdep_3.1_affyST/broadinstitute.org\:plugin/rdep_3.1_affyST/1/rdep_3.1_affyST.zip
+requiredPatchLSIDs=urn\:lsid\:broadinstitute.org\:plugin\:rdep_3.1_affyST\:1
+requiredPatchURLs=http\://www.broadinstitute.org/webservices/gpModuleRepository/download/prod/patch/?file\=/rdep_3.1_affyST/broadinstitute.org\:plugin/rdep_3.1_affyST/1/rdep_3.1_affyST.zip
 
 LSID=urn\:lsid\:broad.mit.edu\:cancer.software.genepattern.module.analysis\:00335\:999999999
 publicationDate=11/13/2013 15\:59 
