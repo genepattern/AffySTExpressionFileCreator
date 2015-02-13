@@ -3,8 +3,8 @@
 #
 module: AffySTExpressionFileCreator
 params: 
-    input.file: [ "http://genepatternbeta.broadinstitute.org/gp/data//xchip/gpdev/shared_data/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st_err/archives/overlap2.tar.bz2",
-                  "http://genepatternbeta.broadinstitute.org/gp/data//xchip/gpdev/shared_data/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st_err/archives/overlap3.tar"
+    input.file: [ "http://192.168.195.60:8080/gp/data//xchip/gpdev/shared_data/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st_err/archives/overlap2.tar.bz2",
+                  "http://192.168.195.60:8080/gp/data//xchip/gpdev/shared_data/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st_err/archives/overlap3.tar"
                   ]
     normalize: 'yes'
     background.correct: 'yes'
@@ -16,9 +16,6 @@ params:
 assertions:
     jobStatus: fail
     files:
-        "stdout.txt":
-            diffCmd: ../diffIgnoreGpTraces.sh
-            diff: "/Volumes/xchip_sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/input_options/invalid_mixed_inputs_overlap2_test/stdout.txt"
         "stderr.txt":
             diffCmd: ../diffIgnoreGpTraces.sh
-            diff: "/Volumes/xchip_sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/input_options/invalid_mixed_inputs_overlap2_test/stderr.txt"
+            diff: "/xchip/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/input_options/invalid_mixed_inputs_overlap2_test/stderr.txt"

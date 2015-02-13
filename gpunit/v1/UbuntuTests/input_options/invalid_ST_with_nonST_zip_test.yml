@@ -3,8 +3,8 @@
 #
 module: AffySTExpressionFileCreator
 params: 
-    input.file: [ "http://genepatternbeta.broadinstitute.org/gp/data//xchip/gpdev/shared_data/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/input/HuEx-1_0-st-v2/HuEx-1_0-st-v2-colon-cancer-small.zip",
-                  "http://genepatternbeta.broadinstitute.org/gp/data//xchip/gpdev/shared_data/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/input/HG-U133A/DBA_cel_files_small.zip"
+    input.file: [ "http://192.168.195.60:8080/gp/data//xchip/gpdev/shared_data/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/input/HuEx-1_0-st-v2/HuEx-1_0-st-v2-colon-cancer-small.zip",
+                  "http://192.168.195.60:8080/gp/data//xchip/gpdev/shared_data/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/input/HG-U133A/DBA_cel_files_small.zip"
                   ]
     normalize: 'yes'
     background.correct: 'yes'
@@ -16,9 +16,6 @@ params:
 assertions:
     jobStatus: fail
     files:
-        "stdout.txt":
-            diffCmd: ../diffIgnoreGpTraces.sh
-            diff: "/Volumes/xchip_sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/input_options/invalid_ST_with_nonST_zip_test/stdout.txt"
         "stderr.txt":
             diffCmd: ../diffIgnoreGpTraces.sh
-            diff: "/Volumes/xchip_sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/input_options/invalid_ST_with_nonST_zip_test/stderr.txt"
+            diff: "/xchip/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/input_options/invalid_ST_with_nonST_zip_test/stderr.txt"

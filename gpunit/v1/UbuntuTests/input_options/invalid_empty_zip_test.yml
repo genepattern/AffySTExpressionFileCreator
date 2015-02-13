@@ -3,7 +3,7 @@
 #
 module: AffySTExpressionFileCreator
 params: 
-    input.file: [ "http://genepatternbeta.broadinstitute.org/gp/data//xchip/gpdev/shared_data/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st_err/archives/empty.zip"
+    input.file: [ "http://192.168.195.60:8080/gp/data//xchip/gpdev/shared_data/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st_err/archives/empty.zip"
                   ]
     normalize: 'yes'
     background.correct: 'yes'
@@ -15,9 +15,6 @@ params:
 assertions:
     jobStatus: fail
     files:
-        "stdout.txt":
-            diffCmd: ../diffIgnoreGpTraces.sh
-            diff: "/Volumes/xchip_sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/input_options/invalid_empty_zip_test/stdout.txt"
         "stderr.txt":
             diffCmd: ../diffIgnoreGpTraces.sh
-            diff: "/Volumes/xchip_sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/input_options/invalid_empty_zip_test/stderr.txt"
+            diff: "/xchip/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/input_options/invalid_empty_zip_test/stderr.txt"

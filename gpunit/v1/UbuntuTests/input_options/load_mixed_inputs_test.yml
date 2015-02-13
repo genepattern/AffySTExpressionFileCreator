@@ -3,16 +3,16 @@
 #
 module: AffySTExpressionFileCreator
 params: 
-    input.file: [ "http://genepatternbeta.broadinstitute.org/gp/data//xchip/gpdev/shared_data/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/flat1.tar.gz",
-                  "http://genepatternbeta.broadinstitute.org/gp/data//xchip/gpdev/shared_data/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/flat2.zip",
-                  "http://genepatternbeta.broadinstitute.org/gp/data//xchip/gpdev/shared_data/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/flat3.tar.xz",
-                  "http://genepatternbeta.broadinstitute.org/gp/data//xchip/gpdev/shared_data/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/flat4.tar",
-                  "http://genepatternbeta.broadinstitute.org/gp/data//xchip/gpdev/shared_data/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/deep_nested_archive1.tar.bz2",
-                  "http://genepatternbeta.broadinstitute.org/gp/data//xchip/gpdev/shared_data/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/deep_nested_archive2.zip",
-                  "http://genepatternbeta.broadinstitute.org/gp/data//xchip/gpdev/shared_data/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/uncompressed_1",
-                  "http://genepatternbeta.broadinstitute.org/gp/data//xchip/gpdev/shared_data/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/uncompressed_2",
-                  "http://genepatternbeta.broadinstitute.org/gp/data//xchip/gpdev/shared_data/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/gz_1",
-                  "http://genepatternbeta.broadinstitute.org/gp/data//xchip/gpdev/shared_data/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/gz_2" 
+    input.file: [ "http://192.168.195.60:8080/gp/data//xchip/gpdev/shared_data/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/flat1.tar.gz",
+                  "http://192.168.195.60:8080/gp/data//xchip/gpdev/shared_data/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/flat2.zip",
+                  "http://192.168.195.60:8080/gp/data//xchip/gpdev/shared_data/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/flat3.tar.xz",
+                  "http://192.168.195.60:8080/gp/data//xchip/gpdev/shared_data/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/flat4.tar",
+                  "http://192.168.195.60:8080/gp/data//xchip/gpdev/shared_data/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/deep_nested_archive1.tar.bz2",
+                  "http://192.168.195.60:8080/gp/data//xchip/gpdev/shared_data/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/deep_nested_archive2.zip",
+                  "http://192.168.195.60:8080/gp/data//xchip/gpdev/shared_data/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/uncompressed_1",
+                  "http://192.168.195.60:8080/gp/data//xchip/gpdev/shared_data/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/uncompressed_2",
+                  "http://192.168.195.60:8080/gp/data//xchip/gpdev/shared_data/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/gz_1",
+                  "http://192.168.195.60:8080/gp/data//xchip/gpdev/shared_data/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/gz_2" 
                   ]
     normalize: 'yes'
     background.correct: 'yes'
@@ -25,4 +25,4 @@ assertions:
     files:
         "result.gct":
             diffCmd: ../diffWithTolerance.sh
-            diff: "/Volumes/xchip_sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/input_options/load_mixed_inputs_test/result.gct"
+            diff: "/xchip/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/input_options/load_mixed_inputs_test/result.gct"
