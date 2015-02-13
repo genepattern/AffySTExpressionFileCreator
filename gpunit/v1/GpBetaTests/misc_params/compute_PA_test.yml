@@ -15,4 +15,4 @@ assertions:
     files:
         "result.res":
             diffCmd: ../diffWithTolerance.sh
-            diff: "/Volumes/xchip_sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/misc_params/compute_PA_test/result.res"
+            diff: "/xchip/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/misc_params/compute_PA_test/result.res"
