@@ -24,6 +24,5 @@ params:
 assertions:
     files:
         "result.gct":
-            diff: "/Volumes/xchip_sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/input_options/load_mixed_inputs_test/result.gct"
-
-#    diffCmd: ./stdoutDiff.sh
+            diffCmd: ../diffWithTolerance.sh
+            diff: "/xchip/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/input_options/load_mixed_inputs_test/result.gct"

@@ -14,4 +14,5 @@ params:
 assertions:
     files:
         "result.res":
-            diff: "/Volumes/xchip_sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/misc_params/compute_PA_test/result.res"
+            diffCmd: ../diffWithTolerance.sh
+            diff: "/xchip/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/misc_params/compute_PA_test/result.res"

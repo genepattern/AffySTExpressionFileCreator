@@ -14,4 +14,5 @@ params:
 assertions:
     files:
         "result.gct":
-            diff: "/Volumes/xchip_sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/input_options/load_deep_nested_tar_bz2_test/result.gct"
+            diffCmd: ../diffWithTolerance.sh
+            diff: "/xchip/sqa/Modules/TestSuiteData/AffySTExpressionFileCreator/v1/output/input_options/load_deep_nested_tar_bz2_test/result.gct"
