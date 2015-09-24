@@ -1,0 +1,19 @@
+#
+# Test loading: single tar.xz archive file containing a flat directory structure
+#
+module: AffySTExpressionFileCreator
+params: 
+    input.file: [ "<%gpunit.testDataRoot%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/uncompressed_1",
+                  "<%gpunit.testDataRoot%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/uncompressed_2"
+                   ]
+    normalize: 'yes'
+    background.correct: 'yes'
+    qc.plot.format: 'skip'
+    clm.file: 
+    annotate.probes: 'no'
+    output.file.base: 'result'
+assertions:
+    files:
+        "result.gct": !!null
+#            diffCmd: ../diffWithTolerance.sh
+#            diff: "<%gpunit.resultDataRoot%>AffySTExpressionFileCreator/v1/output/input_options/load_flat_raw_test/result.gct"

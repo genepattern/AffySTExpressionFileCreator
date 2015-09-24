@@ -1,0 +1,20 @@
+#
+# Test loading (invalid): multiple sources with file overlap (naming collision)
+#
+module: AffySTExpressionFileCreator
+params: 
+    input.file: [ "<%gpunit.testDataRoot%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st_err/overlap_gz_2/",
+                  "<%gpunit.testDataRoot%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st_err/overlap_uncompressed_2/"
+                  ]
+    normalize: 'yes'
+    background.correct: 'yes'
+    qc.plot.format: 'skip'
+    clm.file: 
+    annotate.probes: 'no'
+    output.file.base: 'result'
+assertions:
+    jobStatus: fail
+    files:
+        "stderr.txt":
+            diffCmd: ../diffIgnoreGpTraces.sh
+            diff: "<%gpunit.resultDataRoot%>AffySTExpressionFileCreator/v1/output/input_options/invalid_mixed_inputs_overlap5_test/stderr.txt"

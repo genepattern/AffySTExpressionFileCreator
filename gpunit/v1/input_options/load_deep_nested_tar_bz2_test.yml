@@ -1,0 +1,17 @@
+#
+# Test loading: single tar.bz2 archive file containing a deep, nested directory structure
+#
+module: AffySTExpressionFileCreator
+params: 
+    input.file: [ "<%gpunit.testDataRoot%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/deep_nested_archive1.tar.bz2" ]
+    normalize: 'yes'
+    background.correct: 'yes'
+    qc.plot.format: 'skip'
+    clm.file: 
+    annotate.probes: 'no'
+    output.file.base: 'result'
+assertions:
+    files:
+        "result.gct": !!null
+#            diffCmd: ../diffWithTolerance.sh
+#            diff: "<%gpunit.resultDataRoot%>AffySTExpressionFileCreator/v1/output/input_options/load_deep_nested_tar_bz2_test/result.gct"

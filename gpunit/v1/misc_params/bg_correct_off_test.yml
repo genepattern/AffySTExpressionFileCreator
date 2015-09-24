@@ -1,0 +1,17 @@
+#
+# Test misc params: no background correction
+#
+module: AffySTExpressionFileCreator
+params: 
+    input.file: [ "<%gpunit.testDataRoot%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/deep_nested_archive1.tar.bz2" ]
+    normalize: 'yes'
+    background.correct: 'no'
+    qc.plot.format: 'skip'
+    clm.file: 
+    annotate.probes: 'no'
+    output.file.base: 'result'
+assertions:
+    files:
+        "result.gct": !!null
+#            diffCmd: ../diffWithTolerance.sh
+#            diff: "<%gpunit.resultDataRoot%>AffySTExpressionFileCreator/v1/output/misc_params/bg_correct_off_test/result.gct"

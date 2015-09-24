@@ -1,0 +1,20 @@
+#
+# Test loading (invalid): archives containing CEL files of different array types.
+#
+module: AffySTExpressionFileCreator
+params: 
+    input.file: [ "<%gpunit.testDataRoot%>AffySTExpressionFileCreator/v1/input/HuEx-1_0-st-v2/HuEx-1_0-st-v2-colon-cancer-small.zip",
+                  "<%gpunit.testDataRoot%>AffySTExpressionFileCreator/v1/input/MoGene-2_0-st/E-MTAB-2337.raw.1.zip"
+                  ]
+    normalize: 'yes'
+    background.correct: 'yes'
+    qc.plot.format: 'skip'
+    clm.file: 
+    annotate.probes: 'no'
+    output.file.base: 'result'
+assertions:
+    jobStatus: fail
+    files:
+        "stderr.txt":
+            diffCmd: ../diffIgnoreGpTraces.sh
+            diff: "<%gpunit.resultDataRoot%>AffySTExpressionFileCreator/v1/output/input_options/invalid_mixed_ST_array_types_zip_test/stderr.txt"
