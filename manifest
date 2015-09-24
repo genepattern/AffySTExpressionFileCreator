@@ -1,17 +1,17 @@
 #Wed Aug 13 09:06:10 EDT 2014
 name=AffySTExpressionFileCreator
 commandLine=<R3.1_Rscript> --no-save --quiet --slave --no-restore <libdir>run_gp_affyst_efc.R <libdir> <patches>/rlib/3.1_20141120/site-library \
-    --input.file\=<input.file> --normalize=<normalize> --background.correct=<background.correct> --compute.present.absent.calls=<compute.present.absent.calls> \
-    --qc.plot.format=<qc.plot.format> <clm.file> --annotate.probes=<annotate.probes> --output.file.base=<output.file.base>
+    --input.file\=<input.file> --normalize=<normalize> --background.correct=<background.correct> \
+    --qc.plot.format=<qc.plot.format> <clm.file> --annotate.rows=<annotate.rows> --output.file.base=<output.file.base>
 license=
 taskDoc=doc.html
-fileFormat=gct;res;pdf;svg;png
+fileFormat=gct;pdf;svg;png
 taskType=Preprocess & Utilities
 os=any
 quality=preproduction
 privacy=public
-description=[Beta Release** Contact gp-help with any issues. Check stdout.txt and stderr.txt for errors] Creates a RES or GCT file from a set of CEL files from Affymetrix ST arrays.
-version=Initial beta release
+description=[Beta Release** Contact gp-help with any issues. Check stdout.txt and stderr.txt for errors] Creates a GCT file from a set of CEL files from Affymetrix ST arrays.
+version=Fixed issues with the summarization level.
 minGenePatternVersion=
 language=R
 author=David Eby, Broad Institute
@@ -45,49 +45,41 @@ p3_prefix_when_specified=
 p3_type=java.lang.String
 p3_value=yes;no
 
-p4_default_value=no
-p4_description=Whether to compute Present/Absent calls.
-p4_name=compute.present.absent.calls
+p4_default_value=skip
+p4_description=Choose a file format for the QC plots (or skip them completely)
+p4_fileFormat=
+p4_name=qc.plot.format
 p4_optional=
 p4_prefix_when_specified=
 p4_type=java.lang.String
-p4_value=yes\=yes (create res file);no\=no (create gct file)
+p4_value=pdf;svg;png;skip\=skip (do not produce QC plots)
 
-p5_default_value=skip
-p5_description=Choose a file format for the QC plots (or skip them completely)
-p5_fileFormat=
-p5_name=qc.plot.format
-p5_optional=
-p5_prefix_when_specified=
-p5_type=java.lang.String
-p5_value=pdf;svg;png;skip\=skip (do not produce QC plots)
+p5_MODE=IN
+p5_TYPE=FILE
+p5_default_value=
+p5_description=A tab-delimited text file containing one scan, sample, and class per line
+p5_fileFormat=txt;clm
+p5_name=clm.file
+p5_optional=on
+p5_prefix_when_specified=--clm.file=
+p5_type=java.io.File
+p5_value=
 
-p6_MODE=IN
-p6_TYPE=FILE
-p6_default_value=
-p6_description=A tab-delimited text file containing one scan, sample, and class per line
-p6_fileFormat=txt;clm
-p6_name=clm.file
-p6_optional=on
-p6_prefix_when_specified=--clm.file=
-p6_type=java.io.File
-p6_value=
+p6_default_value=yes
+p6_description=Whether to annotate rows with the gene symbol and description
+p6_name=annotate.rows
+p6_optional=
+p6_prefix_when_specified=
+p6_type=java.lang.String
+p6_value=yes;no
 
-p7_default_value=yes
-p7_description=Whether to annotate probes with the gene symbol and description
-p7_name=annotate.probes
+p7_default_value=<job_id>.expression.gct
+p7_description=The base name of the output file(s). File extensions will be added automatically.
+p7_name=output.file.base
 p7_optional=
 p7_prefix_when_specified=
 p7_type=java.lang.String
-p7_value=yes;no
-
-p8_default_value=<job_id>.expression
-p8_description=The base name of the output file(s).  The .gct or .res extension will be automatically added. 
-p8_name=output.file.base
-p8_optional=
-p8_prefix_when_specified=
-p8_type=java.lang.String
-p8_value=
+p7_value=
 
 requiredPatchLSIDs=urn\:lsid\:broadinstitute.org\:plugin\:rdep_3.1_affyST\:1
 requiredPatchURLs=http\://www.broadinstitute.org/webservices/gpModuleRepository/download/prod/patch/?file\=/rdep_3.1_affyST/broadinstitute.org\:plugin/rdep_3.1_affyST/1/rdep_3.1_affyST.zip

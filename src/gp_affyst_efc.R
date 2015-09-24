@@ -8,8 +8,8 @@
 ## whatsoever. Neither the Broad Institute nor MIT can be responsible for its
 ## use, misuse, or functionality.
 
-GP.affyst.efc <- function(files.to.process, normalize, background.correct, compute.present.absent.calls, 
-                         qc.plot.format, clm.file, annotate.probes, output.file.base, site.library) {
+GP.affyst.efc <- function(files.to.process, normalize, background.correct, qc.plot.format,  
+                         clm.file, annotate.probes, output.file.base, site.library) {
    # Check that we actually have files
    if (NROW(files.to.process) < 1) {
       stop("No CEL files were found in the input file(s)")
@@ -44,7 +44,8 @@ GP.affyst.efc <- function(files.to.process, normalize, background.correct, compu
    # it uses is not very clear as we need to set verbose=FALSE on that call.  The following replicates that
    # verbose=TRUE error message (based on 'checkChipTypes' in oligo's utils-general.R).
    if (length(unique(arrayTypeNames)) != 1) stop("All the CEL files must be of the same type.")
-    
+   print(paste0("Processing files of array type ", arrayTypeName))
+   
    # The read.celfiles call will auto-load the following annotation pkg, but we preemptively & explicitly do it
    # here in order to control output of messages to stderr.
    basic.annPkgName <- cleanPlatformName(arrayTypeName)
@@ -71,24 +72,24 @@ GP.affyst.efc <- function(files.to.process, normalize, background.correct, compu
    # Rename samples according to CLM file, if present, or remove the '.CEL' extensions from the file names if not.
    column.names <- rename.samples(sampleNames(cel.batch), clm)
 
-   probeset.summary <- rma(cel.batch, target="probeset", background=background.correct, normalize=normalize)
-   expr.data <- exprs(probeset.summary)
+   coreTranscript.summary <- rma(cel.batch, target="core", background=background.correct, normalize=normalize)
+   expr.data <- exprs(coreTranscript.summary)
 
    if (annotate.probes) {
       # Check arrayTypeName to see if we have Human, Mouse, Rat (using hard-coded huex, hugene, ...)
-      # These arrays have *much* better/cleaner annotation info available in secondary "probeset" packages;
+      # These arrays have *much* better/cleaner annotation info available in secondary "transcriptcluster" packages;
       # it's much better to work with those than the corresponding pdInfoFile where they are available.
       if (haveDetailedAnnotations(arrayTypeName)) {
-         # Remove any trailing "-v1", "-v2" piece (if present) as these are not found in the "probeset" package names.
+         # Remove any trailing "-v1", "-v2" piece (if present) as these are not found in the "transcriptcluster" package names.
          # This cleans up e.g. "HuEx-1_0-st-v2" to "HuEx-1_0-st".
-         probesetArrayTypeName <- gsub("-v[12]$", "", arrayTypeName)
+         transcriptClusterArrayTypeName <- gsub("-v[12]$", "", arrayTypeName)
          # ...then remove dash and underscore chars and force to lowercase as expected in these names.
-         probesetArrayTypeName <- tolower(gsub("[-_]", "", probesetArrayTypeName))
+         transcriptClusterArrayTypeName <- tolower(gsub("[-_]", "", transcriptClusterArrayTypeName))
  
-         probesetDbName <- paste0(probesetArrayTypeName, "probeset")
-         probesetDb.annPkgName <- paste0(probesetDbName, ".db")
-         loadAnnotationPackage(probesetDb.annPkgName, site.library)
-         annotations <- build.annotations(probeset.summary, probesetDbName)
+         transcriptClusterDbName <- paste0(transcriptClusterArrayTypeName, "transcriptcluster")
+         transcriptClusterDb.annPkgName <- paste0(transcriptClusterDbName, ".db")
+         loadAnnotationPackage(transcriptClusterDb.annPkgName, site.library)
+         annotations <- build.annotations(coreTranscript.summary, transcriptClusterDbName)
       }
       else {
          # For other organisms, skip annotations entirely
@@ -101,21 +102,10 @@ GP.affyst.efc <- function(files.to.process, normalize, background.correct, compu
       annotations <- NULL
    }
 
-   if (compute.present.absent.calls) {
-      print("Calculating P/A calls")
-      calls.pvalues <- paCalls(cel.batch, method="PSDABG", verbose=FALSE)
-      calls <- apply(calls.pvalues, c(1,2), function(pvalue) (if (pvalue < 0.05) { return("P") } else { return("A") } ))
-      dataset <- list(row.descriptions=annotations, data=expr.data, calls=calls)
-      colnames(dataset$data) <- column.names
-      print("Writing dataset as RES")
-      write.res(dataset, paste0(output.file.base, ".res"))
-   }
-   else {
-      dataset <- list(row.descriptions=annotations, data=expr.data)
-      colnames(dataset$data) <- column.names
-      print("Writing dataset as GCT")
-      write.gct(dataset, paste0(output.file.base, ".gct"))
-   }
+   dataset <- list(row.descriptions=annotations, data=expr.data)
+   colnames(dataset$data) <- column.names
+   print("Writing dataset as GCT")
+   write.gct(dataset, output.file.base)
 
    plot.qc.images(cel.batch, column.names, output.file.base, qc.plot.format)
 }
@@ -129,27 +119,27 @@ loadAnnotationPackage <- function(annPackageName, site.library) {
 }
 
 # Works for Human, Mouse, Rat but not for other organisms.
-build.annotations <- function(probeset.summary, probesetDbName) {
-   featureData(probeset.summary) <- getNetAffx(probeset.summary, "probeset")
+build.annotations <- function(coreTranscript.summary, transcriptClusterDbName) {
+   featureData(coreTranscript.summary) <- getNetAffx(coreTranscript.summary, "transcript")
 
    # Find references to the various annotation environments needed for lookup.  These are dependent on
-   # the probesetDbName (based on the Affy array type).
-   # That is, we will be looking in e.g. mogene20stprobesetENTREZID for the Entrez Gene identifiers.
+   # the transcriptClusterDbName (based on the Affy array type).
+   # That is, we will be looking in e.g. mogene20sttranscriptclusterENTREZID for the Entrez Gene identifiers.
    print("Finding annotation environment references")
-   entrezMapName <- paste0(probesetDbName,"ENTREZID")
+   entrezMapName <- paste0(transcriptClusterDbName,"ENTREZID")
    entrezEnv <- get(entrezMapName)
-   symbolMapName <- paste0(probesetDbName,"SYMBOL")
+   symbolMapName <- paste0(transcriptClusterDbName,"SYMBOL")
    symbolEnv <- get(symbolMapName)
 
    # Now we look up the various annotation info.  The annotatedData structure will have rownames matching
-   # the Affy probesetIds, so we apply a lookup function across these to get the Entrez Gene ID, the gene
-   # description and the gene symbol.  These look into the environments found in the probesetDbName package
-   # loaded above.  There's a little bit of 'meta-programming' here; see the mogene20stprobeset package
+   # the Affy transcript Ids, so we apply a lookup function across these to get the Entrez Gene ID, the gene
+   # description and the gene symbol.  These look into the environments found in the transcriptClusterDbName package
+   # loaded above.  There's a little bit of 'meta-programming' here; see the mogene20transcriptcluster package
    # documentation in Bioconductor for a more 'straight code' version of how to do this.  The key point
    # here is that we find the relevant annotation records through the (matrix-oriented) 'mget' call, then
    # apply a function to pull out the desired piece of info from the record.
    print("Looking up annotations")
-   annotatedData <- featureData(probeset.summary)
+   annotatedData <- featureData(coreTranscript.summary)
    entrezGenes <- sapply(mget(rownames(annotatedData), entrezEnv), FUN=function(entrezEntry) (entrezEntry[[1]]), simplify="array")
    gene.symbols <- sapply(mget(rownames(annotatedData), symbolEnv), FUN=function(symbolEntry) (symbolEntry[[1]]), simplify="array")
       
@@ -182,7 +172,6 @@ rearrange.files <- function(file.list, clm) {
    print("Rearranging samples based on CLM file")
    new.files.list <- c()
    file.basenames <- basename(file.list)
-   file.dirnames <- dirname(file.list)
    scanIdxs.to.remove <- c()
    scan.index <- 1
    new.index <- 1
@@ -202,7 +191,8 @@ rearrange.files <- function(file.list, clm) {
          cat(paste("Scan", scan, "in clm file matches more than one CEL file. \n"))
       } 
       else {
-         new.files.list[new.index] <- file.path(file.dirnames[index[1]], file.basenames[index[1]])
+         # Pull the file out of the *original* list so that it has the full path info.
+         new.files.list[new.index] <- file.list[index[1]]
          new.index <- new.index + 1
       }
       scan.index <- scan.index + 1
