@@ -3,16 +3,16 @@
 #
 module: AffySTExpressionFileCreator
 params: 
-    input.file: [ "<%gpunit.testDataRoot%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/flat1.tar.gz",
-                  "<%gpunit.testDataRoot%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/flat2.zip",
-                  "<%gpunit.testDataRoot%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/flat3.tar.xz",
-                  "<%gpunit.testDataRoot%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/flat4.tar",
-                  "<%gpunit.testDataRoot%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/deep_nested_archive1.tar.bz2",
-                  "<%gpunit.testDataRoot%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/deep_nested_archive2.zip",
-                  "<%gpunit.testDataRoot%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/uncompressed_1",
-                  "<%gpunit.testDataRoot%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/uncompressed_2",
-                  "<%gpunit.testDataRoot%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/gz_1",
-                  "<%gpunit.testDataRoot%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/gz_2" 
+    input.file: [ "<%gpunit.testData%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/flat1.tar.gz",
+                  "<%gpunit.testData%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/flat2.zip",
+                  "<%gpunit.testData%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/flat3.tar.xz",
+                  "<%gpunit.testData%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/flat4.tar",
+                  "<%gpunit.testData%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/deep_nested_archive1.tar.bz2",
+                  "<%gpunit.testData%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/deep_nested_archive2.zip",
+                  "<%gpunit.testData%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/uncompressed_1",
+                  "<%gpunit.testData%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/uncompressed_2",
+                  "<%gpunit.testData%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/gz_1",
+                  "<%gpunit.testData%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/gz_2" 
                   ]
     normalize: 'yes'
     background.correct: 'yes'
@@ -21,7 +21,8 @@ params:
     annotate.probes: 'no'
     output.file.base: 'result'
 assertions:
-    files:
-        "result.gct": !!null
+   jobStatus: success
+#    files:
+#        "result.gct": 
 #            diffCmd: ../diffWithTolerance.sh
-#            diff: "<%gpunit.resultDataRoot%>AffySTExpressionFileCreator/v1/output/input_options/load_mixed_inputs_test/result.gct"
+#            diff: "<%gpunit.resultData%>AffySTExpressionFileCreator/v1/output/input_options/load_mixed_inputs_test/result.gct"

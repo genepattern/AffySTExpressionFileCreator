@@ -3,8 +3,8 @@
 #
 module: AffySTExpressionFileCreator
 params: 
-    input.file: [ "<%gpunit.testDataRoot%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st_err/overlap_gz_1/",
-                  "<%gpunit.testDataRoot%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st_err/archives/overlap4.tar.xz"
+    input.file: [ "<%gpunit.testData%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st_err/overlap_gz_1/",
+                  "<%gpunit.testData%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st_err/archives/overlap4.tar.xz"
                   ]
     normalize: 'yes'
     background.correct: 'yes'
@@ -14,7 +14,7 @@ params:
     output.file.base: 'result'
 assertions:
     jobStatus: fail
-    files:
-        "stderr.txt":
-            diffCmd: ../diffIgnoreGpTraces.sh
-            diff: "<%gpunit.resultDataRoot%>AffySTExpressionFileCreator/v1/output/input_options/invalid_mixed_inputs_overlap3_test/stderr.txt"
+#    files:
+#        "stderr.txt": 
+#            diffCmd: ../diffIgnoreGpTraces.sh
+#            diff: "<%gpunit.resultData%>AffySTExpressionFileCreator/v1/output/input_options/invalid_mixed_inputs_overlap3_test/stderr.txt"

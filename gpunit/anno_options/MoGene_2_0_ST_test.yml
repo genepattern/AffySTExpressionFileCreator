@@ -3,7 +3,7 @@
 #
 module: AffySTExpressionFileCreator
 params: 
-    input.file: [ "<%gpunit.testDataRoot%>AffySTExpressionFileCreator/v1/input/MoGene-2_0-st/E-MTAB-2337.raw.1.zip"
+    input.file: [ "<%gpunit.testData%>AffySTExpressionFileCreator/v1/input/MoGene-2_0-st/E-MTAB-2337.raw.1.zip"
                   ]
     normalize: 'yes'
     background.correct: 'yes'
@@ -12,7 +12,8 @@ params:
     annotate.probes: 'yes'
     output.file.base: 'result'
 assertions:
-    files:
-        "result.gct": !!null
+   jobStatus: success
+#    files:
+#        "result.gct": 
 #            diffCmd: ../diffWithTolerance.sh
-#            diff: "<%gpunit.resultDataRoot%>AffySTExpressionFileCreator/v1/output/anno_options/MoGene_2_0_ST_test/result.gct"
+#            diff: "<%gpunit.resultData%>AffySTExpressionFileCreator/v1/output/anno_options/MoGene_2_0_ST_test/result.gct"

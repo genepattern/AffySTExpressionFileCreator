@@ -3,7 +3,7 @@
 #
 module: AffySTExpressionFileCreator
 params: 
-    input.file: [ "<%gpunit.testDataRoot%>AffySTExpressionFileCreator/v1/input/HG-U133A/DBA_cel_files_small.zip"
+    input.file: [ "<%gpunit.testData%>AffySTExpressionFileCreator/v1/input/HG-U133A/DBA_cel_files_small.zip"
                   ]
     normalize: 'yes'
     background.correct: 'yes'
@@ -13,7 +13,7 @@ params:
     output.file.base: 'result'
 assertions:
     jobStatus: fail
-    files:
-        "stderr.txt":
-            diffCmd: ../diffIgnoreGpTraces.sh
-            diff: "<%gpunit.resultDataRoot%>AffySTExpressionFileCreator/v1/output/input_options/invalid_nonST_zip_test/stderr.txt"
+#    files:
+#        "stderr.txt": 
+#            diffCmd: ../diffIgnoreGpTraces.sh
+#            diff: "<%gpunit.resultData%>AffySTExpressionFileCreator/v1/output/input_options/invalid_nonST_zip_test/stderr.txt"

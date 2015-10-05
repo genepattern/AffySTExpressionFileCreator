@@ -3,8 +3,8 @@
 #
 module: AffySTExpressionFileCreator
 params: 
-    input.file: [ "<%gpunit.testDataRoot%>AffySTExpressionFileCreator/v1/input/HuEx-1_0-st-v2/HuEx-1_0-st-v2-colon-cancer-small.zip",
-                  "<%gpunit.testDataRoot%>AffySTExpressionFileCreator/v1/input/MoGene-2_0-st/E-MTAB-2337.raw.1.zip"
+    input.file: [ "<%gpunit.testData%>AffySTExpressionFileCreator/v1/input/HuEx-1_0-st-v2/HuEx-1_0-st-v2-colon-cancer-small.zip",
+                  "<%gpunit.testData%>AffySTExpressionFileCreator/v1/input/MoGene-2_0-st/E-MTAB-2337.raw.1.zip"
                   ]
     normalize: 'yes'
     background.correct: 'yes'
@@ -14,7 +14,7 @@ params:
     output.file.base: 'result'
 assertions:
     jobStatus: fail
-    files:
-        "stderr.txt":
-            diffCmd: ../diffIgnoreGpTraces.sh
-            diff: "<%gpunit.resultDataRoot%>AffySTExpressionFileCreator/v1/output/input_options/invalid_mixed_ST_array_types_zip_test/stderr.txt"
+#    files:
+#        "stderr.txt": 
+#            diffCmd: ../diffIgnoreGpTraces.sh
+#            diff: "<%gpunit.resultData%>AffySTExpressionFileCreator/v1/output/input_options/invalid_mixed_ST_array_types_zip_test/stderr.txt"

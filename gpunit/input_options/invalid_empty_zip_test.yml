@@ -3,7 +3,7 @@
 #
 module: AffySTExpressionFileCreator
 params: 
-    input.file: [ "<%gpunit.testDataRoot%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st_err/archives/empty.zip"
+    input.file: [ "<%gpunit.testData%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st_err/archives/empty.zip"
                   ]
     normalize: 'yes'
     background.correct: 'yes'
@@ -13,7 +13,7 @@ params:
     output.file.base: 'result'
 assertions:
     jobStatus: fail
-    files:
-        "stderr.txt":
-            diffCmd: ../diffIgnoreGpTraces.sh
-            diff: "<%gpunit.resultDataRoot%>AffySTExpressionFileCreator/v1/output/input_options/invalid_empty_zip_test/stderr.txt"
+#    files:
+#        "stderr.txt": 
+#            diffCmd: ../diffIgnoreGpTraces.sh
+#            diff: "<%gpunit.resultData%>AffySTExpressionFileCreator/v1/output/input_options/invalid_empty_zip_test/stderr.txt"

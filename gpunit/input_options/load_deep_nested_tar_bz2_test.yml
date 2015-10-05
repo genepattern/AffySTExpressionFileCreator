@@ -3,7 +3,7 @@
 #
 module: AffySTExpressionFileCreator
 params: 
-    input.file: [ "<%gpunit.testDataRoot%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/deep_nested_archive1.tar.bz2" ]
+    input.file: [ "<%gpunit.testData%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/deep_nested_archive1.tar.bz2" ]
     normalize: 'yes'
     background.correct: 'yes'
     qc.plot.format: 'skip'
@@ -11,7 +11,8 @@ params:
     annotate.probes: 'no'
     output.file.base: 'result'
 assertions:
-    files:
-        "result.gct": !!null
+   jobStatus: success
+#    files:
+#        "result.gct": 
 #            diffCmd: ../diffWithTolerance.sh
-#            diff: "<%gpunit.resultDataRoot%>AffySTExpressionFileCreator/v1/output/input_options/load_deep_nested_tar_bz2_test/result.gct"
+#            diff: "<%gpunit.resultData%>AffySTExpressionFileCreator/v1/output/input_options/load_deep_nested_tar_bz2_test/result.gct"
