@@ -8,23 +8,37 @@
 ## whatsoever. Neither the Broad Institute nor MIT can be responsible for its
 ## use, misuse, or functionality.
 
+suppressMessages(suppressWarnings(library(getopt)))
+suppressMessages(suppressWarnings(library(optparse)))
+suppressMessages(suppressWarnings(library(R.methodsS3)))
+suppressMessages(suppressWarnings(library(R.oo)))
+suppressMessages(suppressWarnings(library(R.utils)))
+suppressMessages(suppressWarnings(library(DBI)))
+suppressMessages(suppressWarnings(library(RSQLite)))
+suppressMessages(suppressWarnings(library(parallel)))
+suppressMessages(suppressWarnings(library(iterators)))
+suppressMessages(suppressWarnings(library(foreach)))
+suppressMessages(suppressWarnings(library(bit)))
+suppressMessages(suppressWarnings(library(ff)))
+suppressMessages(suppressWarnings(library(BiocGenerics)))
+suppressMessages(suppressWarnings(library(IRanges)))
+suppressMessages(suppressWarnings(library(XVector)))
+suppressMessages(suppressWarnings(library(GenomeInfoDb)))
+suppressMessages(suppressWarnings(library(GenomicRanges)))
+suppressMessages(suppressWarnings(library(Biobase)))
+suppressMessages(suppressWarnings(library(zlibbioc)))
+suppressMessages(suppressWarnings(library(Biostrings)))
+suppressMessages(suppressWarnings(library(affyio)))
+suppressMessages(suppressWarnings(library(affxparser)))
+suppressMessages(suppressWarnings(library(preprocessCore)))
+suppressMessages(suppressWarnings(library(oligoClasses)))
+suppressMessages(suppressWarnings(library(oligo)))
+
+sessionInfo()
+
 args <- commandArgs(trailingOnly=TRUE)
 
 libdir <- args[1]
-
-site.library <- args[2]
-
-cat("\nLibrary dir: ",site.library)
-.libPaths(site.library)
-
-suppressMessages(suppressWarnings({
-   library(optparse)
-   library(R.utils)
-   library(affyio)
-   library(oligo)
-   library(DBI)
-   library(KernSmooth)
-}))
 
 option_list <- list(
   make_option("--input.file", dest="input.file"),
@@ -39,8 +53,6 @@ option_list <- list(
 opt <- parse_args(OptionParser(option_list=option_list), positional_arguments=TRUE, args=args)
 print(opt)
 opts <- opt$options
-
-sessionInfo()
 
 source(file.path(libdir, "common.R"))
 source(file.path(libdir, "gp_affyst_efc.R"))
@@ -65,3 +77,5 @@ tryCatch(
       unlink(destdir, recursive=TRUE)
    }
 )
+
+sessionInfo()

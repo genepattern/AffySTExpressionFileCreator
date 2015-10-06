@@ -1,6 +1,6 @@
 #Wed Aug 13 09:06:10 EDT 2014
 name=AffySTExpressionFileCreator
-commandLine=<R3.1_Rscript> --no-save --quiet --slave --no-restore <libdir>run_gp_affyst_efc.R <libdir> <patches>/rlib/3.1_20141120/site-library \
+commandLine=<R3.1_Rscript> --no-save --quiet --slave --no-restore <libdir>run_gp_affyst_efc.R <libdir> \
     --input.file\=<input.file> --normalize=<normalize> --background.correct=<background.correct> \
     --qc.plot.format=<qc.plot.format> <clm.file> --annotate.rows=<annotate.rows> --output.file.base=<output.file.base>
 license=
@@ -11,9 +11,9 @@ os=any
 quality=preproduction
 privacy=public
 description=[Beta Release** Contact gp-help with any issues. Check stdout.txt and stderr.txt for errors] Creates a GCT file from a set of CEL files from Affymetrix ST arrays.
-version=Fixed issues with the summarization level.
+version=Updated to make use of the R package installer.
 minGenePatternVersion=
-language=R
+language=R3.1.3
 author=David Eby, Broad Institute
 
 p1_default_value=
@@ -81,8 +81,8 @@ p7_prefix_when_specified=
 p7_type=java.lang.String
 p7_value=
 
-requiredPatchLSIDs=urn\:lsid\:broadinstitute.org\:plugin\:rdep_3.1_affyST\:1
-requiredPatchURLs=http\://www.broadinstitute.org/webservices/gpModuleRepository/download/prod/patch/?file\=/rdep_3.1_affyST/broadinstitute.org\:plugin/rdep_3.1_affyST/1/rdep_3.1_affyST.zip
+requiredPatchLSIDs=
+requiredPatchURLs=
 
 LSID=urn\:lsid\:broad.mit.edu\:cancer.software.genepattern.module.analysis\:00346\:999999999
 publicationDate=11/13/2013 15\:59 
