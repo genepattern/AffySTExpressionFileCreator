@@ -9,7 +9,7 @@
 ## use, misuse, or functionality.
 
 GP.affyst.efc <- function(files.to.process, normalize, background.correct, qc.plot.format,  
-                         clm.file, annotate.probes, output.file.base, site.library) {
+                         clm.file, annotate.probes, output.file.base) {
    # Check that we actually have files
    if (NROW(files.to.process) < 1) {
       stop("No CEL files were found in the input file(s)")
@@ -20,6 +20,7 @@ GP.affyst.efc <- function(files.to.process, normalize, background.correct, qc.pl
 
    # Load the CLM file and rearrange files.to.process to match
    if (!is.null(clm.file)) {
+      print(paste0("Rearranging according to CLM file ", clm.file))
       clm <- read.clm(clm.file)
       rearranged <- rearrange.files(files.to.process, clm)
       files.to.process <- rearranged$file.list
@@ -49,7 +50,7 @@ GP.affyst.efc <- function(files.to.process, normalize, background.correct, qc.pl
    # The read.celfiles call will auto-load the following annotation pkg, but we preemptively & explicitly do it
    # here in order to control output of messages to stderr.
    basic.annPkgName <- cleanPlatformName(arrayTypeName)
-   loadAnnotationPackage(basic.annPkgName, site.library)
+   loadAnnotationPackage(basic.annPkgName)
 
    # Now, read the CEL files to be processed.
    tryCatch(
@@ -72,9 +73,11 @@ GP.affyst.efc <- function(files.to.process, normalize, background.correct, qc.pl
    # Rename samples according to CLM file, if present, or remove the '.CEL' extensions from the file names if not.
    column.names <- rename.samples(sampleNames(cel.batch), clm)
 
+   # The following line is the key call to extract and preprocess the expression values from the CELS
    coreTranscript.summary <- rma(cel.batch, target="core", background=background.correct, normalize=normalize)
-   expr.data <- exprs(coreTranscript.summary)
 
+   expr.data <- exprs(coreTranscript.summary)
+   
    if (annotate.probes) {
       # Check arrayTypeName to see if we have Human, Mouse, Rat (using hard-coded huex, hugene, ...)
       # These arrays have *much* better/cleaner annotation info available in secondary "transcriptcluster" packages;
@@ -88,7 +91,7 @@ GP.affyst.efc <- function(files.to.process, normalize, background.correct, qc.pl
  
          transcriptClusterDbName <- paste0(transcriptClusterArrayTypeName, "transcriptcluster")
          transcriptClusterDb.annPkgName <- paste0(transcriptClusterDbName, ".db")
-         loadAnnotationPackage(transcriptClusterDb.annPkgName, site.library)
+         loadAnnotationPackage(transcriptClusterDb.annPkgName)
          annotations <- build.annotations(coreTranscript.summary, transcriptClusterDbName)
       }
       else {
@@ -110,9 +113,9 @@ GP.affyst.efc <- function(files.to.process, normalize, background.correct, qc.pl
    plot.qc.images(cel.batch, column.names, output.file.base, qc.plot.format)
 }
 
-loadAnnotationPackage <- function(annPackageName, site.library) {
+loadAnnotationPackage <- function(annPackageName) {
    # Dynamically install (if necessary) and load the extra required annotation package
-   dyn.loadBioconductorPackage(annPackageName, site.library)
+   dyn.loadBioconductorPackage(annPackageName)
    suppressMessages(suppressWarnings(
       library(annPackageName, character.only=TRUE, warn.conflicts=FALSE)
    ))
@@ -148,7 +151,7 @@ build.annotations <- function(coreTranscript.summary, transcriptClusterDbName) {
    refSeqIds <- sapply(pData(annotatedData)[,"geneassignment"], FUN=function(geneEntry) (unlist(strsplit(geneEntry," //"))[1]), simplify="array")
 
    # Build a suitable annotation for the dataset.  We'll use "<entrezGene> // <refSeqId> // <gene.symbol>"
-   print("Building annotations for dataset")
+   print("Annotating dataset")
    annotations <- paste0(unname(entrezGenes), " // ", unname(refSeqIds), " // ", unname(gene.symbols))
    return (annotations)
 }
@@ -274,7 +277,7 @@ write.cls.from.clm <- function(clm, output.file.base) {
 }
 
 plot.qc.images <- function(cel.batch, column.names, output.file.base, qc.plot.format) {
-   # Print out some QC images. Plot nothing if the user choose "skip"
+   # Print out some QC images. Plot nothing if the user chose "skip"
    device.open <- get.device.open(qc.plot.format)
    if (!is.null(device.open)) {
       print("Generating QC plots")

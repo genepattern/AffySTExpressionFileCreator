@@ -686,9 +686,11 @@ parse.command.line <- function(args) {
 	}
 }
 
-init.bioc.loader <- function(site.library) {
+init.bioc.loader <- function() {
    # No need to install the loader via the remote biocLite script if it's already present.
-   if ("BiocInstaller" %in% installed.packages(lib.loc=site.library)[,"Package"]) { return }
+   # Note that this should *always* be the case as we needed it in order to install the
+   # module's R package dependencies.
+   if ("BiocInstaller" %in% installed.packages()[,"Package"]) { return }
 
    tryCatch({
          print(paste0("About to initialize the Bioconductor loader"))
@@ -708,14 +710,14 @@ init.bioc.loader <- function(site.library) {
    return(TRUE)
 }
 
-dyn.loadBioconductorPackage <- function(pkg.name, site.library) {
+dyn.loadBioconductorPackage <- function(pkg.name) {
    # Install pkg.name only if it is not present.
    # NOTE: this is intended only for annotation packages.  Software prerequisite packages should be
    # installed up-front through normal mechanisms.
-   if (!(pkg.name %in% installed.packages(lib.loc=site.library)[,"Package"])) {
-      init.bioc.loader(site.library)
+   if (!(pkg.name %in% installed.packages()[,"Package"])) {
+      init.bioc.loader()
       suppressMessages(suppressWarnings(
-         biocLite(pkg.name, lib=site.library, quiet=TRUE, suppressUpdates=TRUE, suppressAutoUpdate=TRUE)
+         biocLite(pkg.name, quiet=TRUE, suppressUpdates=TRUE, suppressAutoUpdate=TRUE)
       ))
    }
 }

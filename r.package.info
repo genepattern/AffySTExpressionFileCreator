@@ -9,6 +9,8 @@ RSQLite,1.0.0,CRAN
 iterators,1.0.7,CRAN
 foreach,1.4.2,CRAN
 bit,1.1-12,CRAN
+# NOTE: 'ff' must be present in order to install 'oligoClasses' and 'oligo', but must NOT be loaded
+# by the module as it causes a breaking-behavior change and leads to errors.
 ff,2.2-13,CRAN
 BiocGenerics
 S4Vectors

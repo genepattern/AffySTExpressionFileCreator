@@ -65,7 +65,7 @@ p5_prefix_when_specified=--clm.file=
 p5_type=java.io.File
 p5_value=
 
-p6_default_value=yes
+p6_default_value=no
 p6_description=Whether to annotate rows with the gene symbol and description
 p6_name=annotate.rows
 p6_optional=

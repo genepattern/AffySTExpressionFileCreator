@@ -19,7 +19,12 @@ suppressMessages(suppressWarnings(library(parallel)))
 suppressMessages(suppressWarnings(library(iterators)))
 suppressMessages(suppressWarnings(library(foreach)))
 suppressMessages(suppressWarnings(library(bit)))
-suppressMessages(suppressWarnings(library(ff)))
+
+# Don't load the 'ff' package even though it is specified in the r.package.info file.  It's needed
+# to install the oligoClasses pkg but if it's loaded at runtime then it changes the behavior of
+# the module, with failures as a result. 
+#suppressMessages(suppressWarnings(library(ff)))
+
 suppressMessages(suppressWarnings(library(BiocGenerics)))
 suppressMessages(suppressWarnings(library(IRanges)))
 suppressMessages(suppressWarnings(library(XVector)))
@@ -70,7 +75,7 @@ tryCatch(
    {
       files.to.process <- GP.setup.input.files(opts$input.file, destdir)
       GP.affyst.efc(files.to.process, normalize, background.correct, opts$qc.plot.format, 
-                    opts$clm.file, annotate.rows, opts$output.file.base, site.library)
+                    opts$clm.file, annotate.rows, opts$output.file.base)
    },
    finally = {
       # Clean up the CEL file subtree.
