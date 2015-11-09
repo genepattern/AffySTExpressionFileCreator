@@ -1,9 +1,8 @@
-#
-# Test annotation: archive containing MoGene 2.0 ST CEL files.
-#
 module: AffySTExpressionFileCreator
+name: MoGene_2_0_ST_test
+description: Test annotation: archive containing MoGene 2.0 ST CEL files.
 params: 
-    input.file: [ "<%gpunit.testData%>AffySTExpressionFileCreator/v1/input/MoGene-2_0-st/E-MTAB-2337.raw.1.zip"
+    input.file: [ "<%gpunit.testData%>gpunit/AffySTExpressionFileCreator/v1/input/MoGene-2_0-st/E-MTAB-2337.raw.1.zip"
                   ]
     normalize: 'yes'
     background.correct: 'yes'
@@ -12,7 +11,7 @@ params:
     annotate.probes: 'yes'
     output.file.base: 'result'
 assertions:
-   jobStatus: success
+    jobStatus: success
 #    files:
 #        "result.gct": 
 #            diffCmd: ../diffWithTolerance.sh

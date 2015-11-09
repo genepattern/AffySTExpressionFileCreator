@@ -1,10 +1,9 @@
-#
-# Test loading: single tar.xz archive file containing a flat directory structure
-#
 module: AffySTExpressionFileCreator
+name: load_flat_gz_test
+description: Test loading: single tar.xz archive file containing a flat directory structure
 params: 
-    input.file: [ "<%gpunit.testData%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/gz_1",
-                  "<%gpunit.testData%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/gz_2"
+    input.file: [ "<%gpunit.testData%>gpunit/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/gz_1",
+                  "<%gpunit.testData%>gpunit/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/gz_2"
                    ]
     normalize: 'yes'
     background.correct: 'yes'
@@ -13,7 +12,7 @@ params:
     annotate.probes: 'no'
     output.file.base: 'result'
 assertions:
-   jobStatus: success
+    jobStatus: success
 #    files:
 #        "result.gct": 
 #            diffCmd: ../diffWithTolerance.sh

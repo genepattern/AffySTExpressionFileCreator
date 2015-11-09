@@ -1,11 +1,8 @@
-#
-# Test QC plots: generate SVGs
-# NOTE: This test will fail on OS X Mavericks due to a Fontconfig bug with R 3.1.0.  While that is fixed in newer versions of R, we are tied to this one 
-# due to annotation packages missing from Bioconductor for Mavericks. 
-#
 module: AffySTExpressionFileCreator
+name: generate_svg_test
+description: Test QC plots: generate SVGs
 params: 
-    input.file: [ "<%gpunit.testData%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/deep_nested_archive1.tar.bz2" ]
+    input.file: [ "<%gpunit.testData%>gpunit/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/deep_nested_archive1.tar.bz2" ]
     normalize: 'yes'
     background.correct: 'yes'
     qc.plot.format: 'svg'
@@ -13,7 +10,7 @@ params:
     annotate.probes: 'no'
     output.file.base: 'result'
 assertions:
-   jobStatus: success
+    jobStatus: success
 #    files:
 #        "result.gct": !!null
 #        "stdout.txt": !!null

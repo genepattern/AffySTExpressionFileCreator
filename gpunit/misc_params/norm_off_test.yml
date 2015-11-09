@@ -1,9 +1,8 @@
-#
-# Test misc params: no normalization 
-#
 module: AffySTExpressionFileCreator
+name: norm_off_test
+description: Test misc params: no normalization 
 params: 
-    input.file: [ "<%gpunit.testData%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/deep_nested_archive1.tar.bz2" ]
+    input.file: [ "<%gpunit.testData%>gpunit/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/deep_nested_archive1.tar.bz2" ]
     normalize: 'no'
     background.correct: 'yes'
     qc.plot.format: 'skip'
@@ -11,7 +10,7 @@ params:
     annotate.probes: 'no'
     output.file.base: 'result'
 assertions:
-   jobStatus: success
+    jobStatus: success
 #    files:
 #        "result.gct": 
 #            diffCmd: ../diffWithTolerance.sh

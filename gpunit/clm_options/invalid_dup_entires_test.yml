@@ -1,17 +1,16 @@
-#
-# Test CLM options (invalid): duplicate entries in the CLM.
-#
 module: AffySTExpressionFileCreator
+name: invalid_dup_entires_test
+description: Test CLM options (invalid): duplicate entries in the CLM.
 params: 
-    input.file: [ "<%gpunit.testData%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/deep_nested_archive1.tar.bz2" ]
+    input.file: [ "<%gpunit.testData%>gpunit/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/deep_nested_archive1.tar.bz2" ]
     normalize: 'yes'
     background.correct: 'yes'
     qc.plot.format: 'skip'
-    clm.file: "<%gpunit.testData%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/clm/dup_entries.clm"
+    clm.file: "<%gpunit.testData%>gpunit/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/clm/dup_entries.clm"
     annotate.probes: 'no'
     output.file.base: 'result'
 assertions:
-    jobStatus: fail
+     jobStatus: fail
 #    files:
 #        "stderr.txt": 
 #            diffCmd: ../diffIgnoreGpTraces.sh

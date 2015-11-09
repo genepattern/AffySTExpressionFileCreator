@@ -1,17 +1,16 @@
-#
-# Test CLM options: excludes one sample from the archive.
-#
 module: AffySTExpressionFileCreator
+name: exclude_test
+description: Test CLM options: excludes one sample from the archive.
 params: 
-    input.file: [ "<%gpunit.testData%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/deep_nested_archive1.tar.bz2" ]
+    input.file: [ "<%gpunit.testData%>gpunit/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/deep_nested_archive1.tar.bz2" ]
     normalize: 'yes'
     background.correct: 'yes'
     qc.plot.format: 'skip'
-    clm.file: "<%gpunit.testData%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/clm/exclude.clm"
+    clm.file: "<%gpunit.testData%>gpunit/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/clm/exclude.clm"
     annotate.probes: 'no'
     output.file.base: 'result'
 assertions:
-   jobStatus: success
+    jobStatus: success
 #    files:
 #        "stdout.txt": 
 #            diffCmd: ../diffTailOnlyIgnoreGpTraces.sh -9
