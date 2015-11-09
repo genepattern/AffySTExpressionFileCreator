@@ -1,12 +1,12 @@
 module: AffySTExpressionFileCreator
 name: ZebGene_1_1_ST_test
-description: Test annotation: archive containing ZebGene 1.1 ST CEL files.  Note that this is a "model" organism so annotation will be skipped.
+description: Test annotation; archive containing ZebGene 1.1 ST CEL files.  Note that this is a "model" organism so annotation will be skipped.
 params: 
     input.file: [ "<%gpunit.testData%>gpunit/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/deep_nested_archive1.tar.bz2" ]
     normalize: 'yes'
     background.correct: 'yes'
     qc.plot.format: 'skip'
-    clm.file: 
+    clm.file: ''
     annotate.probes: 'yes'
     output.file.base: 'result'
 assertions:

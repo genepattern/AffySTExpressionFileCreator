@@ -1,12 +1,12 @@
 module: AffySTExpressionFileCreator
 name: generate_pdf_test
-description: Test QC plots: generate PDFs
+description: Test QC plots; generate PDFs
 params: 
     input.file: [ "<%gpunit.testData%>gpunit/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/deep_nested_archive1.tar.bz2" ]
     normalize: 'yes'
     background.correct: 'yes'
     qc.plot.format: 'pdf'
-    clm.file: 
+    clm.file: ''
     annotate.probes: 'no'
     output.file.base: 'result'
 assertions:

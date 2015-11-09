@@ -1,12 +1,12 @@
 module: AffySTExpressionFileCreator
 name: load_deep_nested_zip_test
-description: Test loading: single zip archive file containing a deep, nested directory structure
+description: Test loading; single zip archive file containing a deep, nested directory structure
 params: 
     input.file: [ "<%gpunit.testData%>gpunit/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/deep_nested_archive2.zip" ]
     normalize: 'yes'
     background.correct: 'yes'
     qc.plot.format: 'skip'
-    clm.file: 
+    clm.file: ''
     annotate.probes: 'no'
     output.file.base: 'result'
 assertions:

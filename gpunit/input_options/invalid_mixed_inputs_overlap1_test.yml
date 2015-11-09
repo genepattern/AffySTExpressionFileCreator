@@ -1,6 +1,6 @@
 module: AffySTExpressionFileCreator
 name: invalid_mixed_inputs_overlap1_test
-description: Test loading (invalid): multiple sources with file overlap (naming collision)
+description: Test loading (invalid); multiple sources with file overlap (naming collision)
 params: 
     input.file: [ "<%gpunit.testData%>gpunit/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st_err/archives/overlap1.tar.gz",
                   "<%gpunit.testData%>gpunit/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st_err/overlap_uncompressed_1"
@@ -8,7 +8,7 @@ params:
     normalize: 'yes'
     background.correct: 'yes'
     qc.plot.format: 'skip'
-    clm.file: 
+    clm.file: ''
     annotate.probes: 'no'
     output.file.base: 'result'
 assertions:

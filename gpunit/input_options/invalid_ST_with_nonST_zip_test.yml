@@ -1,6 +1,6 @@
 module: AffySTExpressionFileCreator
 name: invalid_ST_with_nonST_zip_test
-description: Test loading (invalid): archives containing CEL files of both ST and non-ST array types
+description: Test loading (invalid); archives containing CEL files of both ST and non-ST array types
 params: 
     input.file: [ "<%gpunit.testData%>gpunit/AffySTExpressionFileCreator/v1/input/HuEx-1_0-st-v2/HuEx-1_0-st-v2-colon-cancer-small.zip",
                   "<%gpunit.testData%>gpunit/AffySTExpressionFileCreator/v1/input/HG-U133A/DBA_cel_files_small.zip"
@@ -8,7 +8,7 @@ params:
     normalize: 'yes'
     background.correct: 'yes'
     qc.plot.format: 'skip'
-    clm.file: 
+    clm.file: ''
     annotate.probes: 'no'
     output.file.base: 'result'
 assertions:

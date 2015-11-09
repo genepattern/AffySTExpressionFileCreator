@@ -1,13 +1,13 @@
 module: AffySTExpressionFileCreator
 name: HuEx_1_0_ST_test
-description: Test annotation: archive containing HuEx 1.0 ST CEL files.  Note that the array name contains a '-v2' suffix which must be handled by the code.
+description: Test annotation; archive containing HuEx 1.0 ST CEL files.  Note that the array name contains a '-v2' suffix which must be handled by the code.
 params: 
     input.file: [ "<%gpunit.testData%>gpunit/AffySTExpressionFileCreator/v1/input/HuEx-1_0-st-v2/HuEx-1_0-st-v2-colon-cancer-small.zip"
                   ]
     normalize: 'yes'
     background.correct: 'yes'
     qc.plot.format: 'skip'
-    clm.file: 
+    clm.file: ''
     annotate.probes: 'yes'
     output.file.base: 'result'
 assertions:
