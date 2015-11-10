@@ -6,7 +6,7 @@ params:
     normalize: 'no'
     background.correct: 'yes'
     qc.plot.format: 'skip'
-    clm.file: ''
+    clm.file: 
     annotate.probes: 'no'
     output.file.base: 'result'
 assertions:

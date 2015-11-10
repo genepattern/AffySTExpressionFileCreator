@@ -6,7 +6,7 @@ params:
     normalize: 'yes'
     background.correct: 'yes'
     qc.plot.format: 'png'
-    clm.file: ''
+    clm.file: 
     annotate.probes: 'no'
     output.file.base: 'result'
 assertions:
