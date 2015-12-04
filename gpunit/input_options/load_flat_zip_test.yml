@@ -1,6 +1,6 @@
 module: AffySTExpressionFileCreator
 name: load_flat_zip_test
-description: Test loading; single zip archive file containing a flat directory structure
+description: Positive test of loading; single zip archive file containing a flat directory structure
 params: 
     input.file: [ "<%gpunit.testData%>gpunit/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/flat2.zip" ]
     normalize: 'yes'

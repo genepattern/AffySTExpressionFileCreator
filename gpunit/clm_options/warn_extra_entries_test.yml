@@ -1,6 +1,6 @@
 module: AffySTExpressionFileCreator
 name: warn_extra_entries_test
-description: Test CLM options; warns about extra entries in the CLM not present in the archive.
+description: Positive test of CLM options; warns about extra entries in the CLM not present in the archive.
 params: 
     input.file: [ "<%gpunit.testData%>gpunit/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/deep_nested_archive1.tar.bz2" ]
     normalize: 'yes'

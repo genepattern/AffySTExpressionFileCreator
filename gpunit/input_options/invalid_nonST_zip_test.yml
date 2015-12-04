@@ -1,6 +1,6 @@
 module: AffySTExpressionFileCreator
 name: invalid_nonST_zip_test
-description: Test loading (invalid); archives containing CEL files of non-ST array type.
+description: Negative test of loading (invalid); archives containing CEL files of non-ST array type.
 params: 
     input.file: [ "<%gpunit.testData%>gpunit/AffySTExpressionFileCreator/v1/input/HG-U133A/DBA_cel_files_small.zip"
                   ]

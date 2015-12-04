@@ -1,6 +1,6 @@
 module: AffySTExpressionFileCreator
 name: MoGene_2_0_ST_test
-description: Test annotation; archive containing MoGene 2.0 ST CEL files.
+description: Positive test of annotation; archive containing MoGene 2.0 ST CEL files.
 params: 
     input.file: [ "<%gpunit.testData%>gpunit/AffySTExpressionFileCreator/v1/input/MoGene-2_0-st/E-MTAB-2337.raw.1.zip"
                   ]

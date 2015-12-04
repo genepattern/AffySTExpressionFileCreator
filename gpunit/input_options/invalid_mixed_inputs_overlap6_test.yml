@@ -1,6 +1,6 @@
 module: AffySTExpressionFileCreator
 name: invalid_mixed_inputs_overlap6_test
-description: Test loading (invalid); multiple sources with file overlap (naming collision)
+description: Negative test of loading (invalid); multiple sources with file overlap (naming collision)
 params: 
     input.file: [ "<%gpunit.testData%>gpunit/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st_err/archives/overlap5.zip",
                   "<%gpunit.testData%>gpunit/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st_err/archives/overlap2.tar.bz2"

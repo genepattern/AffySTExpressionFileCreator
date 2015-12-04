@@ -1,6 +1,6 @@
 module: AffySTExpressionFileCreator
 name: load_deep_nested_tar_bz2_test
-description: Test loading; single tar.bz2 archive file containing a deep, nested directory structure
+description: Positive test of loading; single tar.bz2 archive file containing a deep, nested directory structure
 params: 
     input.file: [ "<%gpunit.testData%>gpunit/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/deep_nested_archive1.tar.bz2" ]
     normalize: 'yes'

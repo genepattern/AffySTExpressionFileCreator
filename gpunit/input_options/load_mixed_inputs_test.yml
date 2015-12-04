@@ -1,6 +1,6 @@
 module: AffySTExpressionFileCreator
 name: load_mixed_inputs_test
-description: Test loading; multiple types of input files at the same time
+description: Positive test of loading; multiple types of input files at the same time
 params: 
     input.file: [ "<%gpunit.testData%>gpunit/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/flat1.tar.gz",
                   "<%gpunit.testData%>gpunit/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/flat2.zip",

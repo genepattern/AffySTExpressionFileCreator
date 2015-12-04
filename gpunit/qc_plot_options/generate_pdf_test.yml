@@ -1,6 +1,6 @@
 module: AffySTExpressionFileCreator
 name: generate_pdf_test
-description: Test QC plots; generate PDFs
+description: Positive test of QC plots; generate PDFs
 params: 
     input.file: [ "<%gpunit.testData%>gpunit/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/deep_nested_archive1.tar.bz2" ]
     normalize: 'yes'

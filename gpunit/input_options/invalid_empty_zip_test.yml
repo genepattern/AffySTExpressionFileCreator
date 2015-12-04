@@ -1,6 +1,6 @@
 module: AffySTExpressionFileCreator
 name: invalid_empty_zip_test
-description: Test loading (invalid); empty zip file
+description: Negative test of loading (invalid); empty zip file
 params: 
     input.file: [ "<%gpunit.testData%>gpunit/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st_err/archives/empty.zip"
                   ]

@@ -1,6 +1,6 @@
 module: AffySTExpressionFileCreator
 name: bg_correct_off_test
-description: Test misc params; no background correction
+description: Positive test of misc params; no background correction
 params: 
     input.file: [ "<%gpunit.testData%>gpunit/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/deep_nested_archive1.tar.bz2" ]
     normalize: 'yes'

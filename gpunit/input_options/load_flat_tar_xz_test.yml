@@ -1,6 +1,6 @@
 module: AffySTExpressionFileCreator
 name: load_flat_tar_xz_test
-description: Test loading; single tar.xz archive file containing a flat directory structure
+description: Positive test of loading; single tar.xz archive file containing a flat directory structure
 params: 
     input.file: [ "<%gpunit.testData%>gpunit/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/flat3.tar.xz" ]
     normalize: 'yes'
