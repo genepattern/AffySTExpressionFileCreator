@@ -1,3 +1,4 @@
+#module: urn:lsid:broad.mit.edu:cancer.software.genepattern.module.analysis:00346:1
 module: AffySTExpressionFileCreator
 name: norm_off_test
 description: Positive test of misc params; no normalization 

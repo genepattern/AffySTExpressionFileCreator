@@ -1,3 +1,4 @@
+#module: urn:lsid:broad.mit.edu:cancer.software.genepattern.module.analysis:00346:1
 module: AffySTExpressionFileCreator
 name: load_mixed_inputs_test
 description: Positive test of loading; multiple types of input files at the same time

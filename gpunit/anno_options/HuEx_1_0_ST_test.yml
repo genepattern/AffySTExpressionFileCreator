@@ -1,3 +1,4 @@
+#module: urn:lsid:broad.mit.edu:cancer.software.genepattern.module.analysis:00346:1
 module: AffySTExpressionFileCreator
 name: HuEx_1_0_ST_test
 description: Positive test of annotation; archive containing HuEx 1.0 ST CEL files.  Note that the array name contains a '-v2' suffix which must be handled by the code.

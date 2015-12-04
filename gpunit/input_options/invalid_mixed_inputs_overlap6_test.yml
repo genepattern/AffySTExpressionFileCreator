@@ -1,3 +1,4 @@
+#module: urn:lsid:broad.mit.edu:cancer.software.genepattern.module.analysis:00346:1
 module: AffySTExpressionFileCreator
 name: invalid_mixed_inputs_overlap6_test
 description: Negative test of loading (invalid); multiple sources with file overlap (naming collision)

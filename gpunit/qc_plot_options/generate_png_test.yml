@@ -1,3 +1,4 @@
+#module: urn:lsid:broad.mit.edu:cancer.software.genepattern.module.analysis:00346:1
 module: AffySTExpressionFileCreator
 name: generate_png_test
 description: Positive test of QC plots; generate PNGs
