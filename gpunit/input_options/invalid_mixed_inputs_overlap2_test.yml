@@ -17,4 +17,4 @@ assertions:
 #    files:
 #        "stderr.txt": 
 #            diffCmd: ../diffIgnoreGpTraces.sh
-#            diff: "<%gpunit.resultData%>AffySTExpressionFileCreator/v1/output/input_options/invalid_mixed_inputs_overlap2_test/stderr.txt"
+#            diff: "<%gpunit.resultData%>gpunit/AffySTExpressionFileCreator/v1/output/input_options/invalid_mixed_inputs_overlap2_test/stderr.txt"
