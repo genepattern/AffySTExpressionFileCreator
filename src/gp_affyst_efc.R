@@ -399,7 +399,7 @@ GP.setup.input.files <- function(input.file, destdir) {
    zips<-grep("*.zip$", ignore.case=TRUE, file.list, value=TRUE)
 
    # Copy the cels into place.  GZ files are handled natively by read.celfiles.
-   if (NROW(cels) > 1) {
+   if (NROW(cels) > 0) {
       for (i in 1:NROW(cels)) {
          tmpDirCount <<- tmpDirCount+1
          to <- file.path(destdir, paste0("in",tmpDirCount))
