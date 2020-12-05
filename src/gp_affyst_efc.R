@@ -116,11 +116,11 @@ GP.affyst.efc <- function(files.to.process, normalize, background.correct, qc.pl
          # For other organisms, skip annotations entirely
          print(paste0("Sorry, annotation information is not available for arrays of type ", arrayTypeName, " at this time."))
          annotate.probes <- "no"
-         annotations <- "NULL"
+         annotations <- NULL
       }
    }
    else {
-      annotations <- "NULL"
+      annotations <- NULL
    }
 
    dataset <- list(row.descriptions=annotations, data=expr.data)
