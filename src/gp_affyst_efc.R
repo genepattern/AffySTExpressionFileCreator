@@ -87,9 +87,9 @@ GP.affyst.efc <- function(files.to.process, normalize, background.correct, qc.pl
 } else if (class(cel.batch) == "GeneFeatureSet" ) {
 ## S4 method for signature 'GeneFeatureSet'
    coreTranscript.summary <- rma(cel.batch, background=background.correct, normalize=normalize, target="core")
-} else if (class(cel.batch) == "SnpCnvFeatureSet" ) {
+#} else if (class(cel.batch) == "SnpCnvFeatureSet" ) {
 ## S4 method for signature 'SnpCnvFeatureSet'
-   coreTranscript.summary <- rma(cel.batch, background=background.correct, normalize=normalize)
+#   coreTranscript.summary <- rma(cel.batch, background=background.correct, normalize=normalize)
 } else {
  exit(paste0("cel array class of \"", class(cel.batch),"\" isn't a valid type for this workflow."))
 }
@@ -106,8 +106,11 @@ GP.affyst.efc <- function(files.to.process, normalize, background.correct, qc.pl
          transcriptClusterArrayTypeName <- gsub("-v[12]$", "", arrayTypeName)
          # ...then remove dash and underscore chars and force to lowercase as expected in these names.
          transcriptClusterArrayTypeName <- tolower(gsub("[-_]", "", transcriptClusterArrayTypeName))
- 
-         transcriptClusterDbName <- paste0(transcriptClusterArrayTypeName, "transcriptcluster")
+         if (class(cel.batch) == "ExpressionFeatureSet" ) {
+         transcriptClusterDbName <- paste0(transcriptClusterArrayTypeName, "probeset")
+         } else {
+           transcriptClusterDbName <- paste0(transcriptClusterArrayTypeName, "transcriptcluster")
+           }
          transcriptClusterDb.annPkgName <- paste0(transcriptClusterDbName, ".db")
          loadAnnotationPackage(transcriptClusterDb.annPkgName)
          print(paste0("Attempting to annotate genes using package: ",transcriptClusterDb.annPkgName))
@@ -185,7 +188,7 @@ haveSTArrayType <- function(arrayTypeName) {
 
 haveDetailedAnnotations <- function(arrayTypeName) {
    # Bioconductor only has detailed annotation information for Human, Mouse, and Rat.
-   return(grepl("huex|hugene|moex|mogene|raex|ragene", arrayTypeName, ignore.case=TRUE))
+   return(grepl("huex|hugene|moex|mogene|raex|ragene|clariom_d_human", arrayTypeName, ignore.case=TRUE))
 }
 
 rearrange.files <- function(file.list, clm) {
