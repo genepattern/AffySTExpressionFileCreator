@@ -36,10 +36,10 @@ GP.affyst.efc <- function(files.to.process, normalize, background.correct, qc.pl
    arrayTypeName <- arrayTypeNames[1]
 
    # Make sure that this is an ST array
-   if (!haveSTArrayType(arrayTypeName)) {
-      stop(paste0("Array type ", arrayTypeName, 
-          " does not seem to be an ST array.  You may want to check whether it is supported by ExpressionFileCreator instead."))
-   }
+#   if (!haveSTArrayType(arrayTypeName)) {
+#      stop(paste0("Array type ", arrayTypeName, 
+#          " does not seem to be an ST array.  You may want to check whether it is supported by ExpressionFileCreator instead."))
+#   }
    
    # Make sure all files match the first.  The read.celfiles() call will also do this, but the error message
    # it uses is not very clear as we need to set verbose=FALSE on that call.  The following replicates that
@@ -73,8 +73,26 @@ GP.affyst.efc <- function(files.to.process, normalize, background.correct, qc.pl
    # Rename samples according to CLM file, if present, or remove the '.CEL' extensions from the file names if not.
    column.names <- rename.samples(sampleNames(cel.batch), clm)
 
-   # The following line is the key call to extract and preprocess the expression values from the CELS
-   coreTranscript.summary <- rma(cel.batch, target="core", background=background.correct, normalize=normalize)
+   # The following lines are the key call to extract and preprocess the expression values from the CELS
+
+   if (class(cel.batch) == "ExonFeatureSet" ) {
+## S4 method for signature 'ExonFeatureSet'
+   coreTranscript.summary <- rma(cel.batch, background=background.correct, normalize=normalize, target="core")
+} else if (class(cel.batch) == "HTAFeatureSet" ) {
+## S4 method for signature 'HTAFeatureSet'
+   coreTranscript.summary <- rma(cel.batch, background=background.correct, normalize=normalize, target="core")
+} else if (class(cel.batch) == "ExpressionFeatureSet" ) {
+## S4 method for signature 'ExpressionFeatureSet'
+   coreTranscript.summary <- rma(cel.batch, background=background.correct, normalize=normalize)
+} else if (class(cel.batch) == "GeneFeatureSet" ) {
+## S4 method for signature 'GeneFeatureSet'
+   coreTranscript.summary <- rma(cel.batch, background=background.correct, normalize=normalize, target="core")
+} else if (class(cel.batch) == "SnpCnvFeatureSet" ) {
+## S4 method for signature 'SnpCnvFeatureSet'
+   coreTranscript.summary <- rma(cel.batch, background=background.correct, normalize=normalize)
+} else {
+ exit(paste0("cel array class of \"", class(cel.batch),"\" isn't a valid type for this workflow."))
+}
 
    expr.data <- exprs(coreTranscript.summary)
    
