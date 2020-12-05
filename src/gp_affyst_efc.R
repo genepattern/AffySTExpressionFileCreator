@@ -96,7 +96,7 @@ GP.affyst.efc <- function(files.to.process, normalize, background.correct, qc.pl
 
    expr.data <- exprs(coreTranscript.summary)
    
-   if (annotate.probes) {
+   if (annotate.probes == "yes") {
       # Check arrayTypeName to see if we have Human, Mouse, Rat (using hard-coded huex, hugene, ...)
       # These arrays have *much* better/cleaner annotation info available in secondary "transcriptcluster" packages;
       # it's much better to work with those than the corresponding pdInfoFile where they are available.
@@ -115,12 +115,12 @@ GP.affyst.efc <- function(files.to.process, normalize, background.correct, qc.pl
       else {
          # For other organisms, skip annotations entirely
          print(paste0("Sorry, annotation information is not available for arrays of type ", arrayTypeName, " at this time."))
-         annotate.probes <- FALSE
-         annotations <- NULL
+         annotate.probes <- "no"
+         annotations <- "NULL"
       }
    }
    else {
-      annotations <- NULL
+      annotations <- "NULL"
    }
 
    dataset <- list(row.descriptions=annotations, data=expr.data)
