@@ -45,7 +45,7 @@ GP.affyst.efc <- function(files.to.process, normalize, background.correct, qc.pl
    # it uses is not very clear as we need to set verbose=FALSE on that call.  The following replicates that
    # verbose=TRUE error message (based on 'checkChipTypes' in oligo's utils-general.R).
    if (length(unique(arrayTypeNames)) != 1) stop("All the CEL files must be of the same type.")
-   print(paste0("Processing files of array type ", arrayTypeName))
+   print(paste0("Processing files of array type: ", arrayTypeName))
    
    # The read.celfiles call will auto-load the following annotation pkg, but we preemptively & explicitly do it
    # here in order to control output of messages to stderr.
@@ -96,7 +96,7 @@ GP.affyst.efc <- function(files.to.process, normalize, background.correct, qc.pl
 
    expr.data <- exprs(coreTranscript.summary)
    
-   if (annotate.probes == "yes") {
+   if (annotate.probes) {
       # Check arrayTypeName to see if we have Human, Mouse, Rat (using hard-coded huex, hugene, ...)
       # These arrays have *much* better/cleaner annotation info available in secondary "transcriptcluster" packages;
       # it's much better to work with those than the corresponding pdInfoFile where they are available.
@@ -110,6 +110,7 @@ GP.affyst.efc <- function(files.to.process, normalize, background.correct, qc.pl
          transcriptClusterDbName <- paste0(transcriptClusterArrayTypeName, "transcriptcluster")
          transcriptClusterDb.annPkgName <- paste0(transcriptClusterDbName, ".db")
          loadAnnotationPackage(transcriptClusterDb.annPkgName)
+         print(paste0("Attempting to annotate genes using package: ",transcriptClusterDb.annPkgName))
          annotations <- build.annotations(coreTranscript.summary, transcriptClusterDbName)
       }
       else {
@@ -184,7 +185,7 @@ haveSTArrayType <- function(arrayTypeName) {
 
 haveDetailedAnnotations <- function(arrayTypeName) {
    # Bioconductor only has detailed annotation information for Human, Mouse, and Rat.
-   return(grepl("huex|hugene|moex|mogene|raex|ragene", arrayTypeName, ignore.case=TRUE))
+   return(grepl("huex|hugene|moex|mogene|raex|ragene|clariom", arrayTypeName, ignore.case=TRUE))
 }
 
 rearrange.files <- function(file.list, clm) {
