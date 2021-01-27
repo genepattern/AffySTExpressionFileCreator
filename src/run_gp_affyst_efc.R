@@ -20,6 +20,7 @@ suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.package
 suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.packages("foreach", repos = "https://cloud.r-project.org/", quiet = TRUE))))
 suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.packages("bit", repos = "https://cloud.r-project.org/", quiet = TRUE))))
 suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.packages("zip", repos = "https://cloud.r-project.org/", quiet = TRUE))))
+suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.packages("BiocManager", repos = "https://cloud.r-project.org/", quiet = TRUE))))
 
 library("getopt")
 library("optparse")
@@ -92,7 +93,7 @@ check.output.format(opts$qc.plot.format)
 destdir <- "cel_files"
 tryCatch(
    {
-      files.to.process <- GP.setup.input.files(opts$input.file, destdir)
+      files.to.process <- GP.setup.input.files("/Users/acastanza/Downloads/Mouse ST 2.0 array/input_files.txt", "/Users/acastanza/Downloads/Mouse ST 2.0 array/output")
       GP.affyst.efc(files.to.process, normalize, background.correct, opts$qc.plot.format, 
                     opts$clm.file, annotate.rows, opts$output.file.base)
    },
