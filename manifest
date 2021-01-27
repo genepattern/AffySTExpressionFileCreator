@@ -1,19 +1,20 @@
-#Wed Aug 13 09:06:10 EDT 2014
+#Wed Dec 12 09:06:10 EDT 2020
 name=AffySTExpressionFileCreator
-commandLine=<R3.1_Rscript> --no-save --quiet --slave --no-restore <libdir>run_gp_affyst_efc.R <libdir> \
+commandLine=<Rscript> <libdir>run_gp_affyst_efc.R <libdir> \
     --input.file\=<input.file> --normalize=<normalize> --background.correct=<background.correct> \
     --qc.plot.format=<qc.plot.format> <clm.file> --annotate.rows=<annotate.rows> --output.file.base=<output.file.base>
 license=
 taskDoc=doc.html
 fileFormat=gct;pdf;svg;png
+job.docker.image=bioconductor/bioconductor_docker\:RELEASE_3_12
 taskType=Preprocess & Utilities
 os=any
 quality=preproduction
 privacy=public
-description=[Beta Release** Contact gp-help with any issues. Check stdout.txt and stderr.txt for errors] Creates a GCT file from a set of CEL files from Affymetrix ST arrays.
-version=Updated to make use of the R package installer.
+description=Creates a GCT file from a set of CEL files from Affymetrix ST arrays.
+version=Fixes a bug causing lone CEL files as input to be skipped.
 minGenePatternVersion=
-language=R3.1.3
+language=any
 author=David Eby, Broad Institute
 
 p1_default_value=
@@ -84,5 +85,5 @@ p7_value=
 requiredPatchLSIDs=
 requiredPatchURLs=
 
-LSID=urn\:lsid\:broad.mit.edu\:cancer.software.genepattern.module.analysis\:00346\:999999999
-publicationDate=11/13/2013 15\:59 
+LSID=urn\:lsid\:broad.mit.edu\:cancer.software.genepattern.module.analysis\:00346\:0.2
+publicationDate=12/04/2020 15\:59 
