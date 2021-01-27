@@ -20,6 +20,7 @@ suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.package
 suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.packages("foreach", repos = "https://cloud.r-project.org/", quiet = TRUE))))
 suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.packages("bit", repos = "https://cloud.r-project.org/", quiet = TRUE))))
 suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.packages("zip", repos = "https://cloud.r-project.org/", quiet = TRUE))))
+suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.packages("BiocManager", repos = "https://cloud.r-project.org/", quiet = TRUE))))
 
 library("getopt")
 library("optparse")
