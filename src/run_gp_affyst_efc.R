@@ -93,7 +93,7 @@ check.output.format(opts$qc.plot.format)
 destdir <- "cel_files"
 tryCatch(
    {
-      files.to.process <- GP.setup.input.files("/Users/acastanza/Downloads/Mouse ST 2.0 array/input_files.txt", "/Users/acastanza/Downloads/Mouse ST 2.0 array/output")
+      files.to.process <- GP.setup.input.files(opts$input.file, destdir)
       GP.affyst.efc(files.to.process, normalize, background.correct, opts$qc.plot.format, 
                     opts$clm.file, annotate.rows, opts$output.file.base)
    },
