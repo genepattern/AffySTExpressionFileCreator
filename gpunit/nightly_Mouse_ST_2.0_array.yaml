@@ -7,6 +7,7 @@ params:
     normalize: 'yes'
     background.correct: 'yes'
     qc.plot.format: 'skip (do not produce QC plots)'
+    # CLM is causing this to fail...
     clm.file: 'input/Mouse_2.0_MYBQKI.clm'
     annotate.probes: 'no'
     output.file.base: 'Mouse_ST_2.0_array.expression.gct'
