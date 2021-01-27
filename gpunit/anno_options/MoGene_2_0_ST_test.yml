@@ -1,4 +1,4 @@
-#module: urn:lsid:broad.mit.edu:cancer.software.genepattern.module.analysis:00346:1
+#module: urn:lsid:broad.mit.edu:cancer.software.genepattern.module.analysis:00346
 module: AffySTExpressionFileCreator
 name: MoGene_2_0_ST_test
 description: Positive test of annotation; archive containing MoGene 2.0 ST CEL files.
