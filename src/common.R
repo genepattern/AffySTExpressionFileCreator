@@ -523,7 +523,7 @@ read.clm <- function(input.file.name) {
 	f <- NULL
 	if(columns > 2) {
 		class.names <- s[, 3]
-		f <- factor(class.names)
+		f <- factor(class.names, levels=unique(class.names))
 	}
 	list("factor"=f, "scan.names"=scan.names , "sample.names"=sample.names)
 }
