@@ -1,9 +1,9 @@
-#
-# Test QC plots: generate PNGs
-#
+#module: urn:lsid:broad.mit.edu:cancer.software.genepattern.module.analysis:00346:1
 module: AffySTExpressionFileCreator
+name: generate_png_test
+description: Positive test of QC plots; generate PNGs
 params: 
-    input.file: [ "<%gpunit.testData%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/deep_nested_archive1.tar.bz2" ]
+    input.file: [ "<%gpunit.testData%>gpunit/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/deep_nested_archive1.tar.bz2" ]
     normalize: 'yes'
     background.correct: 'yes'
     qc.plot.format: 'png'
@@ -11,7 +11,7 @@ params:
     annotate.probes: 'no'
     output.file.base: 'result'
 assertions:
-   jobStatus: success
+    jobStatus: success
 #    files:
 #        "result.gct": !!null
 #        "stdout.txt": !!null

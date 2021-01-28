@@ -1,10 +1,10 @@
-#
-# Test loading (invalid): multiple sources with file overlap (naming collision)
-#
+#module: urn:lsid:broad.mit.edu:cancer.software.genepattern.module.analysis:00346:1
 module: AffySTExpressionFileCreator
+name: invalid_mixed_inputs_overlap1_test
+description: Negative test of loading (invalid); multiple sources with file overlap (naming collision)
 params: 
-    input.file: [ "<%gpunit.testData%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st_err/archives/overlap1.tar.gz",
-                  "<%gpunit.testData%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st_err/overlap_uncompressed_1"
+    input.file: [ "<%gpunit.testData%>gpunit/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st_err/archives/overlap1.tar.gz",
+                  "<%gpunit.testData%>gpunit/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st_err/overlap_uncompressed_1/"
                   ]
     normalize: 'yes'
     background.correct: 'yes'
@@ -13,8 +13,8 @@ params:
     annotate.probes: 'no'
     output.file.base: 'result'
 assertions:
-    jobStatus: fail
+     jobStatus: fail
 #    files:
 #        "stderr.txt": 
 #            diffCmd: ../diffIgnoreGpTraces.sh
-#            diff: "<%gpunit.resultData%>AffySTExpressionFileCreator/v1/output/input_options/invalid_mixed_inputs_overlap1_test/stderr.txt"
+#            diff: "<%gpunit.resultData%>gpunit/AffySTExpressionFileCreator/v1/output/input_options/invalid_mixed_inputs_overlap1_test/stderr.txt"
