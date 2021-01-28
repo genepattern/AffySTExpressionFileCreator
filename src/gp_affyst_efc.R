@@ -108,9 +108,9 @@ GP.affyst.efc <- function(files.to.process, normalize, background.correct, qc.pl
          transcriptClusterArrayTypeName <- tolower(gsub("[-_]", "", transcriptClusterArrayTypeName))
          if (class(cel.batch) == "ExpressionFeatureSet" ) {
          transcriptClusterDbName <- paste0(transcriptClusterArrayTypeName, "probeset")
-         } else {
-           transcriptClusterDbName <- paste0(transcriptClusterArrayTypeName, "transcriptcluster")
-           }
+            } else {
+                   transcriptClusterDbName <- paste0(transcriptClusterArrayTypeName, "transcriptcluster")
+                   }
          transcriptClusterDb.annPkgName <- paste0(transcriptClusterDbName, ".db")
          loadAnnotationPackage(transcriptClusterDb.annPkgName)
          print(paste0("Attempting to annotate genes using package: ",transcriptClusterDb.annPkgName))
@@ -188,7 +188,7 @@ haveSTArrayType <- function(arrayTypeName) {
 
 haveDetailedAnnotations <- function(arrayTypeName) {
    # Bioconductor only has detailed annotation information for Human, Mouse, and Rat.
-   return(grepl("huex|hugene|moex|mogene|raex|ragene|clariom_d_human", arrayTypeName, ignore.case=TRUE))
+   return(grepl("huex|hugene|moex|mogene|raex|ragene|clariom", arrayTypeName, ignore.case=TRUE))
 }
 
 rearrange.files <- function(file.list, clm) {
