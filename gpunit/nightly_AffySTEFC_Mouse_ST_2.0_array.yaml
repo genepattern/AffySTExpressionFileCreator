@@ -18,4 +18,3 @@ assertions:
             diff: "output/Mouse_ST_2.0_array.expression.gct"
         Mouse_ST_2.0_array.expression.gct.cls:
             diff: "output/Mouse_ST_2.0_array.expression.gct.cls"
-        
