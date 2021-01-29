@@ -9,6 +9,7 @@ cpuType=any
 description=Creates a GCT file from a set of CEL files from Affymetrix ST arrays.
 fileFormat=gct;pdf;png;svg
 job.docker.image=jupyter/datascience-notebook\:r-4.0.3
+src.repo=https://github.com/genepattern/HTSeq.Count/releases/tag/v1.2
 language=any
 minGenePatternVersion=
 name=AffySTExpressionFileCreator
