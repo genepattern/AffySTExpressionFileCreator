@@ -188,7 +188,7 @@ haveSTArrayType <- function(arrayTypeName) {
 
 haveDetailedAnnotations <- function(arrayTypeName) {
    # Bioconductor only has detailed annotation information for Human, Mouse, and Rat.
-   return(grepl("huex|hugene|moex|mogene|raex|ragene|clariom", arrayTypeName, ignore.case=TRUE))
+   return(grepl("huex|hugene|moex|mogene|raex|ragene|clariom_d_human", arrayTypeName, ignore.case=TRUE)) #Need probeset.db not transcriptcluster.db for Clariom Arrays
 }
 
 rearrange.files <- function(file.list, clm) {
