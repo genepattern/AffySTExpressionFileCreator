@@ -113,4 +113,4 @@ requiredPatchURLs=
 taskDoc=doc.html
 taskType=preprocess & utilities
 userid=bhill@broadinstitute.org
-version=Updated to use R 4.0.3, accept Clariom S Assay, and to annotate rows by default.
+version=Updated to use R 4.0.3 and to accept Clariom arrays.
