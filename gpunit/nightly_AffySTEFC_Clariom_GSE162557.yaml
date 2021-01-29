@@ -16,3 +16,5 @@ assertions:
         Clariom_GSE162557.expression.gct:
             diffCmd: ../diffWithTolerance.sh
             diff: "output/GSE162557_Clariom.expression.gct"
+        GSE162557_Clariom.expression.gct.cls:
+            diff: "output/GSE162557_Clariom.expression.gct.cls"
