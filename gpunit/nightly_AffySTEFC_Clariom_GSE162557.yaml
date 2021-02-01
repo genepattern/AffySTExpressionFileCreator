@@ -1,0 +1,20 @@
+#module: urn:lsid:broad.mit.edu:cancer.software.genepattern.module.analysis:00346
+module: AffySTExpressionFileCreator
+name: nightly_AffySTEFC_Clariom_GSE162557
+description: Positive test of update to handle Clariom data; archive containing CEL files from GSE162557.
+params:
+    input.file: 'input/GSE162557_RAW.tar'
+    normalize: 'yes'
+    background.correct: 'yes'
+    qc.plot.format: 'skip (do not produce QC plots)'
+    clm.file: 'input/Clariom_GSE162557.clm'
+    annotate.rows: 'yes'
+    output.file.base: 'Clariom_GSE162557.expression.gct'
+assertions:
+    jobStatus: success
+    files:
+        Clariom_GSE162557.expression.gct:
+            #diffCmd: ../diffWithTolerance.sh
+            diff: "output/GSE162557_Clariom.expression.gct"
+        Clariom_GSE162557.expression.gct.cls:
+            diff: "output/GSE162557_Clariom.expression.gct.cls"

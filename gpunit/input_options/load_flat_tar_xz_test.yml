@@ -1,9 +1,9 @@
-#
-# Test loading: single tar.xz archive file containing a flat directory structure
-#
+#module: urn:lsid:broad.mit.edu:cancer.software.genepattern.module.analysis:00346:1
 module: AffySTExpressionFileCreator
+name: load_flat_tar_xz_test
+description: Positive test of loading; single tar.xz archive file containing a flat directory structure
 params: 
-    input.file: [ "<%gpunit.testData%>AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/flat3.tar.xz" ]
+    input.file: [ "<%gpunit.testData%>gpunit/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/flat3.tar.xz" ]
     normalize: 'yes'
     background.correct: 'yes'
     qc.plot.format: 'skip'
@@ -11,8 +11,8 @@ params:
     annotate.probes: 'no'
     output.file.base: 'result'
 assertions:
-   jobStatus: success
+    jobStatus: success
 #    files:
 #        "result.gct": 
 #            diffCmd: ../diffWithTolerance.sh
-#            diff: "<%gpunit.resultData%>AffySTExpressionFileCreator/v1/output/input_options/load_flat_tar_xz_test/result.gct"
+#            diff: "<%gpunit.resultData%>gpunit/AffySTExpressionFileCreator/v1/output/input_options/load_flat_tar_xz_test/result.gct"

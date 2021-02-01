@@ -523,7 +523,7 @@ read.clm <- function(input.file.name) {
 	f <- NULL
 	if(columns > 2) {
 		class.names <- s[, 3]
-		f <- factor(class.names)
+		f <- factor(class.names, levels=unique(class.names))
 	}
 	list("factor"=f, "scan.names"=scan.names , "sample.names"=sample.names)
 }
@@ -690,24 +690,13 @@ init.bioc.loader <- function() {
    # No need to install the loader via the remote biocLite script if it's already present.
    # Note that this should *always* be the case as we needed it in order to install the
    # module's R package dependencies.
-   if ("BiocInstaller" %in% installed.packages()[,"Package"]) { return }
-
-   tryCatch({
+   if (!("BiocManager" %in% installed.packages()[,"Package"])) {
          print(paste0("About to initialize the Bioconductor loader"))
-         suppressMessages(suppressWarnings(
-            source("http://bioconductor.org/biocLite.R")
+         suppressMessages(suppressWarnings(install.packages("BiocManager", repos = "https://cloud.r-project.org/")
          ))
+         suppressMessages(suppressWarnings(library("BiocManager")))
          print("Initialization complete")
-      },
-      warning=function(w) {
-          print(paste0("Warnings(s): ", conditionMessage(w)))
-      },
-      error= function(err){
-          # Consider any error to be fatal
-          print(paste0("Error(s): ", conditionMessage(err)))
-          stop("One or more errors occurred while initializing the Bioconductor loader.")
-      })
-   return(TRUE)
+   }
 }
 
 dyn.loadBioconductorPackage <- function(pkg.name) {
@@ -717,8 +706,7 @@ dyn.loadBioconductorPackage <- function(pkg.name) {
    if (!(pkg.name %in% installed.packages()[,"Package"])) {
       init.bioc.loader()
       suppressMessages(suppressWarnings(
-         biocLite(pkg.name, quiet=TRUE, suppressUpdates=TRUE, suppressAutoUpdate=TRUE)
-      ))
+         BiocManager::install(pkg.name, quiet=TRUE)
+        ))
    }
 }
-

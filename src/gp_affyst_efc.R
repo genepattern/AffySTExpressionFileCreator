@@ -36,16 +36,16 @@ GP.affyst.efc <- function(files.to.process, normalize, background.correct, qc.pl
    arrayTypeName <- arrayTypeNames[1]
 
    # Make sure that this is an ST array
-   if (!haveSTArrayType(arrayTypeName)) {
-      stop(paste0("Array type ", arrayTypeName, 
-          " does not seem to be an ST array.  You may want to check whether it is supported by ExpressionFileCreator instead."))
-   }
+#   if (!haveSTArrayType(arrayTypeName)) {
+#      stop(paste0("Array type ", arrayTypeName, 
+#          " does not seem to be an ST array.  You may want to check whether it is supported by ExpressionFileCreator instead."))
+#   }
    
    # Make sure all files match the first.  The read.celfiles() call will also do this, but the error message
    # it uses is not very clear as we need to set verbose=FALSE on that call.  The following replicates that
    # verbose=TRUE error message (based on 'checkChipTypes' in oligo's utils-general.R).
    if (length(unique(arrayTypeNames)) != 1) stop("All the CEL files must be of the same type.")
-   print(paste0("Processing files of array type ", arrayTypeName))
+   print(paste0("Processing files of array type: ", arrayTypeName))
    
    # The read.celfiles call will auto-load the following annotation pkg, but we preemptively & explicitly do it
    # here in order to control output of messages to stderr.
@@ -73,8 +73,26 @@ GP.affyst.efc <- function(files.to.process, normalize, background.correct, qc.pl
    # Rename samples according to CLM file, if present, or remove the '.CEL' extensions from the file names if not.
    column.names <- rename.samples(sampleNames(cel.batch), clm)
 
-   # The following line is the key call to extract and preprocess the expression values from the CELS
-   coreTranscript.summary <- rma(cel.batch, target="core", background=background.correct, normalize=normalize)
+   # The following lines are the key call to extract and preprocess the expression values from the CELS
+
+   if (class(cel.batch) == "ExonFeatureSet" ) {
+## S4 method for signature 'ExonFeatureSet'
+   coreTranscript.summary <- rma(cel.batch, background=background.correct, normalize=normalize, target="core")
+} else if (class(cel.batch) == "HTAFeatureSet" ) {
+## S4 method for signature 'HTAFeatureSet'
+   coreTranscript.summary <- rma(cel.batch, background=background.correct, normalize=normalize, target="core")
+} else if (class(cel.batch) == "ExpressionFeatureSet" ) {
+## S4 method for signature 'ExpressionFeatureSet'
+   coreTranscript.summary <- rma(cel.batch, background=background.correct, normalize=normalize)
+} else if (class(cel.batch) == "GeneFeatureSet" ) {
+## S4 method for signature 'GeneFeatureSet'
+   coreTranscript.summary <- rma(cel.batch, background=background.correct, normalize=normalize, target="core")
+#} else if (class(cel.batch) == "SnpCnvFeatureSet" ) {
+## S4 method for signature 'SnpCnvFeatureSet'
+#   coreTranscript.summary <- rma(cel.batch, background=background.correct, normalize=normalize)
+} else {
+ exit(paste0("cel array class of \"", class(cel.batch),"\" isn't a valid type for this workflow."))
+}
 
    expr.data <- exprs(coreTranscript.summary)
    
@@ -88,16 +106,20 @@ GP.affyst.efc <- function(files.to.process, normalize, background.correct, qc.pl
          transcriptClusterArrayTypeName <- gsub("-v[12]$", "", arrayTypeName)
          # ...then remove dash and underscore chars and force to lowercase as expected in these names.
          transcriptClusterArrayTypeName <- tolower(gsub("[-_]", "", transcriptClusterArrayTypeName))
- 
-         transcriptClusterDbName <- paste0(transcriptClusterArrayTypeName, "transcriptcluster")
+         if (class(cel.batch) == "ExpressionFeatureSet" ) {
+         transcriptClusterDbName <- paste0(transcriptClusterArrayTypeName, "probeset")
+            } else {
+                   transcriptClusterDbName <- paste0(transcriptClusterArrayTypeName, "transcriptcluster")
+                   }
          transcriptClusterDb.annPkgName <- paste0(transcriptClusterDbName, ".db")
          loadAnnotationPackage(transcriptClusterDb.annPkgName)
+         print(paste0("Attempting to annotate genes using package: ",transcriptClusterDb.annPkgName))
          annotations <- build.annotations(coreTranscript.summary, transcriptClusterDbName)
       }
       else {
          # For other organisms, skip annotations entirely
          print(paste0("Sorry, annotation information is not available for arrays of type ", arrayTypeName, " at this time."))
-         annotate.probes <- FALSE
+         annotate.probes <- "no"
          annotations <- NULL
       }
    }
@@ -166,7 +188,7 @@ haveSTArrayType <- function(arrayTypeName) {
 
 haveDetailedAnnotations <- function(arrayTypeName) {
    # Bioconductor only has detailed annotation information for Human, Mouse, and Rat.
-   return(grepl("huex|hugene|moex|mogene|raex|ragene", arrayTypeName, ignore.case=TRUE))
+   return(grepl("huex|hugene|moex|mogene|raex|ragene|clariom_d_human", arrayTypeName, ignore.case=TRUE)) #Need probeset.db not transcriptcluster.db for Clariom Arrays
 }
 
 rearrange.files <- function(file.list, clm) {
