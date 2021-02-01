@@ -8,7 +8,7 @@ params:
     background.correct: 'yes'
     qc.plot.format: 'skip (do not produce QC plots)'
     clm.file: 'input/Clariom_GSE162557.clm'
-    annotate.probes: 'no'
+    annotate.rows: 'yes'
     output.file.base: 'Clariom_GSE162557.expression.gct'
 assertions:
     jobStatus: success
@@ -16,5 +16,5 @@ assertions:
         Clariom_GSE162557.expression.gct:
             #diffCmd: ../diffWithTolerance.sh
             diff: "output/GSE162557_Clariom.expression.gct"
-        GSE162557_Clariom.expression.gct.cls:
+        Clariom_GSE162557.expression.gct.cls:
             diff: "output/GSE162557_Clariom.expression.gct.cls"

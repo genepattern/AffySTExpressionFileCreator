@@ -8,7 +8,7 @@ params:
     background.correct: 'yes'
     qc.plot.format: 'skip (do not produce QC plots)'
     clm.file: 'input/Mouse_2.0_MYBQKI.clm'
-    annotate.probes: 'no'
+    annotate.rows: 'no'
     output.file.base: 'Mouse_ST_2.0_array.expression.gct'
 assertions:
     jobStatus: success
