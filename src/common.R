@@ -586,51 +586,53 @@ function(gct, filename, check.file.extension=TRUE)
 	return(filename)
 }
 
-is.package.installed <- function(libdir, pkg) {
-	f <- paste(libdir, pkg, sep='')
-	return(file.exists(f) && file.info(f)[["isdir"]])
+#not sure this line is needed - doesn't seem to be used
+#is.package.installed <- function(libdir, pkg) {
+#	f <- paste(libdir, pkg, sep='')
+#	return(file.exists(f) && file.info(f)[["isdir"]])
 }
 
+#not sure this line is needed - doesn't seem to be used
+#install.package <- function(dir, windows, mac, other) {
+#	isWindows <- Sys.info()[["sysname"]]=="Windows"
+#	isMac <- Sys.info()[["sysname"]]=="Darwin"
+#	if(isWindows) {
+#		f <- paste(dir, windows, sep="")
+#		.install.windows(f)
+#	} else if(isMac) {
+#		f <- paste(dir, mac, sep="")
+#      .install.unix(f)
+#	} else { # install from source
+#		f <- paste(dir, other, sep="")
+#		.install.unix(f)
+#	}
+#}
 
-install.package <- function(dir, windows, mac, other) {
-	isWindows <- Sys.info()[["sysname"]]=="Windows"
-	isMac <- Sys.info()[["sysname"]]=="Darwin" 
-	if(isWindows) {
-		f <- paste(dir, windows, sep="")
-		.install.windows(f)
-	} else if(isMac) {
-		f <- paste(dir, mac, sep="")
-      .install.unix(f)
-	} else { # install from source
-		f <- paste(dir, other, sep="")
-		.install.unix(f)
-	}	
-}
+#definitely don't need this
+#.install.windows <- function(pkg) {
+#  if(!is.na(file.info(pkg)['size'])) {
+#      if(DEBUG) {
+#         info("Installing windows package ", pkg)
+#      }
+#      suppressMessages(install.packages(pkg, .libPaths()[1], repos=NULL))
+#   }
+#}
 
-.install.windows <- function(pkg) {
-  if(!is.na(file.info(pkg)['size'])) {
-      if(DEBUG) {
-         info("Installing windows package ", pkg)
-      }
-      suppressMessages(install.packages(pkg, .libPaths()[1], repos=NULL))
-   }
-}
-
-.install.unix <- function(pkg) {
-   if(!is.na(file.info(pkg)['size'])) {
-      if(DEBUG) {
-         info("Installing package ", pkg)
-      }
-       lib <- .libPaths()[1]
-      # cmd <- paste(file.path(R.home(), "bin", "R"), "CMD INSTALL --with-package-versions")
-       cmd <- paste(file.path(R.home(), "bin", "R"), "CMD INSTALL")
-       cmd <- paste(cmd, "-l", lib)
-       cmd <- paste(cmd, " '", pkg, "'", sep = "")
-       status <- suppressMessages(system(cmd))
-       if (status != 0) 
-         cat("\tpackage installation failed\n")
-    }
-}
+#.install.unix <- function(pkg) {
+#   if(!is.na(file.info(pkg)['size'])) {
+#      if(DEBUG) {
+#         info("Installing package ", pkg)
+#      }
+#       lib <- .libPaths()[1]
+#      # cmd <- paste(file.path(R.home(), "bin", "R"), "CMD INSTALL --with-package-versions")
+#       cmd <- paste(file.path(R.home(), "bin", "R"), "CMD INSTALL")
+#       cmd <- paste(cmd, "-l", lib)
+#       cmd <- paste(cmd, " '", pkg, "'", sep = "")
+#       status <- suppressMessages(system(cmd))
+#       if (status != 0)
+#         cat("\tpackage installation failed\n")
+#    }
+#}
 
 trim <- function(s) {
 	sub(' +$', '', s) 
@@ -658,14 +660,15 @@ exit <- function(...) {
 	stop(s, call. = FALSE)
 }
 
-isWindows <- function() {
-	Sys.info()[["sysname"]]=="Windows"
-}
+#shouldn't need this
+#isWindows <- function() {
+#	Sys.info()[["sysname"]]=="Windows"
+#}
 
-
-isMac <- function() {
-	Sys.info()[["sysname"]]=="Darwin" 
-}
+#shouldn't need this
+#isMac <- function() {
+#	Sys.info()[["sysname"]]=="Darwin"
+#}
 
 get.arg <- function(key, args, default.value='') {
 	if(is.null(args[key])) {
