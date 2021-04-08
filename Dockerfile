@@ -1,7 +1,7 @@
 FROM r-base:4.0.3
 
 USER root
-RUN apt-get update && apt-get upgrade
+RUN apt-get update && apt-get upgrade -y
 RUN apt install libcurl4-openssl-dev
 # RUN apt install libopenblas-dev
 
