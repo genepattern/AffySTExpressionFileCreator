@@ -6,8 +6,8 @@ RUN apt install libcurl4-openssl-dev
 # RUN apt install libopenblas-dev
 
 RUN mkdir /AffySTEFC
-RUN chown -R $NB_USER /AffySTEFC
-USER $NB_USER
+RUN chown docker /AffySTEFC
+USER docker
 
 COPY src/*.R /AffySTEFC/
 
