@@ -1,9 +1,9 @@
 FROM r-base:4.0.3
 
 USER root
-RUN apt-get update \
-    && apt-get upgrade -y \
-    && apt install libcurl4-openssl-dev -y \
+RUN apt-get update && apt-get upgrade -y \
+    && apt install -y \
+    libcurl4-openssl-dev \
     #&& apt install libopenblas-dev
 
 RUN mkdir /AffySTEFC \
