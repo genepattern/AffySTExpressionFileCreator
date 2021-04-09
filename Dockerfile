@@ -9,12 +9,15 @@ RUN apt-get update && apt-get upgrade -y \
 
 RUN mkdir /AffySTEFC \
     && chown docker /AffySTEFC
+
+RUN git clone https://github.com/bmbolstad/preprocessCore.git \
+    && chown docker /preprocessCore
+
 USER docker
 
 COPY src/*.R /AffySTEFC/
 
 RUN Rscript /AffySTEFC/installPkgs.R /AffySTEFC/
 
-RUN git clone https://github.com/bmbolstad/preprocessCore.git \
-    && cd preprocessCore/ \
+RUN cd preprocessCore/ \
     && R CMD INSTALL --configure-args="--disable-threading"  .
