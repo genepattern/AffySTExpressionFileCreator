@@ -12,15 +12,6 @@ suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.package
 suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.packages("zip", repos = "https://cloud.r-project.org/", quiet = TRUE))))
 suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.packages("BiocManager", repos = "https://cloud.r-project.org/", quiet = TRUE))))
 
-# library("getopt")
-# library("optparse")
-# library("zip")
-
-# Don't load the 'ff' package even though it is specified in the r.package.info file.  It's needed
-# to install the oligoClasses pkg but if it's loaded at runtime then it changes the behavior of
-# the module, with failures as a result.
-#suppressMessages(suppressWarnings(library(ff)))
-
 suppressPackageStartupMessages(suppressMessages(suppressWarnings(BiocManager::install('BiocGenerics', quiet = TRUE))))
 suppressPackageStartupMessages(suppressMessages(suppressWarnings(BiocManager::install('IRanges', quiet = TRUE))))
 suppressPackageStartupMessages(suppressMessages(suppressWarnings(BiocManager::install('XVector', quiet = TRUE))))
@@ -34,17 +25,3 @@ suppressPackageStartupMessages(suppressMessages(suppressWarnings(BiocManager::in
 suppressPackageStartupMessages(suppressMessages(suppressWarnings(BiocManager::install('preprocessCore', quiet = TRUE))))
 suppressPackageStartupMessages(suppressMessages(suppressWarnings(BiocManager::install('oligoClasses', quiet = TRUE))))
 suppressPackageStartupMessages(suppressMessages(suppressWarnings(BiocManager::install('oligo', quiet = TRUE))))
-
-# library("BiocGenerics")
-# library("IRanges")
-# library("XVector")
-# library("GenomeInfoDb")
-# library("GenomicRanges")
-# library("Biobase")
-# library("zlibbioc")
-# library("Biostrings")
-# library("affyio")
-# library("affxparser")
-# library("preprocessCore")
-# library("oligoClasses")
-# library("oligo")
