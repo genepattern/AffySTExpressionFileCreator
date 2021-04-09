@@ -590,7 +590,7 @@ function(gct, filename, check.file.extension=TRUE)
 #is.package.installed <- function(libdir, pkg) {
 #	f <- paste(libdir, pkg, sep='')
 #	return(file.exists(f) && file.info(f)[["isdir"]])
-}
+#}
 
 #not sure this line is needed - doesn't seem to be used
 #install.package <- function(dir, windows, mac, other) {
