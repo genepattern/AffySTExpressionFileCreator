@@ -12,9 +12,11 @@ params:
     output.file.base: 'Clariom_GSE162557.expression.gct'
 assertions:
     jobStatus: success
+    numFiles: 4
     files:
-        Clariom_GSE162557.expression.gct:
-            #diffCmd: ../diffWithTolerance.sh
-            diff: "output/GSE162557_Clariom.expression.gct"
-        Clariom_GSE162557.expression.gct.cls:
+        "Clariom_GSE162557.expression.gct": !!null
+            #diffCmd: ../diffWithTolerance.sh >> only runs on author's machine
+        Clariom_GSE162557.expression.gct.cls: !!null
             diff: "output/GSE162557_Clariom.expression.gct.cls"
+        "stderr.txt": !!null
+        "stdout.txt": !!null

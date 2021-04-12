@@ -1,4 +1,4 @@
-#module: urn:lsid:broad.mit.edu:cancer.software.genepattern.module.analysis:00346
+# module: urn:lsid:broad.mit.edu:cancer.software.genepattern.module.analysis:00346
 module: AffySTExpressionFileCreator
 name: nightly_AffySTEFC_Mouse_ST_2.0_array
 description: Positive regression test using Mouse ST 2.0 array data
@@ -12,9 +12,11 @@ params:
     output.file.base: 'Mouse_ST_2.0_array.expression.gct'
 assertions:
     jobStatus: success
+    numFiles: 4
     files:
-        Mouse_ST_2.0_array.expression.gct:
-            #diffCmd: ../diffWithTolerance.sh
-            diff: "output/Mouse_ST_2.0_array.expression.gct"
+        "Mouse_ST_2.0_array.expression.gct": !!null
+            # diffCmd: ../diffWithTolerance.sh >> only runs on author's machine
         Mouse_ST_2.0_array.expression.gct.cls:
             diff: "output/Mouse_ST_2.0_array.expression.gct.cls"
+        "stderr.txt": !!null
+        "stdout.txt": !!null
