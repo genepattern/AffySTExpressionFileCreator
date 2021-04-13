@@ -1,4 +1,5 @@
 # AffySTExpressionFileCreator (v2)
+
 **Description**: GenePattern module which Creates a GCT file from a set of CEL files from Affymetrix ST arrays.
 
 **Authors**: David Eby, Broad Institute; Anthony Castanza, UCSD; Barbara Hill, Broad Institute
@@ -8,7 +9,6 @@
 ---
 
 ## Summary
----
 
 This module creates a gene expression dataset from a set of CEL files for Affymetrix ST arrays.  It is similar to [ExpressionFileCreator](https://www.genepattern.org/modules/docs/ExpressionFileCreator/13), which operates on CEL files from the older 3' biased IVT-based Affymetrix arrays.  The conversion is done using the [Robust Multi-array Average (RMA) algorithm](http://biostatistics.oxfordjournals.org/content/4/2/249.long) as provided [by the 'oligo' package](https://bioconductor.riken.jp/packages/3.5/bioc/manuals/oligo/man/oligo.pdf) in Bioconductor.  The result is a matrix containing one intensity value per probe set per sample in the [GCT file format](https://www.genepattern.org/file-formats-guide#GCT). 
 
