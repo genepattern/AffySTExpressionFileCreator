@@ -68,12 +68,12 @@ Carvalho BS and Irizarry RA (2017). "Package 'oligo'" [documentation](https://bi
 
 ## Example Data
 
-Input:
-[GSE162557_RAW.tar](https://github.com/genepattern/AffySTExpressionFileCreator/blob/main/gpunit/input/GSE162557_RAW.tar) - ([full set from GEO - GSE162557](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE162557))
+Input:  
+[GSE162557_RAW.tar](https://github.com/genepattern/AffySTExpressionFileCreator/blob/main/gpunit/input/GSE162557_RAW.tar) - ([full set from GEO - GSE162557](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE162557))  
 [Clariom_GSE162557.clm](https://github.com/genepattern/AffySTExpressionFileCreator/blob/main/gpunit/output/GSE162557_Clariom.expression.gct.cls)
 
-Output:
-[GSE162557_Clariom.expression.gct](https://github.com/genepattern/AffySTExpressionFileCreator/blob/main/gpunit/output/GSE162557_Clariom.expression.gct)
+Output:  
+[GSE162557_Clariom.expression.gct](https://github.com/genepattern/AffySTExpressionFileCreator/blob/main/gpunit/output/GSE162557_Clariom.expression.gct)  
 [GSE162557_Clariom.expression.gct.cls](https://github.com/genepattern/AffySTExpressionFileCreator/blob/main/gpunit/output/GSE162557_Clariom.expression.gct.cls)
 
 
