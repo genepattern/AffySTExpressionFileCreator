@@ -1,0 +1,65 @@
+
+Library dir:  /xchip/gpdev/servers/genepatterntest/patches/rlib/3.1_20141120/site-library$options
+$options$input.file
+[1] "/xchip/gpdev/servers/genepatterntest/users/test/uploads/tmp/run1999580736561890619.tmp/input.file.list.txt"
+
+$options$normalize
+[1] "yes"
+
+$options$background.correct
+[1] "yes"
+
+$options$qc.plot.format
+[1] "skip"
+
+$options$annotate.rows
+[1] "yes"
+
+$options$output.file.base
+[1] "result"
+
+$options$help
+[1] FALSE
+
+
+$args
+[1] "/xchip/gpdev/servers/genepatterntest/taskLib/AffySTExpressionFileCreator.0.13.5896/"
+[2] "/xchip/gpdev/servers/genepatterntest/patches/rlib/3.1_20141120/site-library"        
+
+R version 3.1.0 (2014-04-10)
+Platform: x86_64-unknown-linux-gnu (64-bit)
+
+locale:
+[1] C
+
+attached base packages:
+[1] parallel  methods   stats     graphics  grDevices utils     datasets 
+[8] base     
+
+other attached packages:
+ [1] KernSmooth_2.23-13  DBI_0.3.1           oligo_1.28.3       
+ [4] Biostrings_2.32.1   XVector_0.4.0       IRanges_1.22.10    
+ [7] Biobase_2.24.0      oligoClasses_1.26.0 BiocGenerics_0.10.0
+[10] affyio_1.32.0       R.utils_1.34.0      R.oo_1.18.0        
+[13] R.methodsS3_1.6.1   optparse_1.2.0     
+
+loaded via a namespace (and not attached):
+ [1] BiocInstaller_1.14.3  GenomeInfoDb_1.0.2    GenomicRanges_1.16.4 
+ [4] affxparser_1.36.0     bit_1.1-12            codetools_0.2-9      
+ [7] ff_2.2-13             foreach_1.4.2         getopt_1.20.0        
+[10] iterators_1.0.7       preprocessCore_1.26.1 splines_3.1.0        
+[13] stats4_3.1.0          zlibbioc_1.10.0      
+[1] "Processing files of array type MoGene-2_0-st"
+Reading in : cel_files/in1/KT_A1_(MoGene-2_0-st).CEL
+Reading in : cel_files/in1/KT_A2_(MoGene-2_0-st).CEL
+Reading in : cel_files/in1/KT_A3_(MoGene-2_0-st).CEL
+Reading in : cel_files/in1/KT_G1_(MoGene-2_0-st).CEL
+Reading in : cel_files/in1/KT_G2_(MoGene-2_0-st).CEL
+Reading in : cel_files/in1/KT_G3_(MoGene-2_0-st).CEL
+Background correcting
+Normalizing
+Calculating Expression
+[1] "Finding annotation environment references"
+[1] "Looking up annotations"
+[1] "Building annotations for dataset"
+[1] "Writing dataset as GCT"

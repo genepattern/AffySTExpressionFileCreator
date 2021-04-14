@@ -15,5 +15,5 @@ assertions:
     files:
         "stderr.txt":
 #            diffCmd: ../diffIgnoreGpTraces.sh
-            diff: "https://datasets.genepattern.org/data/test_data/AffySTExpressionFileCreator/v1/output/clm_options/invalid_dup_entires_test/stderr.txt"
+            diff: ./output/clm_options/invalid_dup_entires_test/stderr.txt
             

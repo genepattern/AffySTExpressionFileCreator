@@ -15,4 +15,4 @@ assertions:
     files:
         "result.gct":
 #            diffCmd: ../diffWithTolerance.sh >> only runs on author's machine
-            diff: "https://datasets.genepattern.org/data/test_data/AffySTExpressionFileCreator/v1/output/misc_params/bg_correct_off_test/result.gct"
+            diff: ./output/misc_params/bg_correct_off_test/result.gct

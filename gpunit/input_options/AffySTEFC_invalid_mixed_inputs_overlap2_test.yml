@@ -17,4 +17,4 @@ assertions:
     files:
         "stderr.txt":
 #            diffCmd: ../diffIgnoreGpTraces.sh
-            diff: "<https://datasets.genepattern.org/data/test_data/AffySTExpressionFileCreator/v1/output/input_options/invalid_mixed_inputs_overlap2_test/stderr.txt"
+            diff: /output/input_options/invalid_mixed_inputs_overlap2_test/stderr.txt

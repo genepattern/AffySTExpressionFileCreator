@@ -15,11 +15,11 @@ assertions:
     files:
         "stdout.txt":
 #            diffCmd: ../diffTailOnlyIgnoreGpTraces.sh -9
-            diff: "https://datasets.genepattern.org/data/test_data/AffySTExpressionFileCreator/v1/output/clm_options/rename_and_rearrange_test/stdout.txt"
+            diff: ./output/clm_options/rename_and_rearrange_test/stdout.txt
         "result.gct":
 #            diffCmd: ../diffWithTolerance.sh
-            diff: "https://datasets.genepattern.org/data/test_data/AffySTExpressionFileCreator/v1/output/clm_options/rename_and_rearrange_test/result.gct"
+            diff: ./output/clm_options/rename_and_rearrange_test/result.gct
         "result.cls":
             diffCmd: diff -q --strip-trailing-cr
-            diff: "https://datasets.genepattern.org/data/test_data/AffySTExpressionFileCreator/v1/output/clm_options/rename_and_rearrange_test/result.cls"
+            diff: ./output/clm_options/rename_and_rearrange_test/result.cls
             

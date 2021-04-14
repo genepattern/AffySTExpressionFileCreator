@@ -1,0 +1,5 @@
+Error in GP.affyst.efc(files.to.process, normalize, background.correct,  : 
+  Array type HG-U133A does not seem to be an ST array.  You may want to check whether it is supported by ExpressionFileCreator instead.
+Calls: tryCatch ... tryCatchList -> suppressMessages -> withCallingHandlers
+Execution halted
+Process exited with an error: 1 (Exit value: 1)
