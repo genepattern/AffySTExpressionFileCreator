@@ -38,10 +38,11 @@ Carvalho BS and Irizarry RA (2017). "Package 'oligo'" [documentation](https://bi
 -------|--------------
 | input_file * |  One or more Affymetrix ST CEL files either uploaded directly, packaged into a ZIP or TAR bundle, or supplied through a directory input.  The CEL files can be in GZ format and the TAR can be in GZ, XZ, or BZ2 format.  The parameter will accept multiple inputs in any of these forms. |
 | normalize * | Whether to normalize data using quantile normalization. |
-| background correct * |Whether to perform background correction. |
+| background correct * | Whether to perform background correction. |
+| qc plot format * | Choose a file format for the QC plots (or skip them completely) |
 | clm file | A tab-delimited text file containing one scan, sample, and class per line. |
-| annotate probes * |	Whether to annotate probes with the gene symbol and description. |
-| output file base * | The base name of the output file(s). File extensions will be added automatically. |
+| annotate probes * | Whether to annotate probes with the gene symbol and description. |
+| output file base * | The base name of the output file(s). File extensions will be added automatically. |  
 \*  required
 
 ## Input Files
