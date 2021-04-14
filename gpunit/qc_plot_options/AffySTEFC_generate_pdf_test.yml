@@ -12,7 +12,7 @@ params:
     output.file.base: 'result'
 assertions:
     jobStatus: success
-   files:
+    files:
         "result.gct": !!null
         "stdout.txt": !!null
         "result.QC.Density_histogram.pdf": !!null
