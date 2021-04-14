@@ -43,6 +43,7 @@ Carvalho BS and Irizarry RA (2017). "Package 'oligo'" [documentation](https://bi
 | clm file | A tab-delimited text file containing one scan, sample, and class per line. |
 | annotate probes * | Whether to annotate probes with the gene symbol and description. |
 | output file base * | The base name of the output file(s). File extensions will be added automatically. |  
+
 \*  required
 
 ## Input Files
