@@ -377,13 +377,13 @@ build.oneCelPlotter <- function(plotTypeName, plotterFunction) {
 
 print.densityHistogram <- build.allCelPlotter("Density_histogram", 
    function(cel.batch, count) {
-      hist(cel.batch, names=1:count)
+      hist(cel.batch, names=1:count, target = "probeset")
    }
 )
 
 print.boxplot <- build.allCelPlotter("Boxplot", 
    function(cel.batch, count) {
-      boxplot(cel.batch, names=1:count)
+      boxplot(cel.batch, names=1:count, target = "probeset")
    }
 )
 
