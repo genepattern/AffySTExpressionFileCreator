@@ -12,7 +12,7 @@ params:
     output.file.base: 'result'
 assertions:
      jobStatus: fail
-    files:
+     files:
         "stderr.txt":
 #            diffCmd: ../diffIgnoreGpTraces.sh
             diff: ./output/clm_options/invalid_dup_entires_test/stderr.txt

@@ -14,7 +14,7 @@ params:
     output.file.base: 'result'
 assertions:
      jobStatus: fail
-    files:
+     files:
         "stderr.txt":
 #            diffCmd: ../diffIgnoreGpTraces.sh
             diff: /output/input_options/invalid_mixed_inputs_overlap2_test/stderr.txt
