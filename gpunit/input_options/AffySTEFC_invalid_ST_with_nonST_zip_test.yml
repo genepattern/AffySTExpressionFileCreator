@@ -1,0 +1,20 @@
+#module: urn:lsid:broad.mit.edu:cancer.software.genepattern.module.analysis:00346:2
+module: AffySTExpressionFileCreator
+name: AffySTEFC_invalid_ST_with_nonST_zip_test
+description: Negative test of loading (invalid); archives containing CEL files of both ST and non-ST array types
+params: 
+    input.file: [ "https://datasets.genepattern.org/data/test_data/AffySTExpressionFileCreator/v1/input/HuEx-1_0-st-v2/HuEx-1_0-st-v2-colon-cancer-small.zip",
+                  "https://datasets.genepattern.org/data/test_data/AffySTExpressionFileCreator/v1/input/HG-U133A/DBA_cel_files_small.zip"
+                  ]
+    normalize: 'yes'
+    background.correct: 'yes'
+    qc.plot.format: 'skip'
+    clm.file: 
+    annotate.probes: 'no'
+    output.file.base: 'result'
+assertions:
+     jobStatus: fail
+    files:
+        "stderr.txt":
+#            diffCmd: ../diffIgnoreGpTraces.sh
+            diff: "https://datasets.genepattern.org/data/test_data/AffySTExpressionFileCreator/v1/output/input_options/invalid_ST_with_nonST_zip_test/stderr.txt"

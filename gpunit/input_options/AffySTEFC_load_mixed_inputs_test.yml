@@ -1,0 +1,28 @@
+#module: urn:lsid:broad.mit.edu:cancer.software.genepattern.module.analysis:00346:2
+module: AffySTExpressionFileCreator
+name: AffySTEFC_load_mixed_inputs_test
+description: Positive test of loading; multiple types of input files at the same time
+params: 
+    input.file: [ "https://datasets.genepattern.org/data/test_data/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/flat1.tar.gz",
+                  "https://datasets.genepattern.org/data/test_data//AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/flat2.zip",
+                  "https://datasets.genepattern.org/data/test_data//AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/flat3.tar.xz",
+                  "https://datasets.genepattern.org/data/test_data//AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/flat4.tar",
+                  "https://datasets.genepattern.org/data/test_data//AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/deep_nested_archive1.tar.bz2",
+                  "https://datasets.genepattern.org/data/test_data//AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/deep_nested_archive2.zip",
+                  "https://datasets.genepattern.org/data/test_data//AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/uncompressed_1/",
+                  "https://datasets.genepattern.org/data/test_data//AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/uncompressed_2/",
+                  "https://datasets.genepattern.org/data/test_data//AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/gz_1/",
+                  "https://datasets.genepattern.org/data/test_data//AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/gz_2/"
+                  ]
+    normalize: 'yes'
+    background.correct: 'yes'
+    qc.plot.format: 'skip'
+    clm.file: 
+    annotate.probes: 'no'
+    output.file.base: 'result'
+assertions:
+    jobStatus: success
+    files:
+        "result.gct":
+#            diffCmd: ../diffWithTolerance.sh
+            diff: "https://datasets.genepattern.org/data/test_data/AffySTExpressionFileCreator/v1/output/input_options/load_mixed_inputs_test/result.gct"

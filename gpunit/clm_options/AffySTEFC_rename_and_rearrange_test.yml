@@ -1,0 +1,25 @@
+#module: urn:lsid:broad.mit.edu:cancer.software.genepattern.module.analysis:00346:2
+module: AffySTExpressionFileCreator
+name: AffySTEFC_rename_and_rearrange_test
+description: Positive test of CLM options; rename samples and rearrange the columns.
+params: 
+    input.file: [ "https://datasets.genepattern.org/data/test_data/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/deep_nested_archive1.tar.bz2" ]
+    normalize: 'yes'
+    background.correct: 'yes'
+    qc.plot.format: 'skip'
+    clm.file: "https://datasets.genepattern.org/data/test_data/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/clm/valid.clm"
+    annotate.probes: 'no'
+    output.file.base: 'result'
+assertions:
+    jobStatus: success
+    files:
+        "stdout.txt":
+#            diffCmd: ../diffTailOnlyIgnoreGpTraces.sh -9
+            diff: "https://datasets.genepattern.org/data/test_data/AffySTExpressionFileCreator/v1/output/clm_options/rename_and_rearrange_test/stdout.txt"
+        "result.gct":
+#            diffCmd: ../diffWithTolerance.sh
+            diff: "https://datasets.genepattern.org/data/test_data/AffySTExpressionFileCreator/v1/output/clm_options/rename_and_rearrange_test/result.gct"
+        "result.cls":
+            diffCmd: diff -q --strip-trailing-cr
+            diff: "https://datasets.genepattern.org/data/test_data/AffySTExpressionFileCreator/v1/output/clm_options/rename_and_rearrange_test/result.cls"
+            

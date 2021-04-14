@@ -1,0 +1,18 @@
+#module: urn:lsid:broad.mit.edu:cancer.software.genepattern.module.analysis:00346:2
+module: AffySTExpressionFileCreator
+name: AffySTEFC_norm_off_test
+description: Positive test of misc params; no normalization 
+params: 
+    input.file: [ "https://datasets.genepattern.org/data/test_data/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/deep_nested_archive1.tar.bz2" ]
+    normalize: 'no'
+    background.correct: 'yes'
+    qc.plot.format: 'skip'
+    clm.file: 
+    annotate.probes: 'no'
+    output.file.base: 'result'
+assertions:
+    jobStatus: success
+    files:
+        "result.gct":
+#            diffCmd: ../diffWithTolerance.sh >> only works on author's machine
+            diff: "https://datasets.genepattern.org/data/test_data/AffySTExpressionFileCreator/v1/output/misc_params/norm_off_test/result.gct"
