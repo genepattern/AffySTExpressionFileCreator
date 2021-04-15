@@ -14,6 +14,6 @@ params:
 assertions:
     jobStatus: success
     files:
-        result.gct:
+        result.gct: !!null
 #            diffCmd: ../diffWithTolerance.sh
-            diff: output/HuEx_1_0_ST_test/result.gct
+#            diff: output/HuEx_1_0_ST_test/result.gct
