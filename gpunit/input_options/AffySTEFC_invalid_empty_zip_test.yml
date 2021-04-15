@@ -15,4 +15,4 @@ assertions:
      files:
         stderr.txt:
 #            diffCmd: ../diffIgnoreGpTraces.sh >> only works on author's machine
-            diff: ./output/input_options/invalid_empty_zip_test/stderr.txt
+            diff: ../output/input_options/invalid_empty_zip_test/stderr.txt

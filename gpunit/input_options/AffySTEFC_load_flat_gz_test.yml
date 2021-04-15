@@ -3,8 +3,8 @@ module: AffySTExpressionFileCreator
 name: AffySTEFC_load_flat_gz_test
 description: Positive test of loading; single tar.xz archive file containing a flat directory structure
 params: 
-    input.file: [ "https://datasets.genepattern.org/data/test_data/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/gz_1/",
-                  "https://datasets.genepattern.org/data/test_data/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/gz_2/"
+    input.file: [ "https://datasets.genepattern.org/?prefix=data/test_data/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/gz_1/",
+                  "https://datasets.genepattern.org/?prefix=data/test_data/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/gz_2/"
                    ]
     normalize: 'yes'
     background.correct: 'yes'
@@ -17,4 +17,4 @@ assertions:
     files:
         "result.gct":
 #            diffCmd: ../diffWithTolerance.sh
-            diff: ./output/input_options/load_flat_gz_test/result.gct
+            diff: ../output/input_options/load_flat_gz_test/result.gct

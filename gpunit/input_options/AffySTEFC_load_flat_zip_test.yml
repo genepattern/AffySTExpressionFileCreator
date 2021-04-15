@@ -15,4 +15,4 @@ assertions:
     files:
         "result.gct":
 #            diffCmd: ../diffWithTolerance.sh
-            diff: ./output/input_options/load_flat_zip_test/result.gct
+            diff: ../output/input_options/load_flat_zip_test/result.gct
