@@ -23,6 +23,6 @@ params:
 assertions:
     jobStatus: success
     files:
-        "result.gct":
+        "result.gct": !!null
 #            diffCmd: ../diffWithTolerance.sh
-            diff: ../output/input_options/load_mixed_inputs_test/result.gct
+#            diff: output/load_mixed_inputs_test/result.gct

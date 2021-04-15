@@ -15,6 +15,6 @@ params:
 assertions:
     jobStatus: success
     files:
-        "result.gct":
+        "result.gct": !!null
 #            diffCmd: ../diffWithTolerance.sh
-            diff: ../output/input_options/load_flat_raw_test/result.gct
+#            diff: output/load_flat_raw_test/result.gct

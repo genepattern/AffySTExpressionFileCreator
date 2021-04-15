@@ -15,6 +15,6 @@ params:
 assertions:
      jobStatus: fail
      files:
-        "stderr.txt":
+        "stderr.txt": !!null
 #            diffCmd: ../diffIgnoreGpTraces.sh
-            diff: ../output/input_options/invalid_ST_with_nonST_zip_test/stderr.txt
+#            diff: output/invalid_ST_with_nonST_zip_test/stderr.txt

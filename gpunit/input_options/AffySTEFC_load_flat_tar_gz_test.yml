@@ -1,4 +1,4 @@
-#module: urn:lsid:broad.mit.edu:cancer.software.genepattern.module.analysis:00346:1
+#module: urn:lsid:broad.mit.edu:cancer.software.genepattern.module.analysis:00346:2
 module: AffySTExpressionFileCreator
 name: AffySTEFC_load_flat_tar_gz_test
 description: Positive test of loading; single tar.gz archive file containing a flat directory structure
@@ -13,6 +13,6 @@ params:
 assertions:
     jobStatus: success
     files:
-        "result.gct":
+        "result.gct": !!null
 #            diffCmd: ../diffWithTolerance.sh
-            diff: ../output/input_options/load_flat_tar_gz_test/result.gct
+#            diff: output/load_flat_tar_gz_test/result.gct
