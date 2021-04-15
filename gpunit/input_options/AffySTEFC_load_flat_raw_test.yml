@@ -5,7 +5,7 @@ description: Positive test of loading; single tar.xz archive file containing a f
 params: 
     input.file: [ "https://datasets.genepattern.org/?prefix=data/test_data/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/uncompressed_1/",
                   "https://datasets.genepattern.org/?prefix=data/test_data/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/uncompressed_2/"
-                   ]
+                  ]
     normalize: 'yes'
     background.correct: 'yes'
     qc.plot.format: 'skip'

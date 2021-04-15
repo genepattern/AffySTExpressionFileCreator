@@ -13,6 +13,6 @@ params:
 assertions:
     jobStatus: success
     files:
-        "result.gct":!!null
+        "result.gct": !!null
 #            diffCmd: ../diffWithTolerance.sh
 #            diff: output/load_flat_zip_test/result.gct

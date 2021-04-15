@@ -3,7 +3,8 @@ module: AffySTExpressionFileCreator
 name: AffySTEFC_invalid_empty_zip_test
 description: Negative test of loading (invalid); empty zip file
 params: 
-    input.file: [ "https://datasets.genepattern.org/data/test_data/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st_err/archives/empty.zip"]
+    input.file: [ "https://datasets.genepattern.org/data/test_data/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st_err/archives/empty.zip"
+                  ]
     normalize: 'yes'
     background.correct: 'yes'
     qc.plot.format: 'skip'
@@ -13,6 +14,6 @@ params:
 assertions:
      jobStatus: fail
      files:
-        stderr.txt: !!null
-#            diffCmd: ../diffIgnoreGpTraces.sh >> only works on author's machine
+        "stderr.txt": !!null
+#            diffCmd: ../diffIgnoreGpTraces.sh
 #            diff: output/invalid_empty_zip_test/stderr.txt
