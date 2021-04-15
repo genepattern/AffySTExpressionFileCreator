@@ -15,4 +15,4 @@ assertions:
     files:
         "result.gct":
 #            diffCmd: ../diffWithTolerance.sh
-            diff: ./output/anno_options/ZebGene_1_1_ST_test/result.gct
+            diff: output/anno_options/ZebGene_1_1_ST_test/result.gct
