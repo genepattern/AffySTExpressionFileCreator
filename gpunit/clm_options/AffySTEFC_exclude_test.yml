@@ -19,6 +19,6 @@ assertions:
         "result.cls":
             diffCmd: diff -q --strip-trailing-cr
             diff: output/exclude_test/result.cls
-        "stdout.txt":
-            #            diffCmd: ../diffTailOnlyIgnoreGpTraces.sh -9
-            diff: output/exclude_test/stdout_v2.txt
+#        "stdout.txt":
+#            diffCmd: ../diffTailOnlyIgnoreGpTraces.sh -9
+#            diff: output/exclude_test/stdout.txt
