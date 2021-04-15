@@ -15,5 +15,5 @@ assertions:
      files:
         "stderr.txt":
 #            diffCmd: ../diffIgnoreGpTraces.sh
-            diff: ./output/clm_options/invalid_dup_entires_test/stderr.txt
+            diff: output/invalid_dup_entires_test/stderr.txt
             

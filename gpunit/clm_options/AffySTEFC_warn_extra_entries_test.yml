@@ -15,11 +15,11 @@ assertions:
     files:
         stdout.txt:
 #            diffCmd: ../diffTailOnlyIgnoreGpTraces.sh -12
-            diff: ../output/clm_options/warn_extra_entries_test/stdout.txt
+            diff: output/warn_extra_entries_test/stdout.txt
         result.gct:
 #            diffCmd: ../diffWithTolerance.sh
-            diff: ../output/clm_options/warn_extra_entries_test/result.gct
+            diff: output/warn_extra_entries_test/result.gct
         result.cls:
             diffCmd: diff -q --strip-trailing-cr
-            diff: ../output/clm_options/warn_extra_entries_test/result.cls
+            diff: output/warn_extra_entries_test/result.cls
             
