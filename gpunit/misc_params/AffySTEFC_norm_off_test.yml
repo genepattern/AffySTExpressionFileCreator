@@ -13,6 +13,6 @@ params:
 assertions:
     jobStatus: success
     files:
-        result.gct:
+        result.gct: !!null
 #            diffCmd: ../diffWithTolerance.sh >> only works on author's machine
-            diff: ../output/misc_params/norm_off_test/result.gct
+#            diff: output/norm_off_test/result.gct
