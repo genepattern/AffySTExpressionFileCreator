@@ -16,4 +16,3 @@ assertions:
         "stderr.txt":
 #            diffCmd: ../diffIgnoreGpTraces.sh
             diff: output/invalid_dup_entires_test/stderr_v2.txt
-            

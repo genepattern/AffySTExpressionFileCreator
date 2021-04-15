@@ -21,4 +21,4 @@ assertions:
             diff: output/exclude_test/result.cls
         "stdout.txt":
             #            diffCmd: ../diffTailOnlyIgnoreGpTraces.sh -9
-            diff: output/exclude_test/stdout.txt
+            diff: output/exclude_test/stdout_v2.txt
