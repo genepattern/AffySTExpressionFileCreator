@@ -13,13 +13,13 @@ params:
 assertions:
     jobStatus: success
     files:
-        "stdout.txt":
+        stdout.txt:
 #            diffCmd: ../diffTailOnlyIgnoreGpTraces.sh -12
             diff: ./output/clm_options/warn_extra_entries_test/stdout.txt
-        "result.gct":
+        result.gct:
 #            diffCmd: ../diffWithTolerance.sh
             diff: ./output/clm_options/warn_extra_entries_test/result.gct
-        "result.cls":
+        result.cls:
             diffCmd: diff -q --strip-trailing-cr
             diff: ./output/clm_options/warn_extra_entries_test/result.cls
             

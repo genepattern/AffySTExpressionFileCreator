@@ -13,6 +13,6 @@ params:
 assertions:
      jobStatus: fail
      files:
-        "stderr.txt":
+        stderr.txt:
 #            diffCmd: ../diffIgnoreGpTraces.sh >> only works on author's machine
             diff: ./output/input_options/invalid_empty_zip_test/stderr.txt
