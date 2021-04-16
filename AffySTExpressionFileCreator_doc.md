@@ -29,8 +29,9 @@ Carvalho BS and Irizarry RA (2010). “A Framework for Oligonucleotide Microarra
 Carvalho BS and Irizarry RA (2017). "Package 'oligo'" [documentation](https://bioconductor.riken.jp/packages/3.5/bioc/manuals/oligo/man/oligo.pdf) from Bioconductor 3.5.
 
 ## Source Links
-* [The AffySTExpressionFileCreator GenePattern module source repository](https://github.com/genepattern/AffySTExpressionFileCreator/releases/tag/v2)
-* AffySTExpressionFileCreator uses the [genepattern/affy-st-expression-file-creator:1 Docker image](https://hub.docker.com/layers/genepattern/affy-st-expression-file-creator/1/images/sha256-d8071ee12a5a43a2e832b6f805bd2cf358cf354499e70ee7d063fff1ac93c279?context=repo)
+* [The AffySTExpressionFileCreator GenePattern module source repository](https://github.com/genepattern/AffySTExpressionFileCreator/tree/v2)
+* AffySTExpressionFileCreator uses the [genepattern/affy-st-expression-file-creator:1 Docker image](https://hub.docker.com/layers/genepattern/affy-st-expression-file-creator/1/images/sha256-05a6f3e0a381190cbca7a7ae7e4213a5d0be6edb3c258e3d75ab7e674928f2f0?context=explore)
+* [The Dockerfile used to build that image is here.](https://github.com/genepattern/AffySTExpressionFileCreator/blob/v2/Dockerfile)
 
 ## Parameters
 
