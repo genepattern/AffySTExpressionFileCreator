@@ -8,6 +8,8 @@
 ## whatsoever. Neither the Broad Institute nor MIT can be responsible for its
 ## use, misuse, or functionality.
 
+sink(stdout(), type = "message")
+
 # see installPkgs.R for what was installed in the Docker image
 library("getopt")
 library("optparse")
