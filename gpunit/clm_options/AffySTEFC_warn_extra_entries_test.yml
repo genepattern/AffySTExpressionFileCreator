@@ -19,6 +19,3 @@ assertions:
         result.cls:
             diffCmd: diff -q --strip-trailing-cr
             diff: output/warn_extra_entries_test/result.cls
-#        stdout.txt:
-#            diffCmd: ../diffTailOnlyIgnoreGpTraces.sh -12
-#            diff: output/warn_extra_entries_test/stdout.txt

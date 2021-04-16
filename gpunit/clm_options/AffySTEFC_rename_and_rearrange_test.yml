@@ -19,6 +19,3 @@ assertions:
         "result.cls":
             diffCmd: diff -q --strip-trailing-cr
             diff: output/rename_and_rearrange_test/result.cls
-#        "stdout.txt":
-#            diffCmd: ../diffTailOnlyIgnoreGpTraces.sh -9
-#            diff: output/rename_and_rearrange_test/stdout.txt
