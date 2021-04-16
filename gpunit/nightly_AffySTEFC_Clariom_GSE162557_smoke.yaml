@@ -6,17 +6,35 @@ params:
     input.file: 'input/GSE162557_RAW.tar'
     normalize: 'yes'
     background.correct: 'yes'
-    qc.plot.format: 'skip (do not produce QC plots)'
+    qc.plot.format: 'png'
     clm.file: 'input/Clariom_GSE162557.clm'
     annotate.rows: 'yes'
-    output.file.base: 'Clariom_GSE162557.expression.gct'
+    output.file.base: 'Clariom_GSE162557.expression'
 assertions:
     jobStatus: success
-    numFiles: 4
     files:
         "Clariom_GSE162557.expression.gct": !!null
             #diffCmd: ../diffWithTolerance.sh >> only runs on author's machine
-        Clariom_GSE162557.expression.gct.cls:
-            diff: ./output/GSE162557_Clariom.expression.gct.cls
-        "stderr.txt": !!null
+        Clariom_GSE162557.expression.cls:
+            diff: ./output/GSE162557_Clariom.expression.cls
+        "Clariom_GSE162557.expression.QC.Density_histogram.png": !!null
+        "Clariom_GSE162557.expression.QC.Boxplot.png": !!null
+        "Clariom_GSE162557.expression.QC.GSM4954384_01_HCC_untreated_rep1_Cel_image.png": !!null
+        "Clariom_GSE162557.expression.QC.GSM4954384_01_HCC_untreated_rep1_MAplot.png": !!null
+        "Clariom_GSE162557.expression.QC.GSM4954385_02_HCC_untreated_rep2_Cel_image.png": !!null
+        "Clariom_GSE162557.expression.QC.GSM4954385_02_HCC_untreated_rep2_MAplot.png": !!null
+        "Clariom_GSE162557.expression.QC.GSM4954386_03_HCC_untreated_rep3_Cel_image.png": !!null
+        "Clariom_GSE162557.expression.QC.GSM4954386_03_HCC_untreated_rep3_MAplot.png": !!null
+        "Clariom_GSE162557.expression.QC.GSM4954387_04_HCC_Metformin_Sorafenib_Sequential_rep1_Cel_image.png": !!null
+        "Clariom_GSE162557.expression.QC.GSM4954387_04_HCC_Metformin_Sorafenib_Sequential_rep1_MAplot.png": !!null
+        "Clariom_GSE162557.expression.QC.GSM4954388_05_HCC_Metformin_Sorafenib_Sequential_rep2_Cel_image.png": !!null
+        "Clariom_GSE162557.expression.QC.GSM4954388_05_HCC_Metformin_Sorafenib_Sequential_rep2_MAplot.png": !!null
+        "Clariom_GSE162557.expression.QC.GSM4954389_06_HCC_Metformin_Sorafenib_Sequential_rep3_Cel_image.png": !!null
+        "Clariom_GSE162557.expression.QC.GSM4954389_06_HCC_Metformin_Sorafenib_Sequential_rep3_MAplot.png": !!null
+        "Clariom_GSE162557.expression.QC.GSM4954390_07_HCC_Metformin_Sorafenib_Concomitant_rep1_Cel_image.png": !!null
+        "Clariom_GSE162557.expression.QC.GSM4954390_07_HCC_Metformin_Sorafenib_Concomitant_rep1_MAplot.png": !!null
+        "Clariom_GSE162557.expression.QC.GSM4954391_08_HCC_Metformin_Sorafenib_Concomitant_rep2_Cel_image.png": !!null
+        "Clariom_GSE162557.expression.QC.GSM4954391_08_HCC_Metformin_Sorafenib_Concomitant_rep2_MAplot.png": !!null
+        "Clariom_GSE162557.expression.QC.GSM4954392_09_HCC_Metformin_Sorafenib_Concomitant_rep3_Cel_image.png": !!null
+        "Clariom_GSE162557.expression.QC.GSM4954392_09_HCC_Metformin_Sorafenib_Concomitant_rep3_MAplot.png": !!null
         "stdout.txt": !!null

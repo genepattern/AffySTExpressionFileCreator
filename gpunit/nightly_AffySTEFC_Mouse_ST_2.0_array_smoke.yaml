@@ -9,14 +9,12 @@ params:
     qc.plot.format: 'skip (do not produce QC plots)'
     clm.file: 'input/Mouse_2.0_MYBQKI.clm'
     annotate.rows: 'no'
-    output.file.base: 'Mouse_ST_2.0_array.expression.gct'
+    output.file.base: 'Mouse_ST_2.0_array.expression'
 assertions:
     jobStatus: success
-    numFiles: 4
     files:
         "Mouse_ST_2.0_array.expression.gct": !!null
             #diffCmd: ../diffWithTolerance.sh >> only runs on author's machine
-        Mouse_ST_2.0_array.expression.gct.cls:
-            diff: ./output/Mouse_ST_2.0_array.expression.gct.cls
-        "stderr.txt": !!null
+        Mouse_ST_2.0_array.expression.cls:
+            diff: ./output/Mouse_ST_2.0_array.expression.cls
         "stdout.txt": !!null
