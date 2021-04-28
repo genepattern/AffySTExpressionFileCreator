@@ -12,7 +12,9 @@ RUN mkdir /AffySTEFC \
 
 USER docker
 COPY src/*.R /AffySTEFC/
-RUN Rscript /AffySTEFC/installPkgs.R /AffySTEFC/
+COPY lib/*.tar.gz /AffySTEFC/
+
+RUN Rscript /AffySTEFC/installPkgs.R
 
 USER root
 RUN git clone https://github.com/bmbolstad/preprocessCore.git \
@@ -20,3 +22,7 @@ RUN git clone https://github.com/bmbolstad/preprocessCore.git \
     && R CMD INSTALL --configure-args="--disable-threading"  .
 
 USER docker
+
+# remember to update the tag version here and in your manifest
+# docker build --rm https://github.com/genepattern/AffySTExpressionFileCreator.git#develop -f Dockerfile -t genepattern/affy-st-expression-file-creator:<tag>
+# docker run
