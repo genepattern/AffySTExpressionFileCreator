@@ -1,7 +1,8 @@
 FROM rocker/r-ver:4.0.4
 
 USER root
-RUN apt install -y git libcurl4-openssl-dev
+RUN apt install -y git=1:2.25.1-1ubuntu3.1
+    ##   libcurl4-openssl-dev - should not be needed now that I am installing from source
     ## && apt install libopenblas-dev
 
 RUN mkdir /AffySTEFC \
@@ -22,4 +23,4 @@ USER docker
 
 # remember to update the tag version here and in your manifest
 # docker build --rm https://github.com/genepattern/AffySTExpressionFileCreator.git#develop -f Dockerfile -t genepattern/affy-st-expression-file-creator:<tag>
-# docker run
+# docker run --rm -it --user docker -v /c/Users/MyUSER/PathTo/AffySTExpressionFileCreator:/mnt/mydata:rw genepattern/affy-st-expression-file-creator:<tag> bash
