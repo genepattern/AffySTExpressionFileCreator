@@ -1,4 +1,4 @@
-FROM r-base:4.0.4
+FROM rocker/r-ver:4.0.4
 
 USER root
 RUN apt-get install libcurl4-openssl-dev
