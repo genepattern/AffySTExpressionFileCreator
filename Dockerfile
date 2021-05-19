@@ -1,7 +1,8 @@
 FROM rocker/r-ver:4.0.4
 
 USER root
-RUN apt install -y git=1:2.25.1-1ubuntu3.1
+RUN apt update \
+    && apt install -y git=1:2.25.1-1ubuntu3.1
     ##   libcurl4-openssl-dev - should not be needed now that I am installing from source
     ## && apt install libopenblas-dev
 
@@ -15,6 +16,7 @@ COPY lib/*.tar.gz /AffySTEFC/
 RUN Rscript /AffySTEFC/installPkgs.R
 
 USER root
+# should get a tag for this too
 RUN git clone https://github.com/bmbolstad/preprocessCore.git \
     && cd preprocessCore/ \
     && R CMD INSTALL --configure-args="--disable-threading"  .
