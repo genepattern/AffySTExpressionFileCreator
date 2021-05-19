@@ -1,7 +1,7 @@
 FROM rocker/r-ver:4.0.4
 
 USER root
-RUN apt-get install libcurl4-openssl-dev
+RUN apt install -y git libcurl4-openssl-dev
     ## && apt install libopenblas-dev
 
 RUN mkdir /AffySTEFC \
