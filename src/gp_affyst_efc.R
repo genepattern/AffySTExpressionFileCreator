@@ -375,15 +375,17 @@ build.oneCelPlotter <- function(plotTypeName, plotterFunction) {
    }
 }
 
-print.densityHistogram <- build.allCelPlotter("Density_histogram", 
+# Probeset may not work for all ExpressionFeatureSet type arrays
+print.densityHistogram <- build.allCelPlotter("Density_histogram",
    function(cel.batch, count) {
-      hist(cel.batch, names=1:count)
+      hist(cel.batch, names=1:count, target = "probeset")
    }
 )
 
-print.boxplot <- build.allCelPlotter("Boxplot", 
+# Probeset may not work for all ExpressionFeatureSet type arrays
+print.boxplot <- build.allCelPlotter("Boxplot",
    function(cel.batch, count) {
-      boxplot(cel.batch, names=1:count)
+      boxplot(cel.batch, names=1:count, target = "probeset")
    }
 )
 

@@ -1,0 +1,7 @@
+The following CEL file names were duplicated  (ignoring any compression extension):
+     101642-05.CEL
+Error in check.for.dup.file(files.to.process) : 
+  The module cannot handle duplicated names.  Each file must have a unique name.
+Calls: tryCatch ... tryCatchList -> suppressMessages -> withCallingHandlers
+Execution halted
+Process exited with an error: 1 (Exit value: 1)

@@ -8,42 +8,12 @@
 ## whatsoever. Neither the Broad Institute nor MIT can be responsible for its
 ## use, misuse, or functionality.
 
-suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.packages("getopt", repos = "https://cloud.r-project.org/", quiet = TRUE))))
-suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.packages("optparse", repos = "https://cloud.r-project.org/", quiet = TRUE))))
-suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.packages("R.methodsS3", repos = "https://cloud.r-project.org/", quiet = TRUE))))
-suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.packages("R.oo", repos = "https://cloud.r-project.org/", quiet = TRUE))))
-suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.packages("R.utils", repos = "https://cloud.r-project.org/", quiet = TRUE))))
-suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.packages("DBI", repos = "https://cloud.r-project.org/", quiet = TRUE))))
-suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.packages("RSQLite", repos = "https://cloud.r-project.org/", quiet = TRUE))))
-suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.packages("parallel", repos = "https://cloud.r-project.org/", quiet = TRUE))))
-suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.packages("iterators", repos = "https://cloud.r-project.org/", quiet = TRUE))))
-suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.packages("foreach", repos = "https://cloud.r-project.org/", quiet = TRUE))))
-suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.packages("bit", repos = "https://cloud.r-project.org/", quiet = TRUE))))
-suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.packages("zip", repos = "https://cloud.r-project.org/", quiet = TRUE))))
-suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.packages("BiocManager", repos = "https://cloud.r-project.org/", quiet = TRUE))))
+sink(stdout(), type = "message")
 
+# see installPkgs.R for what was installed in the Docker image
 library("getopt")
 library("optparse")
 library("zip")
-
-# Don't load the 'ff' package even though it is specified in the r.package.info file.  It's needed
-# to install the oligoClasses pkg but if it's loaded at runtime then it changes the behavior of
-# the module, with failures as a result. 
-#suppressMessages(suppressWarnings(library(ff)))
-
-suppressPackageStartupMessages(suppressMessages(suppressWarnings(BiocManager::install('BiocGenerics', quiet = TRUE))))
-suppressPackageStartupMessages(suppressMessages(suppressWarnings(BiocManager::install('IRanges', quiet = TRUE))))
-suppressPackageStartupMessages(suppressMessages(suppressWarnings(BiocManager::install('XVector', quiet = TRUE))))
-suppressPackageStartupMessages(suppressMessages(suppressWarnings(BiocManager::install('GenomeInfoDb', quiet = TRUE))))
-suppressPackageStartupMessages(suppressMessages(suppressWarnings(BiocManager::install('GenomicRanges', quiet = TRUE))))
-suppressPackageStartupMessages(suppressMessages(suppressWarnings(BiocManager::install('Biobase', quiet = TRUE))))
-suppressPackageStartupMessages(suppressMessages(suppressWarnings(BiocManager::install('zlibbioc', quiet = TRUE))))
-suppressPackageStartupMessages(suppressMessages(suppressWarnings(BiocManager::install('Biostrings', quiet = TRUE))))
-suppressPackageStartupMessages(suppressMessages(suppressWarnings(BiocManager::install('affyio', quiet = TRUE))))
-suppressPackageStartupMessages(suppressMessages(suppressWarnings(BiocManager::install('affxparser', quiet = TRUE))))
-suppressPackageStartupMessages(suppressMessages(suppressWarnings(BiocManager::install('preprocessCore', quiet = TRUE))))
-suppressPackageStartupMessages(suppressMessages(suppressWarnings(BiocManager::install('oligoClasses', quiet = TRUE))))
-suppressPackageStartupMessages(suppressMessages(suppressWarnings(BiocManager::install('oligo', quiet = TRUE))))
 
 library("BiocGenerics")
 library("IRanges")

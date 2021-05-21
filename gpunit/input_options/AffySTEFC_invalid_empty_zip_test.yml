@@ -1,0 +1,19 @@
+#module: urn:lsid:broad.mit.edu:cancer.software.genepattern.module.analysis:00346:2
+module: AffySTExpressionFileCreator
+name: AffySTEFC_invalid_empty_zip_test
+description: Negative test of loading (invalid); empty zip file
+params: 
+    input.file: [ "https://datasets.genepattern.org/data/test_data/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st_err/archives/empty.zip"
+                  ]
+    normalize: 'yes'
+    background.correct: 'yes'
+    qc.plot.format: 'skip'
+    clm.file: 
+    annotate.probes: 'no'
+    output.file.base: 'result'
+assertions:
+     jobStatus: fail
+     files:
+        "stdout.txt": !!null
+#            diffCmd: ../diffIgnoreGpTraces.sh
+#            diff: output/invalid_empty_zip_test/stderr.txt

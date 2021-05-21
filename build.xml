@@ -8,8 +8,8 @@
 	<target depends="init" name="create-zip">
 		<antcall target="prezip" />
 		<zip destfile="${dest.dir}/${ant.project.name}.zip" whenempty="fail" defaultexcludes="true">
-            <fileset dir="src" includes="*.R" />
-            <fileset dir="." includes="manifest, r.package.info, *.html, *.txt" excludes="test/**" />
+            <fileset dir="." includes="manifest, *.txt, Dockerfile" />
+			<fileset dir="docs/v2" includes="*.html" />
         </zip>
 		<antcall target="postzip" />
 	</target>

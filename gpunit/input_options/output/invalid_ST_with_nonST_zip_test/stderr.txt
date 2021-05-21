@@ -1,0 +1,5 @@
+Error in GP.affyst.efc(files.to.process, normalize, background.correct,  : 
+  All the CEL files must be of the same type.
+Calls: tryCatch ... tryCatchList -> suppressMessages -> withCallingHandlers
+Execution halted
+Process exited with an error: 1 (Exit value: 1)

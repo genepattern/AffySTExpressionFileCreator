@@ -1,0 +1,18 @@
+#module: urn:lsid:broad.mit.edu:cancer.software.genepattern.module.analysis:00346:2
+module: AffySTExpressionFileCreator
+name: AffySTEFC_ZebGene_1_1_ST_test
+description: Positive test of annotation; archive containing ZebGene 1.1 ST CEL files.  Note that this is a "model" organism so annotation will be skipped.
+params: 
+    input.file: [ "https://datasets.genepattern.org/data/test_data/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/deep_nested_archive1.tar.bz2" ]
+    normalize: 'yes'
+    background.correct: 'yes'
+    qc.plot.format: 'skip'
+    clm.file: 
+    annotate.probes: 'yes'
+    output.file.base: 'result'
+assertions:
+    jobStatus: success
+    files:
+        result.gct: !!null
+#            diffCmd: ../diffWithTolerance.sh
+#            diff: output/ZebGene_1_1_ST_test/result.gct

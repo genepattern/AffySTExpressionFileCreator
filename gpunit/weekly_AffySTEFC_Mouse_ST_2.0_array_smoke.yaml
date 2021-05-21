@@ -1,0 +1,20 @@
+#module: urn:lsid:broad.mit.edu:cancer.software.genepattern.module.analysis:00346:2 - takes 3 minutes to run
+module: AffySTExpressionFileCreator
+name: weekly_AffySTEFC_Mouse_ST_2.0_array_smoke
+description: Positive regression test using Mouse ST 2.0 array data
+params:
+    input.file: 'https://datasets-genepattern-org.s3.amazonaws.com/data/module_support_files/AffySTExpressionFileCreator/Mouse_ST_2.0_array.zip'
+    normalize: 'yes'
+    background.correct: 'yes'
+    qc.plot.format: 'skip (do not produce QC plots)'
+    clm.file: 'input/Mouse_2.0_MYBQKI.clm'
+    annotate.rows: 'no'
+    output.file.base: 'Mouse_ST_2.0_array.expression'
+assertions:
+    jobStatus: success
+    files:
+        "Mouse_ST_2.0_array.expression.gct": !!null
+            #diffCmd: ../diffWithTolerance.sh >> only runs on author's machine
+        Mouse_ST_2.0_array.expression.cls:
+            diff: ./output/Mouse_ST_2.0_array.expression.cls
+        "stdout.txt": !!null
