@@ -20,15 +20,15 @@ USER gpuser
 COPY src/*.R /AffySTEFC/
 COPY lib/*.tar.gz /AffySTEFC/
 
-RUN Rscript /AffySTEFC/installPkgs.R
+#RUN Rscript /AffySTEFC/installPkgs.R
 
-USER root
+# USER root
 # should get a tag for this too
-RUN git clone https://github.com/bmbolstad/preprocessCore.git \
-    && cd preprocessCore/ \
-    && R CMD INSTALL --configure-args="--disable-threading"  .
-
-USER gpuser
+# RUN git clone https://github.com/bmbolstad/preprocessCore.git \
+#    && cd preprocessCore/ \
+#    && R CMD INSTALL --configure-args="--disable-threading"  .
+#
+#USER gpuser
 
 # remember to update the tag version here and in your manifest
 # docker build --rm https://github.com/genepattern/AffySTExpressionFileCreator.git#develop -f Dockerfile -t genepattern/affy-st-expression-file-creator:<tag>
