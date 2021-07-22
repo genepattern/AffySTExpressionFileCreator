@@ -11,9 +11,9 @@
 sink(stdout(), type = "message")
 
 # see installPkgs.R for what was installed in the Docker image
-library("getopt")
-library("optparse")
-library("zip")
+#library("getopt")
+#library("optparse")
+#library("zip")
 
 library("BiocGenerics")
 library("IRanges")

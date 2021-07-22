@@ -13,6 +13,10 @@ suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.package
 suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.packages("zip_2.1.1.tar.gz", quiet = TRUE))))
 suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.packages("BiocManager_1.30.15.tar.gz", quiet = TRUE))))
 
+library("getopt")
+library("optparse")
+library("zip")
+
 suppressPackageStartupMessages(suppressMessages(suppressWarnings(BiocManager::install('BiocGenerics', version = "3.12", quiet = TRUE))))
 # 0.36.1 from Bioconductor v3.12 - all
 suppressPackageStartupMessages(suppressMessages(suppressWarnings(BiocManager::install('IRanges', version = "3.12", quiet = TRUE))))
