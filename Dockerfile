@@ -20,6 +20,8 @@ USER gpuser
 COPY src/*.R /AffySTEFC/
 COPY lib/*.tar.gz /AffySTEFC/
 
+USER root
+
 # RUN Rscript /AffySTEFC/installPkgs.R
 
 # USER root
@@ -32,4 +34,4 @@ COPY lib/*.tar.gz /AffySTEFC/
 
 # remember to update the tag version here and in your manifest
 # docker build --rm https://github.com/genepattern/AffySTExpressionFileCreator.git#develop -f Dockerfile -t genepattern/affy-st-expression-file-creator:<tag>
-# docker run --rm -it --user docker -v /c/Users/MyUSER/PathTo/AffySTExpressionFileCreator:/mnt/mydata:rw genepattern/affy-st-expression-file-creator:<tag> bash
+# docker run --rm -it -v /c/Users/MyUSER/PathTo/AffySTExpressionFileCreator:/mnt/mydata:rw genepattern/affy-st-expression-file-creator:<tag> bash
