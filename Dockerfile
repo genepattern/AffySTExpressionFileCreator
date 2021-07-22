@@ -25,7 +25,7 @@ USER root
 RUN Rscript /AffySTEFC/installPkgs.R
 
 RUN git clone https://github.com/bmbolstad/preprocessCore.git \
-    && cd preprocessCore/
+    && cd preprocessCore/ \
     && git checkout -b RELEASE_3_12 \
     && R CMD INSTALL --configure-args="--disable-threading"  .
 
