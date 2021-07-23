@@ -15,6 +15,7 @@ suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.package
 
 library("getopt")
 library("optparse")
+library("BiocManager")
 
 suppressPackageStartupMessages(suppressMessages(suppressWarnings(BiocManager::install('BiocGenerics', version = "3.12", quiet = TRUE))))
 # 0.36.1 from Bioconductor v3.12 - all
