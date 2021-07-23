@@ -7,15 +7,12 @@ suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.package
 suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.packages("/AffySTEFC/RSQLite_2.2.6.tar.gz", quiet = TRUE))))
 # don't think we need this anymore since parallel is included in 2.14.0
 #suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.packages("parallel", repos = "https://cloud.r-project.org/", quiet = TRUE))))
-suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.packages("iterators_1.0.13.tar.gz", quiet = TRUE))))
-suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.packages("foreach_1.5.1.tar.gz", quiet = TRUE))))
-suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.packages("bit_4.0.4.tar.gz", quiet = TRUE))))
-suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.packages("zip_2.1.1.tar.gz", quiet = TRUE))))
-suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.packages("BiocManager_1.30.15.tar.gz", quiet = TRUE))))
+suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.packages("/AffySTEFC/iterators_1.0.13.tar.gz", quiet = TRUE))))
+suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.packages("/AffySTEFC/foreach_1.5.1.tar.gz", quiet = TRUE))))
+suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.packages("/AffySTEFC/bit_4.0.4.tar.gz", quiet = TRUE))))
+suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.packages("/AffySTEFC/zip_2.1.1.tar.gz", quiet = TRUE))))
+suppressPackageStartupMessages(suppressMessages(suppressWarnings(install.packages("/AffySTEFC/BiocManager_1.30.15.tar.gz", quiet = TRUE))))
 
-library("getopt")
-library("optparse")
-library("BiocManager")
 
 suppressPackageStartupMessages(suppressMessages(suppressWarnings(BiocManager::install('BiocGenerics', version = "3.12", quiet = TRUE))))
 # 0.36.1 from Bioconductor v3.12 - all
