@@ -7,30 +7,33 @@ RUN apt update \
     && apt install -y libcurl4-openssl-dev=7.68.0-1ubuntu2.6
     ## && apt install libopenblas-dev
 
-RUN useradd -ms /bin/bash gpuser
-USER gpuser
-WORKDIR /home/gpuser
+#RUN useradd -ms /bin/bash gpuser
+#USER gpuser
+#WORKDIR /home/gpuser
 
-USER root
+#USER root
 
 RUN mkdir /AffySTEFC \
-    && chown gpuser /AffySTEFC
+    && chown docker /AffySTEFC
 
-USER gpuser
+USER docker
 COPY src/*.R /AffySTEFC/
 COPY lib/*.tar.gz /AffySTEFC/
 
-USER root
+#USER root
 
 RUN Rscript /AffySTEFC/installPkgs.R
+
+USER root
 
 RUN git clone https://github.com/bmbolstad/preprocessCore.git \
     && cd preprocessCore/ \
     && git checkout -b RELEASE_3_12 \
     && R CMD INSTALL --configure-args="--disable-threading"  .
 
-USER gpuser
+USER docker
 
 # remember to update the tag version here and in your manifest
 # docker build --rm https://github.com/genepattern/AffySTExpressionFileCreator.git#develop -f Dockerfile -t genepattern/affy-st-expression-file-creator:<tag>
 # docker run --rm -it -v /c/Users/MyUSER/PathTo/AffySTExpressionFileCreator:/mnt/mydata:rw genepattern/affy-st-expression-file-creator:<tag> bash
+# don't for get to push
