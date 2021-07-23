@@ -30,7 +30,7 @@ Carvalho BS and Irizarry RA (2017). "Package 'oligo'" [documentation](https://bi
 
 ## Source Links
 * [The AffySTExpressionFileCreator GenePattern module source repository](https://github.com/genepattern/AffySTExpressionFileCreator/tree/v2)
-* AffySTExpressionFileCreator uses the [genepattern/affy-st-expression-file-creator:1 Docker image](https://hub.docker.com/layers/genepattern/affy-st-expression-file-creator/1/images/sha256-05a6f3e0a381190cbca7a7ae7e4213a5d0be6edb3c258e3d75ab7e674928f2f0?context=explore)
+* AffySTExpressionFileCreator uses the [genepattern/affy-st-expression-file-creator:2 Docker image](https://hub.docker.com/layers/genepattern/affy-st-expression-file-creator/2/images/sha256-643ebca247442d98c9e0ff5dc79a013d46ac29a9e1512eb0b46fddeb03dd4998?context=explore)
 * [The Dockerfile used to build that image is here.](https://github.com/genepattern/AffySTExpressionFileCreator/blob/v2/Dockerfile)
 
 ## Parameters
@@ -82,7 +82,7 @@ Output:
 
 ## Requirements
 
-Requires the genepattern/affy-st-expression-file-creator:1 Docker image.
+Requires the genepattern/affy-st-expression-file-creator:2 Docker image which uses an R 4.0.4 base image.
 
 ## License
 
