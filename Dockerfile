@@ -20,7 +20,7 @@ USER gpuser
 COPY src/*.R /AffySTEFC/
 COPY lib/*.tar.gz /AffySTEFC/
 
-#USER root
+USER root
 
 RUN Rscript /AffySTEFC/installPkgs.R
 
