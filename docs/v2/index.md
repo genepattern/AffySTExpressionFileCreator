@@ -92,6 +92,6 @@ Requires the genepattern/affy-st-expression-file-creator:1 Docker image.
 
 | Version | Release Date | Description                                 |
 ----------|--------------|---------------------------------------------|
-|  2  | Apr. 16th, 2021 | Updated to use the genepattern/affy-st-expression-file-creator:1 Docker image. |
+|  2  | Jul. 23rd, 2021 | Updated to use the genepattern/affy-st-expression-file-creator:2 Docker image. |
 | 1.3 | Jan. 29, 2021 | Updated to accept Clariom arrays and to use the R 4.0.3 jupyter/datascience-notebook:r-4.0.3 Docker image. |
 | 0.14 | Oct. 22, 2015 | Updated to make use of the R package installer. |
