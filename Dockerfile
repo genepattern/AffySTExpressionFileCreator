@@ -8,7 +8,7 @@ RUN apt update \
     && apt install -y libcurl4-openssl-dev=7.68.0-1ubuntu2.6
     ## && apt install libopenblas-dev
 
-RUN mkdir /AffySTEFC \
+RUN mkdir /AffySTEFC
 
 COPY src/*.R /AffySTEFC/
 COPY lib/*.tar.gz /AffySTEFC/
