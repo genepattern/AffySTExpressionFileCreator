@@ -1,0 +1,19 @@
+#module: urn:lsid:broad.mit.edu:cancer.software.genepattern.module.analysis:00346:2
+module: AffySTExpressionFileCreator
+name: AffySTEFC_HuEx_1_0_ST_test
+description: Positive test of annotation; archive containing HuEx 1.0 ST CEL files.  Note that the array name contains a '-v2' suffix which must be handled by the code.
+params: 
+    input.file: [ "https://datasets.genepattern.org/data/test_data/AffySTExpressionFileCreator/v1/input/HuEx-1_0-st-v2/HuEx-1_0-st-v2-colon-cancer-small.zip"
+                  ]
+    normalize: 'yes'
+    background.correct: 'yes'
+    qc.plot.format: 'skip'
+    clm.file: 
+    annotate.probes: 'yes'
+    output.file.base: 'result'
+assertions:
+    jobStatus: success
+    files:
+        result.gct: !!null
+#            diffCmd: ../diffWithTolerance.sh
+#            diff: output/HuEx_1_0_ST_test/result.gct

@@ -1,15 +1,15 @@
-#copyOfAffySTExpressionFileCreator
-#Wed Jan 27 23:36:16 UTC 2021
+#AffySTExpressionFileCreator
+#Fri Jul 23 19:08:34 UTC 2021
 JVMLevel=
-LSID=urn:lsid:broad.mit.edu:cancer.software.genepattern.module.analysis:00346
+LSID=urn\:lsid\:broad.mit.edu\:cancer.software.genepattern.module.analysis\:00346\:2
 author=David Eby & Barbara A Hill, Broad Institute ; Anthony Castanza, UCSD
-categories=preprocess & utilities;preprocess & utilities
-commandLine=<Rscript> <libdir>run_gp_affyst_efc.R <libdir> --input.file\=<input.file> --normalize\=<normalize> --background.correct\=<background.correct> --qc.plot.format\=<qc.plot.format> <clm.file> --annotate.rows\=<annotate.rows> --output.file.base\=<output.file.base>
+categories=preprocess & utilities
+commandLine=Rscript /AffySTEFC/run_gp_affyst_efc.R /AffySTEFC/ --input.file\=<input.file> --normalize\=<normalize> --background.correct\=<background.correct> --qc.plot.format\=<qc.plot.format> <clm.file> --annotate.rows\=<annotate.rows> --output.file.base\=<output.file.base>
 cpuType=any
 description=Creates a GCT file from a set of CEL files from Affymetrix ST arrays.
-fileFormat=gct;pdf;png;svg
-job.docker.image=jupyter/datascience-notebook\:r-4.0.3
-src.repo=https://github.com/genepattern/HTSeq.Count/releases/tag/v1.3
+documentationUrl=https\://genepattern.github.io/AffySTExpressionFileCreator/v2/
+fileFormat=cls;gct;pdf;png;svg
+job.docker.image=genepattern/affy-st-expression-file-creator\:2
 language=any
 minGenePatternVersion=
 name=AffySTExpressionFileCreator
@@ -18,7 +18,7 @@ p1_MODE=IN
 p1_TYPE=FILE
 p1_default_value=
 p1_description=One or more Affymetrix ST CEL files uploaded individually, or as a ZIP or TAR file, or supplied through a directory input.  CEL files can be uncompressed or in GZ format. TAR files can be uncompressed, or in GZ, XZ, or BZ2 format.  The parameter will accept multiple inputs in any of these forms.
-p1_fileFormat=bz2;cel;directory;gz;xz;zip;tar
+p1_fileFormat=bz2;cel;directory;gz;tar;xz;zip
 p1_flag=
 p1_name=input.file
 p1_numValues=1+
@@ -106,11 +106,12 @@ p7_prefix_when_specified=
 p7_type=java.lang.String
 p7_value=
 privacy=public
-publicationDate=12/04/2020 15\:59 
-quality=preproduction
+publicationDate=04/16/2021 15\:18 
+quality=development
 requiredPatchLSIDs=
 requiredPatchURLs=
-taskDoc=doc.html
+src.repo=https\://github.com/genepattern/HTSeq.Count/releases/tag/v2
+taskDoc=
 taskType=preprocess & utilities
 userid=bhill@broadinstitute.org
-version=Updated to use R 4.0.3 and to accept Clariom arrays.
+version=Updated to use the genepattern/affy-st-expression-file-creator\:2 Docker image

@@ -1,0 +1,19 @@
+#module: urn:lsid:broad.mit.edu:cancer.software.genepattern.module.analysis:00346:2
+module: AffySTExpressionFileCreator
+name: AffySTEFC_invalid_dup_entires_test
+description: Negative test of CLM options (invalid); duplicate entries in the CLM.
+params: 
+    input.file: [ "https://datasets.genepattern.org/data/test_data/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/archives/deep_nested_archive1.tar.bz2" ]
+    normalize: 'yes'
+    background.correct: 'yes'
+    qc.plot.format: 'skip'
+    clm.file: "https://datasets.genepattern.org/data/test_data/AffySTExpressionFileCreator/v1/input/ZebGene-1_1-st/clm/dup_entries.clm"
+    annotate.probes: 'no'
+    output.file.base: 'result'
+assertions:
+     jobStatus: fail
+     files:
+        "stdout.txt": !!null
+#            diffCmd: ../diffIgnoreGpTraces.sh << this would have to be updated now that messages are sunk to stdout and this error is ending up there as well
+#            looks like it's being treated as a warning in the trycatch line 60 gp_affyst_efc.R - not worth fixing - the module errors out, and the error is in stdout.
+#            diff: output/invalid_dup_entires_test/stderr.txt
